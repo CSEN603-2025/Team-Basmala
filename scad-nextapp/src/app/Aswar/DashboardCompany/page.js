@@ -10,7 +10,7 @@ export default function DashboardCompany() {
       <div style={{ marginLeft: '150px', marginTop: '90px', padding: '20px' }}>
         
 
-        YOUR CONTENT GOES HERE -company-
+        
 
 
       </div>
