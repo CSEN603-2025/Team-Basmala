@@ -1,0 +1,66 @@
+.toolbar {
+    position: absolute;
+    top: 0px;
+    left: 135px;
+    right: 20px;
+    background-color: #0070f3;
+    border-radius: 25px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 45px;
+    z-index: 10;
+}
+
+.title {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.iconContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 10px;
+    /* Space between icons */
+}
+
+.iconBtn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    /* Adjust size as needed */
+    cursor: pointer;
+}
+
+.iconBtn:hover {
+    transform: scale(1.1);
+    /* Adds a hover effect */
+}
+
+.profileSection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profilePic {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid white;
+}
+
+.dropdownBtn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
