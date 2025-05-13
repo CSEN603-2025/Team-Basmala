@@ -1,0 +1,67 @@
+.container {
+  padding: 2rem 0;
+}
+
+.internshipList {
+  margin-top: 1.5rem;
+}
+
+.internshipCard {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.internshipCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.instructions {
+  margin-bottom: 1.5rem;
+  color: #666;
+}
+
+.tabs {
+  margin-bottom: 2rem;
+}
+
+.reportStatus {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+.reportStatus.draft {
+  background-color: #e0e0e0;
+  color: #616161;
+}
+
+.reportStatus.pending {
+  background-color: #bbdefb;
+  color: #1976d2;
+}
+
+.reportStatus.accepted {
+  background-color: #c8e6c9;
+  color: #388e3c;
+}
+
+.reportStatus.flagged {
+  background-color: #ffe0b2;
+  color: #f57c00;
+}
+
+.reportStatus.rejected {
+  background-color: #ffcdd2;
+  color: #d32f2f;
+}
+
+.commentSection {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
