@@ -1,3 +1,4 @@
+
 .container {
   min-height: 100vh;
   padding: 2rem;
@@ -112,7 +113,8 @@
   border-top: 1px solid rgba(0,0,0,0.2);
   background: rgba(255,255,255,0.8); /* stronger white background (less transparent) */
   border-radius: 8px;
-  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  backdrop-filter: blur(10px);         /* Standard */
   color: #000000; /* Force all text inside to black */
 }
 

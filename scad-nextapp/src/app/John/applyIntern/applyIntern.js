@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 export default function ApplyIntern() {
     const router = useRouter();
     const navigationToSubmission=()=> {
-        router.push('/applicationSubmit');
+        router.push('/John/applicationSubmit');
     }
   const [formData, setFormData] = useState({
     name: '',
