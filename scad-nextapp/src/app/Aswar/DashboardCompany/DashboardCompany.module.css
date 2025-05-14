@@ -1,4 +1,4 @@
-.actionButton {
+/* .actionButton {
     padding: 12px 24px;
     background-color: #0070f3;
     color: white;
@@ -16,7 +16,7 @@
     background-color: #005ad1;
 }
 
-/* Chart container */
+
 .statusChartWrapper {
     position: absolute;
     width: 346px;
@@ -25,7 +25,6 @@
     top: 160px;
 }
 
-/* Background card */
 .chartBackground {
     position: absolute;
     width: 307px;
@@ -36,7 +35,6 @@
     border-radius: 20px;
 }
 
-/* Bars */
 .barRejected {
     position: absolute;
     width: 57px;
@@ -67,7 +65,7 @@
     border-radius: 15px;
 }
 
-/* Labels */
+
 .labelRejected,
 .labelPending,
 .labelAccepted {
@@ -96,7 +94,6 @@
     top: 264px;
 }
 
-/* Counts above bars */
 .countRejected,
 .countPending,
 .countAccepted {
@@ -123,7 +120,7 @@
     top: 22px;
 }
 
-/* Chart Title */
+
 .chartTitle {
     position: absolute;
     width: 167px;
@@ -135,4 +132,4 @@
     font-size: 20px;
     text-align: center;
     color: #000000;
-}
+} */

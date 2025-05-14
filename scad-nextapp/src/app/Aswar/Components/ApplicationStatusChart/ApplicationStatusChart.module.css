@@ -1,79 +1,77 @@
-/* app/Aswar/Components/Charts/ApplicationStatusChart.module.css */
-
 .statusChartWrapper {
     position: absolute;
-    width: 346px;
-    height: 374px;
-    left: 110px;
-    top: 160px;
+    width: 295px;
+    height: 320px;
+    left: 100px;
+    top: 80px;
 }
 
 .chartBackground {
     position: absolute;
-    width: 307px;
-    height: 360px;
+    width: 265px;
+    height: 310px;
     left: 8px;
-    top: 9px;
+    top: 8px;
     background: #d9d9d9;
-    border-radius: 20px;
+    border-radius: 18px;
 }
 
 .barRejected {
     position: absolute;
-    width: 57px;
-    height: 162px;
-    left: 37px;
-    top: 94px;
+    width: 48px;
+    height: 140px;
+    left: 32px;
+    top: 82px;
     background: #c98a93;
-    border-radius: 15px;
+    border-radius: 13px;
 }
 
 .barPending {
     position: absolute;
-    width: 57px;
-    height: 94px;
-    left: 131px;
-    top: 162px;
+    width: 48px;
+    height: 82px;
+    left: 114px;
+    top: 148px;
     background: #a8a6ae;
-    border-radius: 15px;
+    border-radius: 13px;
 }
 
 .barAccepted {
     position: absolute;
-    width: 57px;
-    height: 214px;
-    left: 225px;
-    top: 42px;
+    width: 48px;
+    height: 180px;
+    left: 196px;
+    top: 38px;
     background: #76a06d;
-    border-radius: 15px;
+    border-radius: 13px;
 }
 
 .labelRejected,
 .labelPending,
 .labelAccepted {
     position: absolute;
-    width: 71px;
-    height: 20px;
+    width: 60px;
+    height: 18px;
     font-family: 'Calibri', sans-serif;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
     color: #000000;
 }
 
 .labelRejected {
-    left: 30px;
-    top: 264px;
+    left: 26px;
+    top: 230px;
 }
 
 .labelPending {
-    left: 124px;
-    top: 264px;
+    left: 108px;
+    top: 230px;
 }
 
 .labelAccepted {
-    left: 218px;
-    top: 264px;
+    left: 190px;
+    top: 230px;
 }
 
 .countRejected,
@@ -82,35 +80,35 @@
     position: absolute;
     font-family: 'Calibri', sans-serif;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
     color: #000000;
 }
 
 .countRejected {
-    left: 52px;
-    top: 73px;
+    left: 45px;
+    top: 65px;
 }
 
 .countPending {
-    left: 150px;
-    top: 141px;
+    left: 130px;
+    top: 125px;
 }
 
 .countAccepted {
-    left: 244px;
-    top: 22px;
+    left: 220px;
+    top: 15px;
 }
 
 .chartTitle {
     position: absolute;
-    width: 167px;
-    height: 29px;
-    left: 17px;
-    top: 331px;
+    width: 150px;
+    height: 25px;
+    left: 12px;
+    top: 285px;
     font-family: 'Calibri', sans-serif;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
     color: #000000;
 }

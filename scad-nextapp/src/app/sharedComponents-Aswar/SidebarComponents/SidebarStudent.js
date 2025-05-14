@@ -1,8 +1,11 @@
 'use client';
-import { FaHome, FaTasks, FaListAlt, FaUser, FaChartBar } from 'react-icons/fa'; // Import icons from react-icons
+import { FaHome, FaTasks, FaListAlt, FaUser, FaChartBar } from 'react-icons/fa';
+import { useRouter } from 'next/navigation'; // Import router
 import styles from './sidebar.module.css';
 
 export default function SidebarStudent({ activeItem }) {
+  const router = useRouter(); // Initialize router
+
   const menuItems = [
     { name: 'Dashboard', icon: <FaHome />, label: 'Dashboard' },
     { name: 'Internship Listings', icon: <FaListAlt />, label: 'Internships' },
@@ -12,8 +15,11 @@ export default function SidebarStudent({ activeItem }) {
   ];
 
   const handleClick = (name) => {
-    alert(`Clicked on ${name}`);
-    // You can implement routing logic or other actions based on the clicked item
+    if (name === 'Internship Listings') {
+      router.push('/John/internships');
+    } else {
+      alert(`Clicked on ${name}`);
+    }
   };
 
   return (
