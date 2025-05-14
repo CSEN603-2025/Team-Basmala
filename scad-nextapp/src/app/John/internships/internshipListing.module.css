@@ -1,46 +1,29 @@
-
-.container {
+.pageLayout {
+  display: flex;
   min-height: 100vh;
-  padding: 2rem;
   background-image: url('/background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
+  /* Add padding-left to avoid overlapping the absolute sidebar */
+  padding-left: 70px; /* Adjust based on actual sidebar width + spacing */
+  box-sizing: border-box;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 1.5rem 2rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 1rem;
 }
 
-/* Glassmorphism wrapper for content */
-.glassWrapper {
-  background: rgba(255, 255, 255, 0.2); /* transparent white */
-  border-radius: 16px;
-  padding: 2rem;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(194, 7, 7, 0.3);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-
-  width: 100%;
-  max-width: 1200px;
-}
-
-/* Existing styles — slightly adjusted for visibility */
-.title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-  color: #D32F2F;
-  text-align: center;
-}
-
-.searchFilterContainer {
+.filtersContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-bottom: 2rem;
-  justify-content: center;
+  margin-bottom: 1rem;
 }
 
 .searchInput, .filterSelect {
@@ -48,19 +31,24 @@
   border: 1px solid #000;
   border-radius: 8px;
   background-color: #D32F2F;
+  color: white;
+}
+
+.filterSelect option {
+  color: black;
 }
 
 .internshipList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .internshipCard {
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.3);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -70,12 +58,11 @@
 .company {
   color: #D32F2F;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 .duration, .paidStatus {
   font-style: italic;
-  color: #000;
 }
 
 .viewDetailsBtn {
@@ -86,8 +73,8 @@
   border: 2px solid #000;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
   font-weight: bold;
+  transition: all 0.2s;
 }
 
 .viewDetailsBtn:hover {
@@ -95,38 +82,24 @@
   color: #fff;
 }
 
-.noResults {
-  color: #D32F2F;
-  font-weight: bold;
-  text-align: center;
-}
-.titleText {
-  font-size: 18px;
-  font-weight: bold;
-  color: #000000; /* Pure black for visibility */
-  margin-bottom: 8px;
-}
-
 .detailsPanel {
-  margin-top: 12px;
-  padding: 12px;
-  border-top: 1px solid rgba(0,0,0,0.2);
-  background: rgba(255,255,255,0.8); /* stronger white background (less transparent) */
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 8px;
-  -webkit-backdrop-filter: blur(10px); /* For Safari */
-  backdrop-filter: blur(10px);         /* Standard */
-  color: #000000; /* Force all text inside to black */
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
-.detailsPanel p, 
+.detailsPanel p,
 .detailsPanel a {
-  color: #000000; /* Ensure links also black (except Apply button) */
+  color: #000;
+  margin: 6px 0;
 }
+
 .detailsPanel a:hover {
   text-decoration: underline;
-}
-.detailsPanel p {
-  margin: 6px 0;
 }
 
 .applyLink {
@@ -143,4 +116,10 @@
 
 .applyLink:hover {
   background-color: #B71C1C;
+}
+
+.noResults {
+  color: #D32F2F;
+  font-weight: bold;
+  text-align: center;
 }

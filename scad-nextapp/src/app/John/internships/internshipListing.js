@@ -1,11 +1,9 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import styles from './internshipListing.module.css';
 
-// 🧩 Add these imports for sidebar and toolbar
 import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarSCAD';
 import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
 
@@ -76,98 +74,86 @@ export default function InternshipListing() {
   });
 
   return (
-    <>
-      {/* Sidebar and Toolbar */}
+    <div className={styles.pageLayout}>
       <SidebarSCAD activeItem="Internships" />
-      <Toolbar title="Available Internships" />
 
-      {/* Main Content */}
-      <div style={{ marginLeft: '150px', marginTop: '90px', padding: '20px' }}>
-        <div className={styles.container}>
-          <div className={styles.glassWrapper}>
-            <h1 className={styles.title}>Available Internships</h1>
+      <div className={styles.mainContent}>
+        <Toolbar title="Available Internships" />
 
-            <div className={styles.searchFilterContainer}>
-              <input
-                type="text"
-                className={styles.searchInput}
-                placeholder="Search internships..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+        <div className={styles.filtersContainer}>
+          <input
+            type="text"
+            className={styles.searchInput}
+            placeholder="Search internships..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
 
-              <div className={styles.filters}>
-                <select
-                  className={styles.filterSelect}
-                  value={filters.industry}
-                  onChange={(e) => setFilters({ ...filters, industry: e.target.value })}
+          <select
+            className={styles.filterSelect}
+            value={filters.industry}
+            onChange={(e) => setFilters({ ...filters, industry: e.target.value })}
+          >
+            <option value="">All Industries</option>
+            <option value="Technology">Technology</option>
+            <option value="Healthcare">Healthcare</option>
+          </select>
+
+          <select
+            className={styles.filterSelect}
+            value={filters.duration}
+            onChange={(e) => setFilters({ ...filters, duration: e.target.value })}
+          >
+            <option value="">All Durations</option>
+            <option value="3 months">3 months</option>
+            <option value="6 months">6 months</option>
+          </select>
+
+          <select
+            className={styles.filterSelect}
+            value={filters.paid}
+            onChange={(e) => setFilters({ ...filters, paid: e.target.value })}
+          >
+            <option value="">Paid & Unpaid</option>
+            <option value="paid">Paid</option>
+            <option value="unpaid">Unpaid</option>
+          </select>
+        </div>
+
+        <div className={styles.internshipList}>
+          {filteredInternships.length > 0 ? (
+            filteredInternships.map((internship) => (
+              <div key={internship.id} className={styles.internshipCard}>
+                <h3 className={styles.company}>{internship.company}</h3>
+                <p><strong>{internship.title}</strong></p>
+                <p className={styles.duration}>{internship.duration}</p>
+                <p className={styles.paidStatus}>
+                  {internship.paid ? `Paid: ${internship.salary}` : 'Unpaid'}
+                </p>
+                <button
+                  className={styles.viewDetailsBtn}
+                  onClick={() => toggleDetails(internship.id)}
                 >
-                  <option value="">All Industries</option>
-                  <option value="Technology">Technology</option>
-                  <option value="Healthcare">Healthcare</option>
-                </select>
+                  {openDetailsIds.includes(internship.id) ? 'Hide Details' : 'View Details'}
+                </button>
 
-                <select
-                  className={styles.filterSelect}
-                  value={filters.duration}
-                  onChange={(e) => setFilters({ ...filters, duration: e.target.value })}
-                >
-                  <option value="">All Durations</option>
-                  <option value="3 months">3 months</option>
-                  <option value="6 months">6 months</option>
-                </select>
-
-                <select
-                  className={styles.filterSelect}
-                  value={filters.paid}
-                  onChange={(e) => setFilters({ ...filters, paid: e.target.value })}
-                >
-                  <option value="">Paid & Unpaid</option>
-                  <option value="paid">Paid</option>
-                  <option value="unpaid">Unpaid</option>
-                </select>
-              </div>
-            </div>
-
-            <div className={styles.internshipList}>
-              {filteredInternships.length > 0 ? (
-                filteredInternships.map((internship) => (
-                  <div key={internship.id} className={styles.internshipCard}>
-                    <h3 className={styles.company}>{internship.company}</h3>
-                    <p><strong>{internship.title}</strong></p>
-                    <p className={styles.duration}>{internship.duration}</p>
-                    <p className={styles.paidStatus}>
-                      {internship.paid ? `Paid: ${internship.salary}` : 'Unpaid'}
-                    </p>
-                    <button
-                      className={styles.viewDetailsBtn}
-                      onClick={() => toggleDetails(internship.id)}
-                    >
-                      {openDetailsIds.includes(internship.id) ? 'Hide Details' : 'View Details'}
+                {openDetailsIds.includes(internship.id) && (
+                  <div className={styles.detailsPanel}>
+                    <p><strong>Description:</strong> {internship.description}</p>
+                    <p><strong>Address:</strong> {internship.address}</p>
+                    <p><strong>Website:</strong> <a href={internship.website} target="_blank" rel="noopener noreferrer">{internship.website}</a></p>
+                    <button onClick={navigateToApplyIntern} className={styles.applyLink}>
+                      Apply Now
                     </button>
-
-                    {openDetailsIds.includes(internship.id) && (
-                      <div className={styles.detailsPanel}>
-                        <p><strong>Description:</strong> {internship.description}</p>
-                        <p><strong>Address:</strong> {internship.address}</p>
-                        <p><strong>Website:</strong> <a href={internship.website} target="_blank" rel="noopener noreferrer">{internship.website}</a></p>
-
-                        <button
-                          onClick={navigateToApplyIntern}
-                          className={styles.applyLink}>
-                          Apply Now
-                        </button>
-                      </div>
-                    )}
                   </div>
-                ))
-              ) : (
-                <p className={styles.noResults}>No internships found.</p>
-              )}
-            </div>
-          </div>
+                )}
+              </div>
+            ))
+          ) : (
+            <p className={styles.noResults}>No internships found.</p>
+          )}
         </div>
       </div>
-    </>
+    </div>
   );
 }

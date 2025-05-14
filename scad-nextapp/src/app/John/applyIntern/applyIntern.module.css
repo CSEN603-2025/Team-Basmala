@@ -49,3 +49,25 @@
 .submitBtn:hover {
   background-color: #B71C1C;
 }
+.pageLayout {
+  display: flex;
+  min-height: 100vh;
+  background-image: url('/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Add padding-left to avoid overlapping the absolute sidebar */
+  padding-left: 70px; /* Adjust based on actual sidebar width + spacing */
+  box-sizing: border-box;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Existing styles for container, title, form, etc. remain unchanged */
