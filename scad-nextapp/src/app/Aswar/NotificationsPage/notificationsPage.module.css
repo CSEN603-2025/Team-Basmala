@@ -1,0 +1,122 @@
+.notificationsPage {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 14px;
+    background: #ffffff;
+    padding: 16px;
+    font-family: 'Calibri', sans-serif;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eeeeee;
+    margin: 16px auto;
+}
+
+.notificationsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.notificationsTitle {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+}
+
+.notificationsActions {
+    display: flex;
+    gap: 12px;
+}
+
+.actionButton {
+    background: none;
+    border: none;
+    color: #0070f3;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 6px;
+    text-decoration: underline;
+}
+
+.actionButton:hover {
+    opacity: 0.8;
+}
+
+.notificationsList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.notificationCard {
+    border-top: 1px solid #eee;
+    padding: 12px 0;
+}
+
+.notificationCard:first-of-type {
+    border-top: none;
+}
+
+.notificationCard.unread {
+    background: #f9f9f9;
+}
+
+.notificationCard.read {
+    opacity: 0.6;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.cardTitle {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+}
+
+.cardDatetime {
+    font-size: 12px;
+    color: #888;
+}
+
+.cardBody {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+}
+
+.cardMessage {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.cardReceivedFrom {
+    font-size: 12px;
+    color: #666;
+}
+
+.notificationOptions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.optionButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #888;
+    padding: 4px;
+}
+
+.optionButton:hover {
+    color: #333;
+}

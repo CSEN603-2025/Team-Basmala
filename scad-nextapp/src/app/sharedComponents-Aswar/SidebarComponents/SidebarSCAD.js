@@ -12,8 +12,17 @@ export default function SidebarSCAD({ activeItem }) {
   ];
 
   const handleClick = (name) => {
-    alert(`Clicked on ${name}`);
-    // You can implement routing logic or other actions based on the clicked item
+    if (name === 'Dashboard') {
+      router.push('/Aswar/DashboardStudent');
+    }
+    else if (name === 'Internship Listings') {
+      router.push('/John/internships');
+    } 
+    else if (name === 'Applications') {
+      router.push('/John/myApplications');
+    } else {
+      alert(`Clicked on ${name}`);
+    }
   };
 
   return (
