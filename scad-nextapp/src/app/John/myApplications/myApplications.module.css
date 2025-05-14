@@ -1,0 +1,19 @@
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(255,255,255,0.9);
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.title {
+  text-align: center;
+  color: #D32F2F;
+  margin-bottom: 1.5rem;
+}
+
+.subtitle {
+  text-align: center;
+  color: #333;
+}

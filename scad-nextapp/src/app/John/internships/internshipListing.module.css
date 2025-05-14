@@ -1,0 +1,144 @@
+.container {
+  min-height: 100vh;
+  padding: 2rem;
+  background-image: url('/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Glassmorphism wrapper for content */
+.glassWrapper {
+  background: rgba(255, 255, 255, 0.2); /* transparent white */
+  border-radius: 16px;
+  padding: 2rem;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(194, 7, 7, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Existing styles — slightly adjusted for visibility */
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #D32F2F;
+  text-align: center;
+}
+
+.searchFilterContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.searchInput, .filterSelect {
+  padding: 0.5rem;
+  border: 1px solid #000;
+  border-radius: 8px;
+  background-color: #D32F2F;
+}
+
+.internshipList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.internshipCard {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  color: #000000;
+}
+
+.company {
+  color: #D32F2F;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.duration, .paidStatus {
+  font-style: italic;
+  color: #000;
+}
+
+.viewDetailsBtn {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #FBC02D;
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  font-weight: bold;
+}
+
+.viewDetailsBtn:hover {
+  background-color: #D32F2F;
+  color: #fff;
+}
+
+.noResults {
+  color: #D32F2F;
+  font-weight: bold;
+  text-align: center;
+}
+.titleText {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000; /* Pure black for visibility */
+  margin-bottom: 8px;
+}
+
+.detailsPanel {
+  margin-top: 12px;
+  padding: 12px;
+  border-top: 1px solid rgba(0,0,0,0.2);
+  background: rgba(255,255,255,0.8); /* stronger white background (less transparent) */
+  border-radius: 8px;
+  backdrop-filter: blur(6px);
+  color: #000000; /* Force all text inside to black */
+}
+
+.detailsPanel p, 
+.detailsPanel a {
+  color: #000000; /* Ensure links also black (except Apply button) */
+}
+.detailsPanel a:hover {
+  text-decoration: underline;
+}
+.detailsPanel p {
+  margin: 6px 0;
+}
+
+.applyLink {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background-color: #D32F2F;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.applyLink:hover {
+  background-color: #B71C1C;
+}

@@ -1,0 +1,51 @@
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(255,255,255,0.9);
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  color: black; /* Make all text inside container black */
+}
+
+.title {
+  text-align: center;
+  color: #D32F2F;
+  margin-bottom: 1.5rem;
+}
+
+.form label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: black; /* Label text black */
+}
+
+.form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: transparent; /* Make input field transparent */
+  color: black; /* Input text color black */
+}
+
+.form input::placeholder {
+  color: rgba(0, 0, 0, 0.6); /* Placeholder slightly lighter black */
+}
+
+.submitBtn {
+  background-color: #D32F2F;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.submitBtn:hover {
+  background-color: #B71C1C;
+}
