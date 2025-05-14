@@ -4,7 +4,7 @@ import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
 import styles from './DashboardCompany.module.css';
 import InternshipPosts from '@/app/Aswar/Components/InternshipPosts/InternshipPosts';
 import ApplicationStatusChart from '../Components/ApplicationStatusChart/ApplicationStatusChart';
-
+import NotificationList from '../Components/NotificationListSmall/NotificationListSmall';
 const internships = [
   { title: 'Frontend Development Internship', startDate: '2025-06-01', endDate: '2025-08-31', status: 'Accepted' },
   { title: 'Backend Development Internship', startDate: '2025-07-01', endDate: '2025-09-30', status: 'Pending' },
@@ -17,10 +17,15 @@ export default function DashboardCompany() {
     <>
       <SidebarCompany activeItem="Dashboard" />
       <Toolbar title="Dashboard" />
-      <InternshipPosts internships={internships} />
-      <ApplicationStatusChart/>
+     
+     
       <div style={{ marginLeft: '100px', marginTop: '90px', padding: '10px' }}>
-       
+     
+     <InternshipPosts internships={internships} />
+      <ApplicationStatusChart/> 
+     
+     
+      <NotificationList />
       </div>
     </>
   );

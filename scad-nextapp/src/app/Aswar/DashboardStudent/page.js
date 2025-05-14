@@ -3,7 +3,7 @@ import SidebarCompany from '@/app/sharedComponents-Aswar/SidebarComponents/Sideb
 import SidebarStudent from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarStudent';
 import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
 
-export default function DashboardCompany() {
+export default function DashboardStudent() {
   return (
     <>
       <SidebarStudent activeItem="Dashboard" />

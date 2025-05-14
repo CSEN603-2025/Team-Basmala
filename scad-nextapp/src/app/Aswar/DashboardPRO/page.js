@@ -3,7 +3,7 @@ import SidebarCompany from '@/app/sharedComponents-Aswar/SidebarComponents/Sideb
 import SidebarPRO from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarPRO';
 import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
 
-export default function DashboardCompany() {
+export default function DashboardPRO() {
   return (
     <>
       <SidebarPRO activeItem="Dashboard" />

@@ -6,6 +6,8 @@ export default function ApplicationStatusChart() {
     <div className={styles.statusChartWrapper}>
       <div className={styles.chartBackground}></div>
 
+      <div className={styles.chartTitle}>Application Status</div>
+
       <div className={styles.barRejected}></div>
       <div className={styles.barPending}></div>
       <div className={styles.barAccepted}></div>
