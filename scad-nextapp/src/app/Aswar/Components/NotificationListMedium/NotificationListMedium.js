@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './NotificationListSmall.module.css';
+import styles from './NotificationListMedium.module.css';
 
 const defaultNotifications = [
   {
@@ -8,11 +8,24 @@ const defaultNotifications = [
     title: 'New Notification',
     message: 'Your application has been accepted successfully.',
     datetime: '2025-05-14 10:32 AM',
-  }
-
+  },
+  {
+    id: 2,
+    app: 'SCAD',
+    title: 'Post Updated',
+    message: 'Your internship posting ‘Data Science Intern’ has been updated successfully.',
+    datetime: '2025-05-13 04:12 PM',
+  },
+  {
+    id: 3,
+    app: 'SCAD',
+    title: 'Application Received',
+    message: 'You have a new application for your Microsoft Internship opportunity.',
+    datetime: '2025-05-15 02:15 PM',
+  },
 ];
 
-export default function NotificationList({
+export default function NotificationListMedium({
   notifications = defaultNotifications,
   onSeeAll = () => alert('See all clicked'),
 }) {

@@ -1,9 +1,27 @@
 'use client';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './toolbar.module.css';
 import { FaChevronDown, FaSearch, FaEnvelope, FaBell } from 'react-icons/fa';
 import Image from 'next/image';
+// import NotificationList from '@/app/Aswar/Components/NotificationListSmall/NotificationListSmall';
+// import NotificationListSmall from '@/app/Aswar/Components/NotificationListSmall/NotificationListSmall';
+import NotificationListMedium from '@/app/Aswar/Components/NotificationListMedium/NotificationListMedium';
 
 export default function Toolbar({ title = "Dashboard" }) {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Close the dropdown if user clicks outside
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
     <div className={styles.toolbar}>
       <span className={styles.title}>{title}</span>
@@ -16,9 +34,19 @@ export default function Toolbar({ title = "Dashboard" }) {
           <button className={styles.iconBtn}>
             <FaEnvelope />
           </button>
-          <button className={styles.iconBtn}>
+          <button
+            className={styles.iconBtn}
+            onClick={() => setDropdownOpen(open => !open)}
+            aria-label="Toggle notifications"
+          >
             <FaBell />
           </button>
+
+          {dropdownOpen && (
+            <div ref={dropdownRef} className={styles.notificationDropdown}>
+              <NotificationListMedium />
+            </div>
+          )}
         </div>
 
         <Image
