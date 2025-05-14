@@ -2,7 +2,7 @@
 import SidebarCompany from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarCompany';
 import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
 import styles from './DashboardCompany.module.css';
-import InternshipPosts from '@/app/sharedComponents-Aswar/InternshipPosts/InternshipPosts';
+import InternshipPosts from '@/app/Aswar/Components/InternshipPosts/InternshipPosts';
 
 const internships = [
   { title: 'Frontend Development Internship', startDate: '2025-06-01', endDate: '2025-08-31', status: 'Accepted' },
