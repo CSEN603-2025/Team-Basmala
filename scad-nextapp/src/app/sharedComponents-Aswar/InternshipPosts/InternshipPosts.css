@@ -1,0 +1,152 @@
+.frame6 {
+    position: absolute;
+    width: 706px;
+    height: 316px;
+    left: 450px;
+    top: 175px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.9));
+    font-family: 'Calibri', sans-serif;
+}
+
+.rectangle8 {
+    position: absolute;
+    width: 697px;
+    height: 302px;
+    left: 9px;
+    top: 7px;
+    background: rgba(177, 180, 219, 0.26);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 30px;
+}
+
+.header-title {
+    position: absolute;
+    left: 35px;
+    top: 33px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000;
+    height: 27px;
+    width: 195px;
+}
+
+.label {
+    position: absolute;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: white;
+    height: 22px;
+}
+
+.label.title {
+    left: 35px;
+    top: 76px;
+    width: 36px;
+}
+
+.label.start-date {
+    left: 222px;
+    top: 76px;
+    width: 80px;
+}
+
+.label.duration {
+    left: 326px;
+    top: 76px;
+    width: 64px;
+}
+
+.label.posted-on {
+    left: 419px;
+    top: 76px;
+    width: 70px;
+}
+
+.label.applicants {
+    left: 513px;
+    top: 76px;
+    width: 80px;
+}
+
+.label.status {
+    left: 631px;
+    top: 76px;
+    width: 49px;
+}
+
+.line {
+    position: absolute;
+    width: 655.02px;
+    height: 0px;
+    left: 25px;
+    border: 1px solid #d9d9d9;
+}
+
+.line3 {
+    top: 144px;
+}
+
+.line5 {
+    top: 196px;
+}
+
+.line4 {
+    top: 252px;
+}
+
+.post-title {
+    position: absolute;
+    width: 152px;
+    height: 17px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #0D455A;
+    left: 25px;
+}
+
+.post-title.one {
+    top: 106px;
+}
+
+.post-title.two {
+    top: 172px;
+}
+
+.post-title.three {
+    top: 229px;
+}
+
+.post-title.four {
+    top: 268px;
+}
+
+.date {
+    position: absolute;
+    width: 80px;
+    height: 17px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #0D455A;
+    left: 215px;
+}
+
+.date.one {
+    top: 114px;
+}
+
+.date.two {
+    top: 165px;
+}
+
+.date.three {
+    top: 219px;
+}
+
+.date.four {
+    top: 268px;
+}

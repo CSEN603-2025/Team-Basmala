@@ -1,46 +1,58 @@
+/* Updated .toolbar to match narrower sidebar design */
 .toolbar {
     position: absolute;
     top: 0px;
-    left: 135px;
+    left: 10px;
     right: 20px;
     background-color: #0070f3;
     border-radius: 25px;
-    padding: 20px;
+    padding: 15px;
+    /* reduced padding */
     margin: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 45px;
+    height: 40px;
+    /* reduced height */
     z-index: 10;
 }
 
 .title {
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
+    /* smaller font size */
     font-weight: bold;
+    
+
 }
 
 .iconContainer {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-right: 10px;
-    /* Space between icons */
+    gap: 8px;
+    /* reduced gap */
+    margin-right: 8px;
+    /* reduced space between icons */
 }
 
 .iconBtn {
     background: transparent;
     border: none;
     color: white;
-    font-size: 1.2rem;
-    /* Adjust size as needed */
+    font-size: 1.3rem;
+    /* smaller icon size */
     cursor: pointer;
+    margin-top: 10px;
 }
 
+.dropdownBtn{
+    margin-top: 10px;
+}
+
+
 .iconBtn:hover {
-    transform: scale(1.1);
-    /* Adds a hover effect */
+    transform: scale(1.2);
 }
 
 .profileSection {
@@ -50,8 +62,8 @@
 }
 
 .profilePic {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
     border: 1.5px solid white;
@@ -64,3 +76,4 @@
     font-size: 1rem;
     cursor: pointer;
 }
+
