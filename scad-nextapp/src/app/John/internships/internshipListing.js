@@ -6,7 +6,7 @@ import styles from './internshipListing.module.css';
 
 import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarSCAD';
 import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
-
+import BackButton from '@/app/sharedComponents-Aswar/backButton/backButton';
 const dummyInternships = [
   {
     id: 1,
@@ -73,87 +73,94 @@ export default function InternshipListing() {
     return matchesSearch && matchesFilters;
   });
 
-  return (
-    <div className={styles.pageLayout}>
-      <SidebarSCAD activeItem="Internships" />
+ return (
+  <div className={styles.pageLayout}>
+    <SidebarSCAD activeItem="Internships" />
 
-      <div className={styles.mainContent}>
-        <Toolbar title="Available Internships" />
+    <div className={styles.mainContent}>
+      <Toolbar title="Available Internships" />
 
-        <div className={styles.filtersContainer}>
-          <input
-            type="text"
-            className={styles.searchInput}
-            placeholder="Search internships..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+      <div className={styles.filtersContainer}>
+        <input
+          type="text"
+          className={styles.searchInput}
+          placeholder="Search internships..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
 
-          <select
-            className={styles.filterSelect}
-            value={filters.industry}
-            onChange={(e) => setFilters({ ...filters, industry: e.target.value })}
-          >
-            <option value="">All Industries</option>
-            <option value="Technology">Technology</option>
-            <option value="Healthcare">Healthcare</option>
-          </select>
+        <select
+          className={styles.filterSelect}
+          value={filters.industry}
+          onChange={(e) => setFilters({ ...filters, industry: e.target.value })}
+        >
+          <option value="">All Industries</option>
+          <option value="Technology">Technology</option>
+          <option value="Healthcare">Healthcare</option>
+        </select>
 
-          <select
-            className={styles.filterSelect}
-            value={filters.duration}
-            onChange={(e) => setFilters({ ...filters, duration: e.target.value })}
-          >
-            <option value="">All Durations</option>
-            <option value="3 months">3 months</option>
-            <option value="6 months">6 months</option>
-          </select>
+        <select
+          className={styles.filterSelect}
+          value={filters.duration}
+          onChange={(e) => setFilters({ ...filters, duration: e.target.value })}
+        >
+          <option value="">All Durations</option>
+          <option value="3 months">3 months</option>
+          <option value="6 months">6 months</option>
+        </select>
 
-          <select
-            className={styles.filterSelect}
-            value={filters.paid}
-            onChange={(e) => setFilters({ ...filters, paid: e.target.value })}
-          >
-            <option value="">Paid & Unpaid</option>
-            <option value="paid">Paid</option>
-            <option value="unpaid">Unpaid</option>
-          </select>
-        </div>
+        <select
+          className={styles.filterSelect}
+          value={filters.paid}
+          onChange={(e) => setFilters({ ...filters, paid: e.target.value })}
+        >
+          <option value="">Paid & Unpaid</option>
+          <option value="paid">Paid</option>
+          <option value="unpaid">Unpaid</option>
+        </select>
+      </div>
 
-        <div className={styles.internshipList}>
-          {filteredInternships.length > 0 ? (
-            filteredInternships.map((internship) => (
-              <div key={internship.id} className={styles.internshipCard}>
-                <h3 className={styles.company}>{internship.company}</h3>
-                <p><strong>{internship.title}</strong></p>
-                <p className={styles.duration}>{internship.duration}</p>
-                <p className={styles.paidStatus}>
-                  {internship.paid ? `Paid: ${internship.salary}` : 'Unpaid'}
-                </p>
-                <button
-                  className={styles.viewDetailsBtn}
-                  onClick={() => toggleDetails(internship.id)}
-                >
-                  {openDetailsIds.includes(internship.id) ? 'Hide Details' : 'View Details'}
-                </button>
+      <div className={styles.internshipList}>
+        {filteredInternships.length > 0 ? (
+          filteredInternships.map((internship) => (
+            <div key={internship.id} className={styles.internshipCard}>
+              <h3 className={styles.company}>{internship.company}</h3>
+              <p><strong>{internship.title}</strong></p>
+              <p className={styles.duration}>{internship.duration}</p>
+              <p className={styles.paidStatus}>
+                {internship.paid ? `Paid: ${internship.salary}` : 'Unpaid'}
+              </p>
+              <button
+                className={styles.viewDetailsBtn}
+                onClick={() => toggleDetails(internship.id)}
+              >
+                {openDetailsIds.includes(internship.id) ? 'Hide Details' : 'View Details'}
+              </button>
 
-                {openDetailsIds.includes(internship.id) && (
-                  <div className={styles.detailsPanel}>
-                    <p><strong>Description:</strong> {internship.description}</p>
-                    <p><strong>Address:</strong> {internship.address}</p>
-                    <p><strong>Website:</strong> <a href={internship.website} target="_blank" rel="noopener noreferrer">{internship.website}</a></p>
-                    <button onClick={navigateToApplyIntern} className={styles.applyLink}>
-                      Apply Now
-                    </button>
-                  </div>
-                )}
-              </div>
-            ))
-          ) : (
-            <p className={styles.noResults}>No internships found.</p>
-          )}
-        </div>
+              {openDetailsIds.includes(internship.id) && (
+                <div className={styles.detailsPanel}>
+                  <p><strong>Description:</strong> {internship.description}</p>
+                  <p><strong>Address:</strong> {internship.address}</p>
+                  <p><strong>Website:</strong> <a href={internship.website} target="_blank" rel="noopener noreferrer">{internship.website}</a></p>
+                  <p><strong>Skills Required:</strong> {internship.skills.join(', ')}</p>
+                  <p><strong>Additional Information:</strong> This internship offers a great opportunity to gain hands-on experience in the {internship.industry} industry. You'll work closely with experienced professionals and contribute to meaningful projects.</p>
+                  <button onClick={navigateToApplyIntern} className={styles.applyLink}>
+                    Apply Now
+                  </button>
+                </div>
+              )}
+            </div>
+          ))
+        ) : (
+          <p className={styles.noResults}>No internships found.</p>
+        )}
       </div>
     </div>
-  );
+
+    {/* Add the Back Button here */}
+    <div className={styles.backButtonContainer}>
+      <BackButton />
+    </div>
+  </div>
+);
 }

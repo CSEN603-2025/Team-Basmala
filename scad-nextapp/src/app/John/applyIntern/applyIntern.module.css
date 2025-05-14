@@ -51,7 +51,8 @@
 }
 .pageLayout {
   display: flex;
-  min-height: 100vh;
+  flex-direction: column; /* Arrange children vertically */
+  min-height: 100vh; /* Ensure the page takes up the full viewport height */
   background-image: url('/background.jpg');
   background-size: cover;
   background-position: center;
@@ -63,11 +64,15 @@
 }
 
 .mainContent {
-  flex: 1;
+  flex: 1; /* Allow the main content to take up available space */
   padding: 1.5rem 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-/* Existing styles for container, title, form, etc. remain unchanged */
+.backButtonContainer {
+  margin-top: auto; /* Push the Back Button to the bottom of the page */
+  text-align: right; /* Align the button to the left */
+  padding: 1rem; /* Add some padding for spacing */
+}

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 
 import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarSCAD';
 import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
+import BackButton from '@/app/sharedComponents-Aswar/backButton/backButton';
 
 export default function ApplyIntern() {
   const router = useRouter();
@@ -133,6 +134,9 @@ export default function ApplyIntern() {
           </form>
         </div>
       </div>
+      <div className={styles.backButtonContainer}>
+      <BackButton />
+    </div>
     </div>
   );
 }
