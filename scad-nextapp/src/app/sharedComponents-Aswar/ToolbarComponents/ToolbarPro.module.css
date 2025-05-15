@@ -1,0 +1,78 @@
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 0 24px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    font-family: 'Calibri', sans-serif;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.profileSection {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.iconContainer {
+    display: flex;
+    gap: 12px;
+}
+
+.iconBtn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #333;
+}
+
+.iconBtn:hover {
+    color: #0070f3;
+}
+
+.profileWrapper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.profilePic {
+    border-radius: 50%;
+    border: 2px solid #fff;
+    object-fit: cover;
+}
+
+.dropdownBtn {
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    color: #333;
+}
+
+.notificationDropdown {
+    position: absolute;
+    top: 60px;
+    right: 60px;
+    z-index: 10;
+}
+
+/* 🔰 PRO Badge */
+.proBadge {
+    background-color: #ffd700;
+    color: #000;
+    font-weight: 700;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    line-height: 1;
+    height: fit-content;
+}

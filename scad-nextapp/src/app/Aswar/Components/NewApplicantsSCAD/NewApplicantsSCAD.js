@@ -1,55 +1,47 @@
 'use client';
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import styles from './NewApplicantsCompany.module.css';
-import { FaUser, FaEnvelope } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaPhone } from 'react-icons/fa';
 
 const applicants = [
   {
     name: 'Jermaine Kuhlman',
     position: 'Human Interactions Agent',
-    image: '/applicant1.jpeg',
+    image: '/avatars/avatar1.jpg',
   },
   {
     name: 'Sadie Yost',
     position: 'International Functionality Consultant',
-    image: '/applicant2.jpg',
+    image: '/avatars/avatar2.jpg',
   },
   {
     name: 'Ben Langworth',
     position: 'Future Web Representative',
-    image: '/applicant3.jpg',
+    image: '/avatars/avatar3.jpg',
   },
   {
     name: 'Raymond Raynor',
     position: 'Human Creative Designer',
-    image: '/applicant4.avif',
+    image: '/avatars/avatar4.jpg',
   },
   {
     name: 'Betty Buckridge',
     position: 'Direct Solutions Executive',
-    image: '/applicant5.jpeg',
+    image: '/avatars/avatar5.jpg',
   },
   {
     name: 'Raymond Raynor',
     position: 'Human Creative Designer',
-    image: '/applicant6.jpeg',
+    image: '/avatars/avatar4.jpg',
   },
 ];
 
-export default function NewApplicantsCompany() {
-  const router = useRouter();
-
+export default function NewApplicantsSCAD() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h3 className={styles.title}>New Applicants</h3>
-        <button
-          className={styles.seeAll}
-          onClick={() => router.push('/John/allApplicants')}
-        >
-          See all
-        </button>
+        <button className={styles.seeAll}>See all</button>
       </div>
 
       <ul className={styles.applicantList}>
@@ -63,6 +55,7 @@ export default function NewApplicantsCompany() {
             <div className={styles.actions}>
               <button><FaUser /></button>
               <button><FaEnvelope /></button>
+              <button><FaPhone /></button>
             </div>
           </li>
         ))}
