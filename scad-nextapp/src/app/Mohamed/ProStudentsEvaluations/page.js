@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 
 // Create a loading placeholder
-function LoadingStudentsEvaluations() {
+function LoadingProStudentsEvaluations() {
   return (
     <div style={{ 
       padding: '2rem', 
@@ -16,21 +16,21 @@ function LoadingStudentsEvaluations() {
       justifyContent: 'center',
       minHeight: '50vh'
     }}>
-      <h2>Loading Students Evaluations...</h2>
+      <h2>Loading Professional Students Evaluations...</h2>
       <p>Please wait while we load your evaluations dashboard.</p>
     </div>
   );
 }
 
 // Use dynamic import with no SSR to prevent hydration issues
-const StudentsEvaluationsClient = dynamic(
-  () => import('./StudentsEvaluations'),
+const ProStudentsEvaluationsClient = dynamic(
+  () => import('./ProStudentsEvaluations'),
   { 
     ssr: false,
-    loading: () => <LoadingStudentsEvaluations />
+    loading: () => <LoadingProStudentsEvaluations />
   }
 );
 
-export default function StudentsEvaluationsPage() {
-  return <StudentsEvaluationsClient />;
+export default function ProStudentsEvaluationsPage() {
+  return <ProStudentsEvaluationsClient />;
 }

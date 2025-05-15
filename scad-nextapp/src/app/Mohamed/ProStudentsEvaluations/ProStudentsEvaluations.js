@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import styles from "./StudentsEvaluations.module.css";
+import styles from "./ProStudentsEvaluations.module.css";
 import { 
   Container, 
   Typography, 
@@ -28,7 +28,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  MenuItem
+  MenuItem // Added missing import
 } from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
@@ -42,7 +42,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import DownloadIcon from '@mui/icons-material/Download';
 import ReplyIcon from '@mui/icons-material/Reply';
 
-function StudentsEvaluations() {
+function ProStudentsEvaluations() {
   // Tab management
   const [tabValue, setTabValue] = useState(0);
   
@@ -166,23 +166,20 @@ function StudentsEvaluations() {
 
   // Load saved data on component mount
   useEffect(() => {
-    // Simulate fetching data from localStorage or an API
-    const savedEvaluations = localStorage.getItem("userEvaluations")
-      ? JSON.parse(localStorage.getItem("userEvaluations"))
-      : [];
-      
-    const savedReports = localStorage.getItem("userReports")
-      ? JSON.parse(localStorage.getItem("userReports"))
-      : userReports;
-
-    setUserEvaluations(savedEvaluations);
-    setReports(savedReports);
-    
-    // Display alert for flagged reports on component mount
-    const hasFlaggedReports = savedReports.some(report => report.status === "Flagged" || report.status === "Rejected");
-    
-    // Mark loading as complete
-    setIsLoading(false);
+    // Only run on client
+    if (typeof window !== 'undefined') {
+      const savedEvaluations = localStorage.getItem("userEvaluations")
+        ? JSON.parse(localStorage.getItem("userEvaluations"))
+        : [];
+        
+      const savedReports = localStorage.getItem("userReports")
+        ? JSON.parse(localStorage.getItem("userReports"))
+        : userReports;
+  
+      setUserEvaluations(savedEvaluations);
+      setReports(savedReports);
+      setIsLoading(false);
+    }
   }, []);
 
   // Tab change handler
@@ -252,7 +249,7 @@ function StudentsEvaluations() {
     }
 
     // Save to local storage
-    localStorage.setItem("userEvaluations", JSON.stringify(updatedEvaluations));
+    localStorage.setItem("proUserEvaluations", JSON.stringify(updatedEvaluations));
     
     setUserEvaluations(updatedEvaluations);
     setIsEditing(false);
@@ -302,7 +299,7 @@ function StudentsEvaluations() {
         evaluation => evaluation.companyId !== companyId
       );
       
-      localStorage.setItem("userEvaluations", JSON.stringify(updatedEvaluations));
+      localStorage.setItem("proUserEvaluations", JSON.stringify(updatedEvaluations));
       setUserEvaluations(updatedEvaluations);
     }
   };
@@ -438,7 +435,7 @@ function StudentsEvaluations() {
     }
     
     // Save to localStorage
-    localStorage.setItem("userReports", JSON.stringify(updatedReports));
+    localStorage.setItem("proUserReports", JSON.stringify(updatedReports));
     
     // Update state
     setReports(updatedReports);
@@ -463,7 +460,7 @@ function StudentsEvaluations() {
   const handleDeleteReport = (reportId) => {
     if (window.confirm("Are you sure you want to delete this report?")) {
       const updatedReports = reports.filter(report => report.id !== reportId);
-      localStorage.setItem("userReports", JSON.stringify(updatedReports));
+      localStorage.setItem("proUserReports", JSON.stringify(updatedReports));
       setReports(updatedReports);
     }
   };
@@ -485,7 +482,7 @@ function StudentsEvaluations() {
       report.id === selectedReport.id ? updatedReport : report
     );
     
-    localStorage.setItem("userReports", JSON.stringify(updatedReports));
+    localStorage.setItem("proUserReports", JSON.stringify(updatedReports));
     setReports(updatedReports);
     setAppealDialogOpen(false);
     setAppealMessage('');
@@ -747,16 +744,10 @@ function StudentsEvaluations() {
                     {report.introduction}
                   </Typography>
                   <Typography variant="body2" sx={{ mt: 1 }}>
-                    <strong>Courses:</strong> {report.selectedCourses.length > 0 ? 
-                      report.selectedCourses.map(courseId => {
-                        const course = availableCourses.find(c => c.id === courseId);
-                        return course ? course.code : courseId;
-                      }).join(', ') : "All courses"}
+                    <strong>Courses:</strong> {report.selectedCourses.length > 0 ? report.selectedCourses.join(', ') : "All courses"}
                   </Typography>
                   <Typography variant="body2" sx={{ mt: 1 }}>
-                    <strong>Major:</strong> {
-                      availableMajors.find(m => m.id === report.selectedMajor)?.name || "All Majors"
-                    }
+                    <strong>Major:</strong> {report.selectedMajor}
                   </Typography>
                 </Grid>
                 <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 1 }}>
@@ -797,6 +788,7 @@ function StudentsEvaluations() {
               {selectedReport ? "Review the details of your report below." : "Fill out the form below to create a new report."}
             </DialogContentText>
             
+            {/* Report form or details view */}
             {selectedReport ? (
               <Box>
                 <Typography variant="h6" gutterBottom>
@@ -929,7 +921,7 @@ function StudentsEvaluations() {
             {selectedReport ? (
               <>
                 <Button 
-                  onClick={() => handleDownloadPDF(selectedReport)} 
+                  onClick={handleDownloadPDF} 
                   color="primary"
                   startIcon={<DownloadIcon />}
                 >
@@ -1098,7 +1090,7 @@ function StudentsEvaluations() {
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Paper elevation={3} sx={{ p: 3 }}>
         <Typography variant="h4" gutterBottom>
-          Student Evaluations & Reports
+          Professional Student Evaluations & Reports
         </Typography>
         
         <Tabs value={tabValue} onChange={handleTabChange} sx={{ mb: 3 }}>
@@ -1115,4 +1107,4 @@ function StudentsEvaluations() {
   );
 }
 
-export default StudentsEvaluations;
+export default ProStudentsEvaluations;
