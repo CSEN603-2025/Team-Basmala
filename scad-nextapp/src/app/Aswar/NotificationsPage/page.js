@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import { FaTrashAlt, FaEnvelopeOpen, FaEnvelope } from 'react-icons/fa';
 import styles from './notificationsPage.module.css';
+import Sidebar from '@/app/sharedComponents-Aswar/SidebarComponents/Sidebar';
+import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
+import BackButton from '@/app/sharedComponents-Aswar/backButton/backButton';
 
 
 const defaultNotifications = [
@@ -169,6 +172,9 @@ export default function NotificationsPage() {
   };
 
   return (
+    <>
+   <BackButton/>
+         
     <div className={styles.notificationsPage}>
       <div className={styles.notificationsHeader}>
         <h2 className={styles.notificationsTitle}>Notifications</h2>
@@ -221,5 +227,7 @@ export default function NotificationsPage() {
         ))}
       </div>
     </div>
+    </>
+    
   );
 }

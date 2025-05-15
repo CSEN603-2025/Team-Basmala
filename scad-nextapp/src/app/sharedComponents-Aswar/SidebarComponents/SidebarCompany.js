@@ -16,13 +16,14 @@ export default function SidebarCompany({ activeItem }) {
       router.push('/Aswar/DashboardStudent');
     }
     else if (name === 'Internship Listings') {
-      router.push('/John/internships');
+      router.push('/John/CompanyViewIntern');
     } 
     else if (name === 'Applications') {
       router.push('/John/myApplications');
     } else {
       alert(`Clicked on ${name}`);
     }
+    
   };
 
   return (

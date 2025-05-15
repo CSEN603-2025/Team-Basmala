@@ -1,4 +1,6 @@
+'use client';
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './NotificationListSmall.module.css';
 
 const defaultNotifications = [
@@ -9,18 +11,21 @@ const defaultNotifications = [
     message: 'Your application has been accepted successfully.',
     datetime: '2025-05-14 10:32 AM',
   }
-
 ];
 
-export default function NotificationList({
+export default function NotificationListSmall({
   notifications = defaultNotifications,
-  onSeeAll = () => alert('See all clicked'),
 }) {
+  const router = useRouter();
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h3 className={styles.title}>Notifications</h3>
-        <button className={styles.seeAll} onClick={onSeeAll}>
+        <button
+          className={styles.seeAll}
+          onClick={() => router.push('/Aswar/NotificationsPage')}
+        >
           See all
         </button>
       </div>

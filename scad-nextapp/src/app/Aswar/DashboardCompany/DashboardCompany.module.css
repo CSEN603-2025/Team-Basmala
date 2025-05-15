@@ -1,135 +1,18 @@
-/* .actionButton {
-    padding: 12px 24px;
-    background-color: #0070f3;
-    color: white;
-    border: none;
-    border-radius: 999px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
-    margin: 5px;
-    align-items: center;
+
+
+.mainContent {
+    margin-left: 100px;
+    margin-top: 90px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
-.actionButton:hover {
-    background-color: #005ad1;
+/* Add spacing between buttons and dashboard content */
+.dashboardContent {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 20px;
+    /* <-- This ensures all content starts after the buttons */
 }
-
-
-.statusChartWrapper {
-    position: absolute;
-    width: 346px;
-    height: 374px;
-    left: 110px;
-    top: 160px;
-}
-
-.chartBackground {
-    position: absolute;
-    width: 307px;
-    height: 360px;
-    left: 8px;
-    top: 9px;
-    background: #d9d9d9;
-    border-radius: 20px;
-}
-
-.barRejected {
-    position: absolute;
-    width: 57px;
-    height: 162px;
-    left: 37px;
-    top: 94px;
-    background: #c98a93;
-    border-radius: 15px;
-}
-
-.barPending {
-    position: absolute;
-    width: 57px;
-    height: 94px;
-    left: 131px;
-    top: 162px;
-    background: #a8a6ae;
-    border-radius: 15px;
-}
-
-.barAccepted {
-    position: absolute;
-    width: 57px;
-    height: 214px;
-    left: 225px;
-    top: 42px;
-    background: #76a06d;
-    border-radius: 15px;
-}
-
-
-.labelRejected,
-.labelPending,
-.labelAccepted {
-    position: absolute;
-    width: 71px;
-    height: 20px;
-    font-family: 'Calibri', sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    text-align: center;
-    color: #000000;
-}
-
-.labelRejected {
-    left: 30px;
-    top: 264px;
-}
-
-.labelPending {
-    left: 124px;
-    top: 264px;
-}
-
-.labelAccepted {
-    left: 218px;
-    top: 264px;
-}
-
-.countRejected,
-.countPending,
-.countAccepted {
-    position: absolute;
-    font-family: 'Calibri', sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    text-align: center;
-    color: #000000;
-}
-
-.countRejected {
-    left: 52px;
-    top: 73px;
-}
-
-.countPending {
-    left: 150px;
-    top: 141px;
-}
-
-.countAccepted {
-    left: 244px;
-    top: 22px;
-}
-
-
-.chartTitle {
-    position: absolute;
-    width: 167px;
-    height: 29px;
-    left: 17px;
-    top: 331px;
-    font-family: 'Calibri', sans-serif;
-    font-weight: 700;
-    font-size: 20px;
-    text-align: center;
-    color: #000000;
-} */

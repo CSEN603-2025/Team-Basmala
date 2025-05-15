@@ -1,0 +1,28 @@
+.actionsRow {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+
+}
+
+.roundButton {
+    padding: 12px 20px;
+    border-radius: 999px;
+    border: none;
+    background-color: #0070f3;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.roundButton:hover {
+    background-color: #005ad1;
+    transform: translateY(-1px);
+}
+
+.roundButton:active {
+    transform: translateY(1px);
+}

@@ -1,4 +1,6 @@
+'use client';
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './NotificationListMedium.module.css';
 
 const defaultNotifications = [
@@ -27,13 +29,17 @@ const defaultNotifications = [
 
 export default function NotificationListMedium({
   notifications = defaultNotifications,
-  onSeeAll = () => alert('See all clicked'),
 }) {
+  const router = useRouter();
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h3 className={styles.title}>Notifications</h3>
-        <button className={styles.seeAll} onClick={onSeeAll}>
+        <button
+          className={styles.seeAll}
+          onClick={() => router.push('/Aswar/NotificationsPage')}
+        >
           See all
         </button>
       </div>
