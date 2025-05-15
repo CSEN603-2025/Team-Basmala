@@ -6,6 +6,8 @@ import InternshipPosts from '@/app/Aswar/Components/InternshipPosts/InternshipPo
 import ApplicationStatusChart from '../Components/ApplicationStatusChart/ApplicationStatusChart';
 import NotificationList from '../Components/NotificationListSmall/NotificationListSmall';
 import DashboardQuickButtons from '../Components/DashboardQuickButtons/DashboardQuickButtons';
+import NewApplicantsCompany from '../Components/NewApplicantsCompany/NewApplicantsCompany';
+
 const internships = [
   { title: 'Frontend Development Internship', startDate: '2025-06-01', endDate: '2025-08-31', status: 'Accepted' },
   { title: 'Backend Development Internship', startDate: '2025-07-01', endDate: '2025-09-30', status: 'Pending' },
@@ -18,16 +20,19 @@ export default function DashboardCompany() {
     <>
       <SidebarCompany activeItem="Dashboard" />
       <Toolbar title="Dashboard" />
-     
-     
-      <div className={styles.mainContent}>
-  <DashboardQuickButtons />
 
-  {/* Wrap the rest of the content in a new container */}
-  <div className={styles.dashboardContent}>
-    <InternshipPosts internships={internships} />
-    <ApplicationStatusChart />
+      <div className={styles.mainContent}>
+  <div className={styles.topRow}>
+    <DashboardQuickButtons />
     <NotificationList />
+  </div>
+
+  <div className={styles.dashboardSpacing}>
+    <div className={styles.dashboardContent}>
+      <ApplicationStatusChart />
+      <InternshipPosts internships={internships} />
+      <NewApplicantsCompany />
+    </div>
   </div>
 </div>
 

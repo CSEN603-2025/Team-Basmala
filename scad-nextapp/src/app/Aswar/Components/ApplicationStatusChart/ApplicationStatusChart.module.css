@@ -1,22 +1,45 @@
 .statusChartWrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
     background: #d9d9d9;
     border-radius: 16px;
     padding: 16px;
     width: 220px;
-    /* Restored original fixed width */
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     margin-top: 0px;
 }
+
+/* Title + View All */
+.headerRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
 .chartTitle {
     font-family: 'Calibri', sans-serif;
     font-weight: 900;
-    font-size: 16px;
-    text-align: center;
-    margin-bottom: 16px;
+    font-size: 15px;
     color: #000000;
+}
+
+.viewAllBtn {
+    background: none;
+    border: none;
+    color: #888888;
+    /* Light gray */
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    /* 🔧 Removes underline */
+    font-family: 'Calibri', sans-serif;
+    padding: 0;
+}
+
+.viewAllBtn:hover {
+    opacity: 0.8;
 }
 
 .barsContainer {

@@ -5,7 +5,10 @@ import styles from './ApplicationStatusChart.module.css';
 export default function ApplicationStatusChart() {
   return (
     <div className={styles.statusChartWrapper}>
-      <div className={styles.chartTitle}>Application Status</div>
+      <div className={styles.headerRow}>
+        <div className={styles.chartTitle}>Application Status</div>
+        <button className={styles.viewAllBtn}>See All</button>
+      </div>
 
       <div className={styles.barsContainer}>
         <div className={`${styles.bar} ${styles.barRejected}`}>
