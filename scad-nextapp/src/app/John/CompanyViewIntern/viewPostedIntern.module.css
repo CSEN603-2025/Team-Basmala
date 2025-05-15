@@ -57,3 +57,68 @@
   flex-direction: column;
   gap: 0.5rem;
 }
+.filterSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-bottom: 1.5rem;
+}
+
+.filterSection input[type="text"],
+.filterSection input[type="number"] {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.filterBox {
+  background-color: #f2f7ff;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-top: 0.5rem;
+  width: 100%;
+  max-width: 500px;
+}
+.topControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+.durationCheckboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.checkboxGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.3rem;
+}
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.applicants {
+  font-size: 0.9rem;
+  color: #555;
+  background-color: #e6f0ff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 500;
+}
