@@ -22,7 +22,9 @@ export default function SidebarStudent({ activeItem }) {
       router.push('/John/internships');
     } 
     else if (name === 'Applications') {
-      router.push('/John/myApplications');
+      router.push('/John/myApplications')}
+    else if (name === 'Reports') {
+        router.push('/Mohamed/StudentsEvaluations');
     } else {
       alert(`Clicked on ${name}`);
     }
