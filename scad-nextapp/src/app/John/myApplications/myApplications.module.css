@@ -17,3 +17,69 @@
   text-align: center;
   color: #333;
 }
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.applicationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.applicationCard {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #f9f9f9;
+}
+
+.company {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.title {
+  font-size: 1rem;
+  color: #555;
+}
+
+.status {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.status.pending {
+  color: #ff9800;
+}
+
+.status.accepted {
+  color: #4caf50;
+}
+
+.status.rejected {
+  color: #f44336;
+}
+
+.status.finalized {
+  color: #2196f3;
+}

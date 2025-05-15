@@ -55,10 +55,17 @@
   color: #000000;
 }
 
-.company {
-  color: #D32F2F;
-  font-weight: bold;
-  font-size: 1.2rem;
+.companyHeader {
+  display: flex;
+  align-items: center; /* Align the image and text vertically */
+  gap: 1rem; /* Add space between the image and the text */
+}
+
+.companyLogo {
+  width: 50px; /* Adjust the width of the logo */
+  height: 50px; /* Adjust the height of the logo */
+  object-fit: contain; /* Ensure the image fits within the dimensions */
+  border-radius: 6px; /* Optional: Add rounded corners */
 }
 
 .duration, .paidStatus {
@@ -128,3 +135,24 @@
   text-align: left; /* Align the button to the left */
   padding: 1rem; /* Add some padding for spacing */
 }
+.cardHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cardText {
+  flex: 1;
+}
+
+.companyLogo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;  /* Prevent squishing */
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+
