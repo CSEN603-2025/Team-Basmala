@@ -1,4 +1,4 @@
-// src/app/login/page.js
+// src/app/auth/page.js
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -49,9 +49,13 @@ export default function AuthPage() {
   };
 
   const handleRegister = () => {
-    alert('Dummy registration: not implemented.');
+    if (role === 'company') {
+      router.push('/Aswar/auth/CompanyRegistration');
+    } else {
+      alert('Registration not implemented for this role.');
+    }
   };
-
+  
   return (
     <div>
       <h1>Authentication Page</h1>

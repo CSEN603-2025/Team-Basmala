@@ -1,0 +1,83 @@
+.container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 24px;
+    background-color: #f5f7fb;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Calibri', sans-serif;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0d455a;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Wraps each label + input/select */
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Labels */
+.formLabel {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Text & Email Inputs */
+.inputField {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+}
+
+/* Select dropdown */
+.selectField {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    background-color: #fff;
+}
+
+/* File inputs */
+.fileInput {
+    padding: 6px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    background-color: #fff;
+}
+
+/* Submit button */
+.submitBtn {
+    padding: 10px;
+    background-color: #0070f3;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submitBtn:hover {
+    background-color: #005ad1;
+}
