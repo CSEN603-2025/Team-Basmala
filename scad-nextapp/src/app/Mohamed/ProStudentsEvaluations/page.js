@@ -1,8 +1,7 @@
 'use client';
 
-import SidebarCompany from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarPRO';
-import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
-import { useState, useEffect } from 'react';
+import SidebarPRO from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarPRO';
+import ToolbarPro from '@/app/sharedComponents-Aswar/ToolbarComponents/ToolbarPro';
 import dynamic from 'next/dynamic';
 
 // Create a loading placeholder
@@ -34,5 +33,13 @@ const ProStudentsEvaluationsClient = dynamic(
 );
 
 export default function ProStudentsEvaluationsPage() {
-  return <ProStudentsEvaluationsClient />;
+  return (
+    <>
+      <SidebarPRO />
+      <ToolbarPro />
+      <div style={{ marginLeft: '150px', marginTop: '90px', padding: '20px' }}>
+        <ProStudentsEvaluationsClient />
+      </div>
+    </>
+  );
 }

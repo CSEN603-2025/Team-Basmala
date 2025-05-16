@@ -1,8 +1,6 @@
 "use client";
 
 
-import SidebarCompany from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarPRO';
-import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
 import React, { useState, useEffect } from "react";
 import styles from "./ProStudentsEvaluations.module.css";
 import jsPDF from "jspdf";
@@ -83,7 +81,8 @@ function ProStudentsEvaluations() {
   const completedInternships = [
     {
       id: 1,
-      companyName: "Tech Innovations Inc.",
+      companyName: "Google",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
       position: "Software Engineering Intern",
       duration: "3 months",
       completedOn: "March 15, 2025",
@@ -91,10 +90,20 @@ function ProStudentsEvaluations() {
     },
     {
       id: 2,
-      companyName: "DataSoft Solutions",
+      companyName: "Microsoft",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
       position: "Frontend Developer Intern",
       duration: "6 months",
       completedOn: "April 30, 2025",
+      evaluated: false
+    },
+    {
+      id: 3,
+      companyName: "IBM",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+      position: "Data Analyst Intern",
+      duration: "4 months",
+      completedOn: "May 10, 2025",
       evaluated: false
     }
   ];
