@@ -29,6 +29,8 @@ export default function SidebarPRO({ activeItem }) {
       router.push('/John/myApplications')}
     else if (name === 'Evaluate') {
       router.push('/Mohamed/ProStudentsEvaluations');
+    }  else if (name === 'Workshops') {
+        router.push('/Basmala/workshops' );
   }else {
       alert(`Clicked on ${name}`);
     }
