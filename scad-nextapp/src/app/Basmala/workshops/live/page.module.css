@@ -12,110 +12,109 @@
 
 .mainContent {
   flex: 1;
-  padding: 20px;
-  background-color: #f8f9fa;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  margin-left: 80px; /* Space for sidebar */
   min-height: calc(100vh - 64px);
   overflow-y: auto;
-  margin-left: 80px; /* Space for sidebar */
 }
 
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem;
-  width: 100%;
+  height: 100%;
 }
 
 .title {
-  color: #2c3e50;
-  margin-bottom: 3rem;
-  font-size: 2.5rem;
-  font-weight: 600;
-  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
 }
 
 .workshopsLayout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   gap: 2rem;
-  width: 100%;
-  position: relative;
+  height: calc(100vh - 200px); /* Adjust height to prevent overflow */
+  overflow: hidden;
 }
 
 .workshopsList {
+  flex: 2;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
+  gap: 1rem;
+  overflow-y: auto;
+  padding-right: 1rem;
 }
 
 .workshopCard {
   background: white;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .workshopInfo h2 {
-  color: #2c3e50;
-  margin: 0 0 1rem 0;
-  font-size: 1.25rem;
+  margin: 0 0 1rem;
+  color: #333;
 }
 
 .datetime {
-  color: #3498db;
-  font-weight: 500;
-  margin: 0.5rem 0;
+  color: #666;
+  margin-bottom: 0.5rem;
 }
 
-.presenter, .duration {
+.presenter {
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.duration {
   color: #666;
-  margin: 0.25rem 0;
-  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
 }
 
 .description {
-  color: #666;
-  margin: 1rem 0;
-  font-size: 0.9rem;
-  line-height: 1.5;
+  color: #555;
+  margin-bottom: 1rem;
 }
 
 .joinButton {
-  background: #3498db;
-  color: white;
-  border: none;
-  padding: 0.75rem;
-  border-radius: 8px;
-  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.5rem;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
+  padding: 0.75rem 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .joinButton:hover {
-  background: #2980b9;
+  background-color: #0056b3;
 }
 
-.notesSection {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.workshopActiveArea {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  height: fit-content;
-  position: sticky;
-  top: 84px; /* Adjusted to account for toolbar */
-  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.notesSection {
+  flex: 1;
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  min-height: 250px;
+  max-height: 40%;
 }
 
 .notesHeader {
@@ -126,9 +125,9 @@
 }
 
 .notesHeader h2 {
-  color: #2c3e50;
   margin: 0;
   font-size: 1.25rem;
+  color: #333;
 }
 
 .notesActions {
@@ -137,76 +136,116 @@
 }
 
 .actionButton {
-  background: #f8f9fa;
-  color: #666;
+  padding: 0.5rem;
+  background: none;
   border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  color: #666;
+  transition: color 0.2s;
 }
 
 .actionButton:hover {
-  background: #e9ecef;
-  color: #3498db;
+  color: #007bff;
 }
 
 .notesTextarea {
+  flex: 1;
   width: 100%;
-  min-height: 400px;
-  padding: 1rem;
-  border: 1px solid #e9ecef;
-  border-radius: 8px;
-  resize: vertical;
-  font-family: inherit;
-  font-size: 0.9rem;
-  line-height: 1.6;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: none;
+  font-size: 1rem;
 }
 
 .notesTextarea:focus {
   outline: none;
-  border-color: #3498db;
+  border-color: #007bff;
+}
+
+.chatSection {
+  flex: 2;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.completeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.completeButton:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.completeButton svg {
+  font-size: 1.2rem;
 }
 
 @media (max-width: 1200px) {
   .workshopsLayout {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  .workshopsList {
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .workshopActiveArea {
+    max-width: none;
+    height: auto;
   }
 
   .notesSection {
-    position: static;
-    margin-top: 2rem;
+    max-height: 300px;
+  }
+
+  .chatSection {
+    height: 500px;
   }
 }
 
 @media (max-width: 768px) {
-  .container {
-    padding: 1rem;
+  .contentWrapper {
+    margin-top: 56px;
   }
 
   .mainContent {
-    padding: 10px;
-    margin-left: 60px; /* Adjusted for smaller sidebar */
+    padding: 1rem;
+    margin-left: 60px;
+  }
+
+  .container {
+    padding: 0;
   }
 
   .title {
-    font-size: 2rem;
-    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .workshopCard {
     padding: 1rem;
-  }
-
-  .notesSection {
-    padding: 1rem;
-  }
-
-  .notesTextarea {
-    min-height: 300px;
   }
 } 
