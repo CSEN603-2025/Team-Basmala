@@ -1,12 +1,11 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import styles from './selectRole.module.css';
+
 
 export default function SelectRolePage() {
   const router = useRouter();
 
   const handleSelect = (role) => {
-    // Ensure the role is correctly mapped to the route
     const roleRoutes = {
       company: '/Aswar/DashboardCompany',
       scad: '/Aswar/DashboardSCAD',
@@ -17,7 +16,7 @@ export default function SelectRolePage() {
 
     const route = roleRoutes[role];
     if (route) {
-      router.push(route); // Redirect to the respective dashboard
+      router.push(route);
     } else {
       alert('Invalid role selected');
     }

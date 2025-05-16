@@ -9,7 +9,8 @@ export default function SidebarCompany({ activeItem }) {
 
   const menuItems = [
     { name: 'Dashboard', icon: <FaHome />, label: 'Dashboard' },
-    { name: 'Internship Listings', icon: <FaListAlt />, label: 'Internships' },
+    { name: 'Internship Listings', icon: <FaListAlt />, label: ' My Internships' },
+    { name: 'All Internship Listings', icon: <FaListAlt />, label: 'All Internships' },
     { name: 'Applications', icon: <FaTasks />, label: 'Applications' },
     { name: 'Interns', icon: <FaUser />, label: 'Interns' },
     { name: 'Reports', icon: <FaChartBar />, label: 'Reports' }

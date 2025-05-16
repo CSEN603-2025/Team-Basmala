@@ -19,6 +19,7 @@ export default function Sidebar({ activeItem }) {
   return (
     <div className={styles.sidebar}>
       <h2 className={styles.logo}>SCAD</h2>
+      
       <div className={styles.iconList}>
         {menuItems.map((item, index) => (
           <div
