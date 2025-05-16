@@ -13,6 +13,7 @@ export default function SidebarStudent({ activeItem }) {
     { name: 'Applications', icon: <FaTasks />, label: 'Applications' },
     { name: 'Interns', icon: <FaUser />, label: 'Interns' },
     { name: 'Evaluate', icon: <FaChartBar />, label: 'Evaluate' }
+    
   ];
 
   const handleClick = (name) => {
