@@ -1,26 +1,7 @@
 .container {
   max-width: 800px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: rgba(255,255,255,0.9);
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-}
-
-.title {
-  text-align: center;
-  color: #D32F2F;
-  margin-bottom: 1.5rem;
-}
-
-.subtitle {
-  text-align: center;
-  color: #333;
-}
-.container {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 1rem;
+  margin: 0 auto;         /* No top margin, centers horizontally */
+  padding: 1.5rem 1rem 2rem 1rem;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -29,13 +10,18 @@
 .title {
   text-align: center;
   color: #333;
+  margin-top: 0;
   margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .subtitle {
   text-align: center;
   color: #666;
+  margin-top: 0;
   margin-bottom: 2rem;
+  font-size: 1.1rem;
 }
 
 .applicationsList {
@@ -82,4 +68,12 @@
 
 .status.finalized {
   color: #2196f3;
+}
+.pageTitle {
+  text-align: center;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
 }

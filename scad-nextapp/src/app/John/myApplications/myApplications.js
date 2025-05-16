@@ -3,6 +3,9 @@
 import React from 'react';
 import styles from './myApplications.module.css';
 
+import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarSCAD';
+import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
+
 const dummyApplications = [
   {
     id: 1,
@@ -32,20 +35,26 @@ const dummyApplications = [
 
 export default function MyApplications() {
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>My Applications</h1>
-      <p className={styles.subtitle}>Here are the internships you've applied for:</p>
+    <div style={{ display: 'flex', minHeight: '100vh' }}>
+      <SidebarSCAD activeItem="My Applications" />
+      <div style={{ flex: 1 }}>
+        <Toolbar title="My Applications" />
+        <div className={styles.container}>
+        <h1 className={styles.pageTitle}>My Applications</h1>         
+         <p className={styles.subtitle}>Here are the internships you've applied for:</p>
 
-      <div className={styles.applicationsList}>
-        {dummyApplications.map((application) => (
-          <div key={application.id} className={styles.applicationCard}>
-            <h3 className={styles.company}>{application.company}</h3>
-            <p className={styles.title}>{application.title}</p>
-            <p className={`${styles.status} ${styles[application.status.toLowerCase()]}`}>
-              Status: {application.status}
-            </p>
+          <div className={styles.applicationsList}>
+            {dummyApplications.map((application) => (
+              <div key={application.id} className={styles.applicationCard}>
+                <h3 className={styles.company}>{application.company}</h3>
+                <p className={styles.title}>{application.title}</p>
+                <p className={`${styles.status} ${styles[application.status.toLowerCase()]}`}>
+                  Status: {application.status}
+                </p>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );

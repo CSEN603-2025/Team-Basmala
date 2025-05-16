@@ -21,7 +21,11 @@ export default function SidebarCompany({ activeItem }) {
       router.push('/Aswar/DashboardStudent');
     } else if (name === 'Internship Listings') {
       router.push('/John/CompanyViewIntern');
-    } else if (name === 'Applications') {
+    } 
+    else if (name === 'All Internship Listings') {
+      router.push('/John/AllinternshipList');   
+    }
+    else if (name === 'Applications') {
       router.push('/John/myApplications');
     }else if (name === 'Interns') {
       router.push('/John/CompanyCurrentInterns');
