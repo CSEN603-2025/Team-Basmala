@@ -296,3 +296,10 @@
 .applicationsPanel .topControls {
   margin-top: 1rem; /* Increase this value for more space */
 }
+.backButtonContainer {
+  position: static;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  margin-right: 2rem;
+}

@@ -5,6 +5,7 @@ import styles from './myApplications.module.css';
 
 import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarSCAD';
 import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
+import BackButton from '@/app/sharedComponents-Aswar/backButton/backButton';
 
 const dummyApplications = [
   {
@@ -40,9 +41,7 @@ export default function MyApplications() {
       <div style={{ flex: 1 }}>
         <Toolbar title="My Applications" />
         <div className={styles.container}>
-        <h1 className={styles.pageTitle}>My Applications</h1>         
-         <p className={styles.subtitle}>Here are the internships you've applied for:</p>
-
+          <h1 className={styles.pageTitle}>My Applications</h1>
           <div className={styles.applicationsList}>
             {dummyApplications.map((application) => (
               <div key={application.id} className={styles.applicationCard}>
@@ -54,6 +53,10 @@ export default function MyApplications() {
               </div>
             ))}
           </div>
+        </div>
+        {/* Back button at the bottom left */}
+        <div className={styles.backButtonContainer}>
+          <BackButton />
         </div>
       </div>
     </div>
