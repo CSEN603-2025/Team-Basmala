@@ -497,7 +497,9 @@ function CompanyEvaluations() {
             <Paper key={student.id} elevation={2} className={styles.studentCard} sx={{ mb: 2, p: 2 }}>
               <Grid container spacing={2}>
                 <Grid item xs={1}>
-                  <Avatar src={student.photo} alt={student.studentName} sx={{ width: 56, height: 56 }} />
+                  <div style={{ height: 56, width: 56, background: '#eee', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#888', fontWeight: 700, fontSize: 24 }}>
+                    {student.studentName[0]}
+                  </div>
                 </Grid>
                 <Grid item xs={7}>
                   <Typography variant="h6">{student.studentName}</Typography>
