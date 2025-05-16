@@ -1,8 +1,11 @@
 'use client';
-import { FaHome, FaTasks, FaListAlt, FaUser, FaChartBar } from 'react-icons/fa'; // Import icons from react-icons
+import { useRouter } from 'next/navigation';
+import { FaHome, FaTasks, FaListAlt, FaUser, FaChartBar } from 'react-icons/fa';
 import styles from './sidebar.module.css';
 
 export default function SidebarPRO({ activeItem }) {
+  const router = useRouter();
+
   const menuItems = [
     { name: 'Dashboard', icon: <FaHome />, label: 'Dashboard' },
     { name: 'Internship Listings', icon: <FaListAlt />, label: 'Internships' },
@@ -14,11 +17,9 @@ export default function SidebarPRO({ activeItem }) {
   const handleClick = (name) => {
     if (name === 'Dashboard') {
       router.push('/Aswar/DashboardStudent');
-    }
-    else if (name === 'Internship Listings') {
+    } else if (name === 'Internship Listings') {
       router.push('/John/internships');
-    } 
-    else if (name === 'Applications') {
+    } else if (name === 'Applications') {
       router.push('/John/myApplications');
     } else {
       alert(`Clicked on ${name}`);
@@ -28,7 +29,7 @@ export default function SidebarPRO({ activeItem }) {
   return (
     <div className={styles.sidebar}>
       <h2 className={styles.logo}>SCAD</h2>
-      <h2 className={styles.PRO}> PRO</h2>
+      <div className={styles.proBadge}>PRO</div>
       <div className={styles.iconList}>
         {menuItems.map((item, index) => (
           <div

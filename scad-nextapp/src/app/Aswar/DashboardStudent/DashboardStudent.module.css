@@ -1,0 +1,31 @@
+.mainContent {
+    margin-left: 100px;
+    margin-top: 90px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    /* Adjusted gap */
+}
+
+.topRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    /* Reduced gap */
+    flex-wrap: wrap;
+}
+
+.dashboardSpacing {
+    margin-top: 0px;
+    /* Removed unnecessary margin */
+}
+
+.dashboardContent {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    /* Adjusted gap between components */
+    align-items: flex-start;
+}

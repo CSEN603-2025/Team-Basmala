@@ -89,6 +89,28 @@
     color: white;
 }
 
-.PRO {
-    color: gold;
+
+
+/* at the bottom of your existing file, add: */
+
+.proBadge {
+    margin-top: 1px;
+    /* space below the logo */
+    margin-bottom: 12px;
+    /* space before the icons */
+    padding: 2px 6px;
+    /* badge padding */
+    background-color: goldenrod;
+    /* gold background */
+    color: #0070f3;
+    /* sidebar primary color for contrast */
+    font-size: 0.65rem;
+    /* small text */
+    font-weight: bold;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    width: fit-content;
+    /* shrink to text width */
 }
