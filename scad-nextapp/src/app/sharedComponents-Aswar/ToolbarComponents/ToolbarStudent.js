@@ -5,6 +5,7 @@ import { FaChevronDown, FaSearch, FaEnvelope, FaBell } from 'react-icons/fa';
 import Image from 'next/image';
 import NotificationListMedium from '@/app/Aswar/Components/NotificationListMedium/NotificationListMedium';
 import { useRouter } from 'next/navigation';
+import NotificationListMediumStudent from '@/app/Aswar/Components/NotificationListMediumStudent/NotificationListMediumStudent';
 
 export default function ToolbarStudent({ title = "Dashboard" }) {
   const [notifOpen, setNotifOpen] = useState(false);
@@ -61,7 +62,7 @@ export default function ToolbarStudent({ title = "Dashboard" }) {
           </button>
           {notifOpen && (
             <div ref={dropdownRef} className={styles.notificationDropdown}>
-              <NotificationListMedium />
+              <NotificationListMediumStudent />
             </div>
           )}
         </div>

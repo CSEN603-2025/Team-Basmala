@@ -1,0 +1,42 @@
+.mainContent {
+    margin-left: 100px;
+    margin-top: 90px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.topRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.dashboardSpacing {
+    margin-top: 0;
+}
+
+/* Updated container for the three components */
+.dashboardContent {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    /* prevent wrapping */
+}
+
+/* Make each direct child take equal space */
+.dashboardContent>* {
+    flex: 1 1 0;
+}
+
+/* call alert floats above everything */
+.callAlertWrapper {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}

@@ -1,39 +1,32 @@
 'use client';
-import { FaHome, FaTasks, FaListAlt, FaUser, FaChartBar } from 'react-icons/fa'; // Import icons from react-icons
+import { FaHome, FaTasks, FaListAlt, FaUser, FaChartBar } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
 import styles from './sidebar.module.css';
 
 export default function SidebarSCAD({ activeItem }) {
+  const router = useRouter();   // ← You must call this!
+
   const menuItems = [
-    { name: 'Dashboard', icon: <FaHome />, label: 'Dashboard' },
-    { name: 'Internship Listings', icon: <FaListAlt />, label: 'Internships' },
-    { name: 'Applications', icon: <FaTasks />, label: 'Applications' },
-    { name: 'Interns', icon: <FaUser />, label: 'Interns' },
-    { name: 'Reports', icon: <FaChartBar />, label: 'Reports' }
+    { name: 'Dashboard',        icon: <FaHome />,     label: 'Dashboard',        path: '/Aswar/DashboardSCAD' },
+    { name: 'Internship Listings', icon: <FaListAlt />, label: 'Internships',     path: '/John/internships' },
+    { name: 'Applications',     icon: <FaTasks />,    label: 'Applications',     path: '/John/myApplications' },
+    { name: 'Interns',          icon: <FaUser />,     label: 'Interns',          path: '/Mohamed/SCAD' },
+    { name: 'Reports',          icon: <FaChartBar />, label: 'Reports',          path: '/Aswar/DashboardSCAD/reports' }
   ];
 
-  const handleClick = (name) => {
-    if (name === 'Dashboard') {
-      router.push('/Aswar/DashboardStudent');
-    }
-    else if (name === 'Internship Listings') {
-      router.push('/John/internships');
-    } 
-    else if (name === 'Applications') {
-      router.push('/John/myApplications');
-    } else {
-      alert(`Clicked on ${name}`);
-    }
+  const handleClick = (path) => {
+    router.push(path);
   };
 
   return (
     <div className={styles.sidebar}>
       <h2 className={styles.logo}>SCAD</h2>
       <div className={styles.iconList}>
-        {menuItems.map((item, index) => (
+        {menuItems.map((item) => (
           <div
-            key={index}
+            key={item.name}
             className={`${styles.iconItem} ${activeItem === item.name ? styles.active : ''}`}
-            onClick={() => handleClick(item.name)}
+            onClick={() => handleClick(item.path)}
           >
             <div className={styles.iconContainer}>
               <div className={styles.icon}>{item.icon}</div>

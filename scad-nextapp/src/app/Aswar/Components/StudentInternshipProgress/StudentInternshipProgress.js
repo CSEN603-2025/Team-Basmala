@@ -17,7 +17,7 @@ export default function StudentInternshipProgress({
       {/* Title */}
       <h3 className={styles.cardTitle}>3-Months Internship Progress</h3>
 
-      {/* Row 1: Progress Bar */}
+      {/* Progress Bar Row */}
       <div className={styles.progressRow}>
         <div className={styles.progressBarContainer}>
           <div
@@ -30,22 +30,19 @@ export default function StudentInternshipProgress({
         </div>
       </div>
 
-      {/* Completed Internships Section */}
+      {/* Completed Internships */}
       <h4 className={styles.listTitle}>Completed Internships</h4>
-      <div className={styles.listRow}>
-        <ul className={styles.internshipList}>
-          {completedInternships.map(({ name, logoUrl }, idx) => (
-            <li key={idx} className={styles.internshipItem}>
-              <img
-                src={logoUrl}
-                alt={name}
-                className={styles.logoImg}
-              />
+      <ul className={styles.internshipList}>
+        {completedInternships.map(({ name, logoUrl, position }, idx) => (
+          <li key={idx} className={styles.internshipItem}>
+            <img src={logoUrl} alt={name} className={styles.logoImg} />
+            <div className={styles.internshipInfo}>
               <span className={styles.companyName}>{name}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+              <span className={styles.position}>{position}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

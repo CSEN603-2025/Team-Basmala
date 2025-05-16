@@ -18,18 +18,18 @@ export default function NotificationListSmall({
 }) {
   const router = useRouter();
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <h3 className={styles.title}>Notifications</h3>
-        <button
-          className={styles.seeAll}
-          onClick={() => router.push('/Aswar/NotificationsPage')}
-        >
-          See all
-        </button>
-      </div>
+  const goToNotifications = () => {
+    router.push('/Aswar/NotificationsPage');
+  };
 
+  return (
+    <div
+      className={styles.container}
+      onClick={goToNotifications}
+      role="button"
+      tabIndex={0}
+      onKeyPress={(e) => e.key === 'Enter' && goToNotifications()}
+    >
       {notifications.map(({ id, app, title, message, datetime }) => (
         <div key={id} className={styles.card}>
           <div className={styles.cardHeader}>

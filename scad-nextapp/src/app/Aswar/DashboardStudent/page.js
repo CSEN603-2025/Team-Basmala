@@ -8,6 +8,7 @@ import NotificationList from '../Components/NotificationListSmall/NotificationLi
 import DashboardQuickButtons from '../Components/DashboardQuickButtons/DashboardQuickButtons';
 import NewApplicantsCompany from '../Components/NewApplicantsCompany/NewApplicantsCompany';
 import StudentInternshipProgress from '../Components/StudentInternshipProgress/StudentInternshipProgress'
+import NotificationCardStudent from '../Components/NotificationCardStudent/NotificationCardStudent';
 
 const internships = [
   { title: 'Frontend Development Internship', startDate: '2025-06-01', endDate: '2025-08-31', status: 'Accepted' },
@@ -25,7 +26,7 @@ export default function DashboardStudent() {
       <div className={styles.mainContent}>
   <div className={styles.topRow}>
     <DashboardQuickButtons />
-    <NotificationList />
+    <NotificationCardStudent />
 
   </div>
 
@@ -36,12 +37,24 @@ export default function DashboardStudent() {
       <StudentInternshipProgress
   daysCompleted={45}
   completedInternships={[
-    { name: 'Google', logoUrl: 'https://logo.clearbit.com/google.com' },
-    { name: 'Amazon',    logoUrl: 'https://logo.clearbit.com/amazon.com' },
-    { name: 'Microsoft',   logoUrl: 'https://logo.clearbit.com/microsoft.com' },
+    { 
+      name: 'Google', 
+      logoUrl: 'https://logo.clearbit.com/google.com', 
+      position: 'Frontend Developer'
+    },
+    { 
+      name: 'Amazon', 
+      logoUrl: 'https://logo.clearbit.com/amazon.com', 
+      position: 'Data Analyst'
+    },
+    { 
+      name: 'Microsoft', 
+      logoUrl: 'https://logo.clearbit.com/microsoft.com', 
+      position: 'UX Designer'
+    },
   ]}
 />
-     
+
     </div>
   </div>
 </div>

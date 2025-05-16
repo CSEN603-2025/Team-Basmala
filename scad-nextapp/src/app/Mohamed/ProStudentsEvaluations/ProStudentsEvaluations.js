@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./ProStudentsEvaluations.module.css";
+import jsPDF from "jspdf";
 import { 
   Container, 
   Typography, 
@@ -465,10 +466,31 @@ function ProStudentsEvaluations() {
     }
   };
   
-  const handleDownloadPDF = (report) => {
-    // In a real app, this would generate and download a PDF
-    alert("Downloading report as PDF...");
-    // You would use a library like jsPDF or make an API call to generate the PDF
+  const handleDownloadPDF = () => {
+    if (!selectedReport) {
+      alert("No report selected to download.");
+      return;
+    }
+    const doc = new jsPDF();
+    doc.setFontSize(16);
+    doc.text(selectedReport.title || "Internship Report", 10, 15);
+    doc.setFontSize(12);
+    doc.text(`Company: ${selectedReport.companyName || ""}`, 10, 30);
+    doc.text(`Introduction:`, 10, 40);
+    doc.text(selectedReport.introduction || "", 10, 48, { maxWidth: 180 });
+    doc.text(`Details:`, 10, 65);
+    doc.text(selectedReport.body || "", 10, 73, { maxWidth: 180 });
+    doc.text(`Courses:`, 10, 90);
+    if (selectedReport.selectedCourses && selectedReport.selectedCourses.length > 0) {
+      const courses = selectedReport.selectedCourses.map(id => {
+        const course = availableCourses.find(c => c.id === id);
+        return course ? course.name : "";
+      }).join(", ");
+      doc.text(courses, 10, 98, { maxWidth: 180 });
+    }
+    doc.text(`Major: ${selectedReport.selectedMajor || ""}`, 10, 115);
+    doc.text(`Submission Date: ${selectedReport.submissionDate || ""}`, 10, 125);
+    doc.save(`${selectedReport.title || "internship-report"}.pdf`);
   };
   
   const handleAppealReport = () => {
