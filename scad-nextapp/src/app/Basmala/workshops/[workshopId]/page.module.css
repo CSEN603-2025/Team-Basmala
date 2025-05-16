@@ -1,135 +1,201 @@
 .container {
-  padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-}
-
-.title {
-  color: #2c3e50;
-  margin-bottom: 2rem;
-  font-size: 2rem;
-  font-weight: 600;
-}
-
-.workshopGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.workshopCard {
+  padding: 2rem;
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.workshopCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.workshopHeader {
-  padding: 1.5rem;
-  background: #f8f9fa;
-  border-bottom: 1px solid #eee;
+.header {
+  margin-bottom: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.workshopHeader h2 {
+.header h1 {
   margin: 0;
-  font-size: 1.25rem;
   color: #2c3e50;
+  font-size: 2rem;
 }
 
 .status {
-  background: #e3f2fd;
-  color: #1976d2;
-  padding: 0.25rem 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.badge {
+  padding: 0.5rem 1rem;
   border-radius: 20px;
   font-size: 0.875rem;
   font-weight: 500;
 }
 
-.workshopDetails {
-  padding: 1.5rem;
+.upcoming {
+  background-color: #e3f2fd;
+  color: #1976d2;
 }
 
-.datetime {
-  color: #2196f3;
+.ongoing {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.completed {
+  background-color: #eeeeee;
+  color: #616161;
+}
+
+.live {
+  background-color: #fce4ec;
+  color: #c2185b;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: calc(100vh - 64px);
+  overflow-y: auto;
+}
+
+.infoSection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #eee;
+}
+
+.basicInfo {
+  flex: 1;
+  min-width: 280px;
+}
+
+.infoItem {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.label {
   font-weight: 500;
-  margin-bottom: 0.5rem;
+  color: #666;
+  width: 100px;
 }
 
-.duration,
-.presenter {
-  color: #666;
+.capacity {
+  flex: 1;
+  min-width: 280px;
+}
+
+.capacityInfo {
   margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background-color: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background-color: #2196f3;
+  transition: width 0.3s ease;
 }
 
 .description {
+  margin-bottom: 2rem;
+}
+
+.description h2,
+.topics h2,
+.requirements h2 {
+  color: #2c3e50;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.description p {
   color: #666;
-  margin-bottom: 1.5rem;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
-.buttonGroup {
+.topics,
+.requirements {
+  margin-bottom: 2rem;
+}
+
+.topics ul,
+.requirements ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.topics li,
+.requirements li {
+  padding: 0.5rem 0;
+  color: #666;
   display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  align-items: center;
 }
 
-.registerButton,
-.detailsButton {
-  flex: 1;
-  padding: 0.75rem 1.5rem;
-  border-radius: 25px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.2s ease;
-  text-decoration: none;
+.topics li::before,
+.requirements li::before {
+  content: "•";
+  color: #2196f3;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.actions {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: center;
 }
 
 .registerButton {
   background-color: #2196f3;
   color: white;
   border: none;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 200px;
 }
 
-.registerButton:hover {
+.registerButton:hover:not(:disabled) {
   background-color: #1976d2;
 }
 
-.detailsButton {
-  background-color: white;
-  color: #2196f3;
-  border: 2px solid #2196f3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.registerButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
-.detailsButton:hover {
-  background-color: #e3f2fd;
-}
-
-.registeredBadge {
-  flex: 1;
-  padding: 0.75rem 1.5rem;
-  background-color: #e8f5e9;
+.registeredMessage {
   color: #2e7d32;
-  border-radius: 25px;
   font-weight: 500;
-  text-align: center;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.5rem;
+  font-size: 1.1rem;
 }
 
 /* Modal Styles */
@@ -274,12 +340,18 @@
     padding: 1rem;
   }
 
-  .workshopGrid {
-    grid-template-columns: 1fr;
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .buttonGroup {
+  .infoSection {
     flex-direction: column;
+  }
+
+  .basicInfo,
+  .capacity {
+    width: 100%;
   }
 
   .formRow {
@@ -301,12 +373,13 @@
 .contentWrapper {
   display: flex;
   flex: 1;
+  margin-top: 64px;
 }
 
 .mainContent {
   flex: 1;
   padding: 20px;
   background-color: #f8f9fa;
-  min-height: calc(100vh - 64px); /* Adjust based on toolbar height */
+  min-height: calc(100vh - 64px);
   overflow-y: auto;
 } 
