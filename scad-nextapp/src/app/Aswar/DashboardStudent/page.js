@@ -9,6 +9,7 @@ import DashboardQuickButtons from '../Components/DashboardQuickButtons/Dashboard
 import NewApplicantsCompany from '../Components/NewApplicantsCompany/NewApplicantsCompany';
 import StudentInternshipProgress from '../Components/StudentInternshipProgress/StudentInternshipProgress'
 import NotificationCardStudent from '../Components/NotificationCardStudent/NotificationCardStudent';
+import SidebarStudent from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarStudent';
 
 const internships = [
   { title: 'Frontend Development Internship', startDate: '2025-06-01', endDate: '2025-08-31', status: 'Accepted' },
@@ -20,7 +21,7 @@ const internships = [
 export default function DashboardStudent() {
   return (
     <>
-      <SidebarCompany activeItem="Dashboard" />
+      <SidebarStudent activeItem="Dashboard" />
       <Toolbar title="Dashboard" />
 
       <div className={styles.mainContent}>
