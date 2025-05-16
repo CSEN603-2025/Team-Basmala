@@ -1,11 +1,12 @@
 .mainContent {
+    position: relative;
+    /* context for absolute children */
     margin-left: 100px;
     margin-top: 90px;
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    /* Adjusted gap */
 }
 
 .topRow {
@@ -13,19 +14,24 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 16px;
-    /* Reduced gap */
     flex-wrap: wrap;
 }
 
 .dashboardSpacing {
-    margin-top: 0px;
-    /* Removed unnecessary margin */
+    margin-top: 0;
 }
 
 .dashboardContent {
     display: flex;
     flex-direction: row;
     gap: 24px;
-    /* Adjusted gap between components */
     align-items: flex-start;
+}
+
+/* call alert floats above everything */
+.callAlertWrapper {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
 }

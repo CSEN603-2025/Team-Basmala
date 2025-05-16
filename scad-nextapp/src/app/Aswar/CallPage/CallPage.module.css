@@ -1,0 +1,73 @@
+.callContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #000;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    padding-top: 20px;
+    box-sizing: border-box;
+    font-family: 'Calibri', sans-serif;
+}
+
+.videoContainer {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    aspect-ratio: 16 / 9;
+    background: #111;
+    border: 2px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.localVideo {
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+.notification {
+    position: absolute;
+    top: 20px;
+    background: rgba(255, 255, 255, 0.85);
+    color: #000;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+}
+
+.controlBtn,
+.controlBtnLeave {
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.controlBtn {
+    background: #0070f3;
+    color: #fff;
+}
+
+.controlBtn:hover {
+    background: #005ad1;
+}
+
+.controlBtnLeave {
+    background: #c82333;
+    color: #fff;
+}
+
+.controlBtnLeave:hover {
+    background: #a71d2a;
+}
