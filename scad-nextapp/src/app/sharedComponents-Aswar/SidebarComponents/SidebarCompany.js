@@ -22,7 +22,10 @@ export default function SidebarCompany({ activeItem }) {
       router.push('/John/CompanyViewIntern');
     } else if (name === 'Applications') {
       router.push('/John/myApplications');
-    } else {
+    }else if (name === 'Interns') {
+      router.push('/John/CompanyCurrentInterns');
+    }
+     else {
       alert(`Clicked on ${name}`);
     }
     

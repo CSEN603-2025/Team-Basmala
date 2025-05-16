@@ -122,3 +122,177 @@
   border-radius: 6px;
   font-weight: 500;
 }
+/* View Toggle Buttons (Posted Internships / All Applications) */
+.viewToggle {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  justify-content: flex-start;
+}
+
+.toggleBtn {
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  border: 2px solid #007bff;
+  background-color: white;
+  color: #007bff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toggleBtn:hover {
+  background-color: #e6f0ff;
+}
+
+.toggleBtn.active {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+/* Applications Panel */
+.applicationsPanel {
+  padding: 0 1.5rem;
+  margin-top: 1rem;
+}
+
+
+.applicationsPanel h2 {
+  margin-bottom: 1rem;
+  color: #0056b3;
+}
+
+/* Dropdown filter */
+.applicationsPanel select {
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+}
+
+/* Each Applicant Card */
+.applicationCard {
+  border: 1px solid #cce0ff;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f8fbff;
+}
+
+.applicationCard p {
+  margin: 0.5rem 0;
+}
+
+.applicationCard a {
+  color: #007bff;
+  text-decoration: underline;
+}
+.applicantCardsWrapper {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+
+/* Status Buttons */
+.statusButtons {
+  margin-top: 0.5rem;
+}
+
+.statusButtons button {
+  margin-right: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #e0ecff;
+  color: #0056b3;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.statusButtons button:hover {
+  background-color: #cce0ff;
+}
+/* Add this to your viewPostedIntern.module.css */
+.viewToggle {
+  margin-top: 3rem; /* Adjust as needed to push the buttons below the toolbar */
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.heading {
+  font-size: 2rem;
+  color: #0056b3;
+  font-weight: bold;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.toggleGroup {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.toggleBtn {
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  border: 2px solid #007bff;
+  background-color: white;
+  color: #007bff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toggleBtn:hover {
+  background-color: #e6f0ff;
+}
+
+.toggleBtn.active {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.postButton {
+  margin-left: auto;
+  padding: 0.5rem 1rem;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.postButton:hover {
+  background: #0056b3;
+}
+/* Make the All Applicants title look like the active toggle button */
+.applicantsTitleBtn {
+  font-size: 1rem; /* Match the toggleBtn font size */
+  font-weight: bold;
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  margin-bottom: 1.5rem;
+  cursor: default;
+  pointer-events: none;
+  display: inline-block;
+}
+/* Push the search bar further below the All Applicants title */
+.applicationsPanel .topControls {
+  margin-top: 1rem; /* Increase this value for more space */
+}
