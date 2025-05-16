@@ -213,7 +213,7 @@ export default function Page() {
   const endCall = () => {
     setCallData(prev => ({...prev, callEnded: true}));
     setTimeout(() => {
-      router.push('/Basmala/DashboardSCAD');
+      router.push('/Aswar/DashboardSCAD');
     }, 2000);
   };
 
