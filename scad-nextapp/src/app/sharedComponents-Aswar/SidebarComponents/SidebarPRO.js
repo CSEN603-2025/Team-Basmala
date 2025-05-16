@@ -28,6 +28,7 @@ export default function SidebarPRO({ activeItem }) {
   return (
     <div className={styles.sidebar}>
       <h2 className={styles.logo}>SCAD</h2>
+      <h2 className={styles.PRO}> PRO</h2>
       <div className={styles.iconList}>
         {menuItems.map((item, index) => (
           <div
