@@ -29,59 +29,95 @@ const SCAD = () => {
 
   // Fetch reports (mock data for now)
   useEffect(() => {
-    const mockReports = [
-      {
-        id: 1,
-        studentId: 1,
-        studentName: 'Ahmed Mohamed',
-        major: 'CS',
-        title: 'Internship at Tech Co',
-        status: 'pending',
-        submissionDate: '2025-04-15',
-        content: 'Detailed report about my experience...',
-        company: 'Tech Co',
-        supervisor: 'Mr. Khaled',
-        evaluation: 'Excellent',
-        feedback: 'Great performance and teamwork.',
-        attachment: 'report1.pdf',
-        internshipStartDate: '2025-02-01',
-        internshipEndDate: '2025-04-01'
-      },
-      {
-        id: 2,
-        studentId: 2,
-        studentName: 'Sara Ali',
-        major: 'IT',
-        title: 'Summer Internship',
-        status: 'accepted',
-        submissionDate: '2025-04-10',
-        content: 'Working on database management systems...',
-        company: 'Data Solutions',
-        supervisor: 'Ms. Fatma',
-        evaluation: 'Very Good',
-        feedback: 'Strong technical skills.',
-        attachment: 'report2.pdf',
-        internshipStartDate: '2025-01-15',
-        internshipEndDate: '2025-03-15'
-      },
-      {
-        id: 3,
-        studentId: 3,
-        studentName: 'Omar Hassan',
-        major: 'DS',
-        title: 'Data Analysis Internship',
-        status: 'flagged',
-        submissionDate: '2025-04-12',
-        content: 'Applied machine learning techniques...',
-        company: 'Analytics Hub',
-        supervisor: 'Dr. Samir',
-        evaluation: 'Needs Improvement',
-        feedback: 'Should focus more on documentation.',
-        attachment: 'report3.pdf',
-        internshipStartDate: '2025-03-01',
-        internshipEndDate: '2025-05-01'
-      },
-    ];
+    // ...inside useEffect for mockReports...
+const mockReports = [
+  {
+    id: 1,
+    studentId: 1,
+    studentName: 'Ahmed Mohamed',
+    major: 'CS',
+    title: 'Internship at Google',
+    status: 'pending',
+    submissionDate: '2025-04-15',
+    content: 'Detailed report about my experience...',
+    company: 'Google',
+    supervisor: 'Mr. Khaled',
+    evaluation: 'Excellent',
+    feedback: 'Great performance and teamwork.',
+    attachment: 'report1.pdf',
+    internshipStartDate: '2025-02-01',
+    internshipEndDate: '2025-04-01'
+  },
+  {
+    id: 2,
+    studentId: 2,
+    studentName: 'Sara Ali',
+    major: 'IT',
+    title: 'Summer Internship',
+    status: 'accepted',
+    submissionDate: '2025-04-10',
+    content: 'Working on database management systems...',
+    company: 'Microsoft',
+    supervisor: 'Ms. Fatma',
+    evaluation: 'Very Good',
+    feedback: 'Strong technical skills.',
+    attachment: 'report2.pdf',
+    internshipStartDate: '2025-01-15',
+    internshipEndDate: '2025-03-15'
+  },
+  {
+    id: 3,
+    studentId: 3,
+    studentName: 'Omar Hassan',
+    major: 'DS',
+    title: 'Data Analysis Internship',
+    status: 'flagged',
+    submissionDate: '2025-04-12',
+    content: 'Applied machine learning techniques...',
+    company: 'IBM',
+    supervisor: 'Dr. Samir',
+    evaluation: 'Needs Improvement',
+    feedback: 'Should focus more on documentation.',
+    attachment: 'report3.pdf',
+    internshipStartDate: '2025-03-01',
+    internshipEndDate: '2025-05-01'
+  },
+  {
+    id: 4,
+    studentId: 4,
+    studentName: 'Layla Youssef',
+    major: 'CS',
+    title: 'Web App Internship',
+    status: 'flagged',
+    submissionDate: '2025-04-18',
+    content: 'Worked on frontend and backend tasks...',
+    company: 'Meta',
+    supervisor: 'Eng. Mona',
+    evaluation: 'Satisfactory',
+    feedback: 'Needs to improve code quality.',
+    attachment: 'report4.pdf',
+    internshipStartDate: '2025-02-10',
+    internshipEndDate: '2025-04-10'
+  },
+  {
+    id: 5,
+    studentId: 5,
+    studentName: 'Hassan Nabil',
+    major: 'IT',
+    title: 'Network Internship',
+    status: 'rejected',
+    submissionDate: '2025-04-20',
+    content: 'Assisted in network setup and troubleshooting...',
+    company: 'Cisco',
+    supervisor: 'Mr. Adel',
+    evaluation: 'Poor',
+    feedback: 'Report lacks sufficient detail.',
+    attachment: 'report5.pdf',
+    internshipStartDate: '2025-03-05',
+    internshipEndDate: '2025-05-05'
+  }
+];
+// ...existing code...
     setReports(mockReports);
   }, []);
 
@@ -334,23 +370,27 @@ const SCAD = () => {
               </div>
               {/* Clarification form for flagged or rejected */}
               {(selectedReport.status === 'flagged' || selectedReport.status === 'rejected') && (
-                <form onSubmit={handleClarificationSubmit} className={styles.clarificationForm}>
-                  <label htmlFor="clarification"><strong>Clarification Comment:</strong></label>
-                  <textarea
-                    id="clarification"
-                    value={clarification}
-                    onChange={(e) => setClarification(e.target.value)}
-                    rows={3}
-                    placeholder="Enter your clarification here..."
-                    required
-                    className={styles.clarificationTextarea}
-                  />
-                  <button type="submit" className={styles.submitButton}>Submit Clarification</button>
-                  {clarificationSubmitted && (
-                    <span className={styles.successMsg}>Clarification submitted!</span>
-                  )}
-                </form>
-              )}
+  <form onSubmit={handleClarificationSubmit} className={styles.clarificationForm}>
+    <label htmlFor="clarification" className={styles.clarificationLabel}>
+      <strong>Clarification Comment:</strong>
+    </label>
+    <div className={styles.clarificationRow}>
+      <textarea
+        id="clarification"
+        value={clarification}
+        onChange={(e) => setClarification(e.target.value)}
+        rows={3}
+        placeholder="Enter your clarification here..."
+        required
+        className={styles.clarificationTextarea}
+      />
+      <button type="submit" className={styles.submitButton}>Submit Clarification</button>
+    </div>
+    {clarificationSubmitted && (
+      <span className={styles.successMsg}>Clarification submitted!</span>
+    )}
+  </form>
+)}
               <div className={styles.actionButtons}>
                 <button className={`${styles.actionButton} ${styles.accept}`}>Accept</button>
                 <button className={`${styles.actionButton} ${styles.reject}`}>Reject</button>
