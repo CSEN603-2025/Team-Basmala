@@ -39,7 +39,7 @@
 "use client";
 
 import StudentsEvaluations from './StudentsEvaluations';
-import SidebarCompany from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarCompany';
+import SidebarCompany from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarStudent';
 import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
 
 export default function StudentsEvaluationsPage() {

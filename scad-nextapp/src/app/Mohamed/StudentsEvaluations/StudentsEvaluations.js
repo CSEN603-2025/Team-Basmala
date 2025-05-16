@@ -522,6 +522,7 @@ function StudentsEvaluations() {
   
   const handleViewReport = (report) => {
     setSelectedReport(report);
+    setIsEditingReport(false); // Ensure view-only mode
     setReportDialogOpen(true);
   };
   
@@ -957,18 +958,19 @@ function StudentsEvaluations() {
                   </Button>
                   <Button
                     variant="outlined"
-                    size="small"
-                    startIcon={<EditIcon />}
+                  size="small"
+                    startIcon={<VisibilityIcon />}
                     onClick={() => {
                       if (evaluation && evaluation.companyId) {
-                        handleEditEvaluation(evaluation);
+                        setSelectedCompany(completedInternships.find(c => c.id === evaluation.companyId));
+                        setTabValue(0); // Switch to Company Evaluations tab for viewing
                       } else {
-                        alert("Unable to edit. Evaluation details are missing.");
+                        alert("Unable to view. Evaluation details are missing.");
                       }
                     }}
                   >
-                    Edit
-                  </Button>
+                  View
+                </Button>
                 </Grid>
               </Grid>
             </Paper>
@@ -1001,86 +1003,133 @@ function StudentsEvaluations() {
         maxWidth="md"
         fullWidth
       >
-        <DialogTitle>{selectedReport ? "Edit Report" : "Create New Report"}</DialogTitle>
+        <DialogTitle>
+          {isEditingReport ? (selectedReport ? "Edit Report" : "Create New Report") : "View Report"}
+        </DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            {selectedReport ? "Update the details of your report." : "Fill out the form below to create a new report."}
-          </DialogContentText>
-          <TextField
-            label="Report Title"
-            name="title"
-            value={reportData.title}
-            onChange={handleReportInputChange}
-            fullWidth
-            sx={{ mb: 2 }}
-          />
-          <TextField
-            label="Introduction"
-            name="introduction"
-            value={reportData.introduction}
-            onChange={handleReportInputChange}
-            fullWidth
-            multiline
-            rows={2}
-            sx={{ mb: 2 }}
-          />
-          <TextField
-            label="Detailed Description"
-            name="body"
-            value={reportData.body}
-            onChange={handleReportInputChange}
-            fullWidth
-            multiline
-            rows={4}
-            sx={{ mb: 2 }}
-          />
-          <Typography variant="subtitle1" gutterBottom>
-            Select Courses
-          </Typography>
-          <Grid container spacing={2} sx={{ mb: 2 }}>
-            {availableCourses.map((course) => (
-              <Grid item xs={6} sm={4} md={3} key={course.id}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={reportData.selectedCourses.includes(course.id)}
-                      onChange={() => handleCourseSelection(course.id)}
+          {isEditingReport ? (
+            <>
+              <DialogContentText>
+                {selectedReport ? "Update the details of your report." : "Fill out the form below to create a new report."}
+              </DialogContentText>
+              <TextField
+                label="Report Title"
+                name="title"
+                value={reportData.title}
+                onChange={handleReportInputChange}
+                fullWidth
+                sx={{ mb: 2 }}
+              />
+              <TextField
+                label="Introduction"
+                name="introduction"
+                value={reportData.introduction}
+                onChange={handleReportInputChange}
+                fullWidth
+                multiline
+                rows={2}
+                sx={{ mb: 2 }}
+              />
+              <TextField
+                label="Detailed Description"
+                name="body"
+                value={reportData.body}
+                onChange={handleReportInputChange}
+                fullWidth
+                multiline
+                rows={4}
+                sx={{ mb: 2 }}
+              />
+              <Typography variant="subtitle1" gutterBottom>
+                Select Courses
+              </Typography>
+              <Grid container spacing={2} sx={{ mb: 2 }}>
+                {availableCourses.map((course) => (
+                  <Grid item xs={6} sm={4} md={3} key={course.id}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={reportData.selectedCourses.includes(course.id)}
+                          onChange={() => handleCourseSelection(course.id)}
+                        />
+                      }
+                      label={course.name}
                     />
-                  }
-                  label={course.name}
-                />
+                  </Grid>
+                ))}
               </Grid>
-            ))}
-          </Grid>
-          <FormControl fullWidth sx={{ mb: 2 }}>
-            <InputLabel id="major-select-label">Select Major</InputLabel>
-            <Select
-              labelId="major-select-label"
-              id="major-select"
-              value={reportData.selectedMajor}
-              onChange={handleMajorChange}
-              label="Select Major"
-            >
-              <MenuItem value="all">All Majors</MenuItem>
-              {availableMajors.map((major) => (
-                <MenuItem key={major.id} value={major.id}>
-                  {major.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+              <FormControl fullWidth sx={{ mb: 2 }}>
+                <InputLabel id="major-select-label">Select Major</InputLabel>
+                <Select
+                  labelId="major-select-label"
+                  id="major-select"
+                  value={reportData.selectedMajor}
+                  onChange={handleMajorChange}
+                  label="Select Major"
+                >
+                  <MenuItem value="all">All Majors</MenuItem>
+                  {availableMajors.map((major) => (
+                    <MenuItem key={major.id} value={major.id}>
+                      {major.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </>
+          ) : (
+            <>
+              <Typography variant="h6" gutterBottom>
+                {selectedReport?.title}
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                Introduction
+              </Typography>
+              <Typography paragraph>
+                {selectedReport?.introduction}
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                Detailed Description
+              </Typography>
+              <Typography paragraph>
+                {selectedReport?.body}
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                Courses
+              </Typography>
+              <Typography paragraph>
+                {selectedReport?.selectedCourses?.map((courseId) => {
+                  const course = availableCourses.find((c) => c.id === courseId);
+                  return course ? course.code : courseId;
+                }).join(', ') || "All courses"}
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                Major
+              </Typography>
+              <Typography paragraph>
+                {availableMajors.find((m) => m.id === selectedReport?.selectedMajor)?.name || "All Majors"}
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                Submission Date
+              </Typography>
+              <Typography paragraph>
+                {selectedReport?.submissionDate}
+              </Typography>
+            </>
+          )}
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setReportDialogOpen(false)} color="primary">
-            Cancel
+            Close
           </Button>
-          <Button
-            onClick={() => handleSaveReport(false)}
-            color="primary"
-            variant="contained"
-          >
-            {selectedReport ? "Update Report" : "Save Report"}
-          </Button>
+          {isEditingReport && (
+            <Button
+              onClick={() => handleSaveReport(false)}
+              color="primary"
+              variant="contained"
+            >
+              {selectedReport ? "Update Report" : "Save Report"}
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
     </Container>
