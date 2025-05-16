@@ -79,7 +79,8 @@ function StudentsEvaluations() {
   const completedInternships = [
     {
       id: 1,
-      companyName: "Tech Innovations Inc.",
+      companyName: "Google",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
       position: "Software Engineering Intern",
       duration: "3 months",
       completedOn: "March 15, 2025",
@@ -87,10 +88,20 @@ function StudentsEvaluations() {
     },
     {
       id: 2,
-      companyName: "DataSoft Solutions",
+      companyName: "Microsoft",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
       position: "Frontend Developer Intern",
       duration: "6 months",
       completedOn: "April 30, 2025",
+      evaluated: false
+    },
+    {
+      id: 3,
+      companyName: "IBM",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+      position: "Data Analyst Intern",
+      duration: "4 months",
+      completedOn: "May 10, 2025",
       evaluated: false
     }
   ];
@@ -140,26 +151,56 @@ function StudentsEvaluations() {
   const availableCourses = getAllCourses();
   
   const userReports = [
-    {
-      id: 1,
-      title: "Software Engineering Internship at Tech Innovations",
-      introduction: "During Summer 2025, I had the opportunity to work at Tech Innovations Inc...",
-      body: "Throughout my internship, I gained hands-on experience with React, Node.js, and AWS...",
-      submissionDate: "April 2, 2025",
-      status: "Flagged",
-      companyName: "Tech Innovations Inc.",
-      selectedCourses: [1, 4, 5],
-      comments: [
-        {
-          id: 1,
-          author: "Dr. Ahmed Hassan",
-          date: "April 5, 2025",
-          text: "Your report lacks specific technical details. Please elaborate on the technologies you worked with and how they relate to your coursework.",
-          type: "faculty"
-        }
-      ]
-    }
-  ];
+  {
+    id: 1,
+    title: "Software Engineering Internship at Google",
+    introduction: "During Summer 2025, I had the opportunity to work at Google as a Software Engineering Intern...",
+    body: "Throughout my internship, I gained hands-on experience with React, Node.js, and cloud technologies...",
+    submissionDate: "March 20, 2025",
+    status: "Approved",
+    companyName: "Google",
+    selectedCourses: [1, 4, 5],
+    comments: [
+      {
+        id: 1,
+        author: "Dr. Ahmed Hassan",
+        date: "March 25, 2025",
+        text: "Great report! Your technical details are well-documented.",
+        type: "faculty"
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: "Frontend Development Internship at Microsoft",
+    introduction: "During Spring 2025, I worked at Microsoft as a Frontend Developer Intern...",
+    body: "I contributed to building scalable UI components using React and TypeScript...",
+    submissionDate: "April 15, 2025",
+    status: "Pending",
+    companyName: "Microsoft",
+    selectedCourses: [2, 3, 6],
+    comments: []
+  },
+  {
+    id: 3,
+    title: "Data Analysis Internship at IBM",
+    introduction: "In early 2025, I joined IBM as a Data Analyst Intern...",
+    body: "I worked on analyzing large datasets using Python and SQL, and created insightful dashboards...",
+    submissionDate: "May 5, 2025",
+    status: "Flagged",
+    companyName: "IBM",
+    selectedCourses: [7, 8, 9],
+    comments: [
+      {
+        id: 2,
+        author: "Dr. Sarah Ali",
+        date: "May 10, 2025",
+        text: "Your report is missing details about the tools you used for data visualization.",
+        type: "faculty"
+      }
+    ]
+  }
+];
   
   // Add a loading state to handle initial render
   const [isLoading, setIsLoading] = useState(true);
@@ -512,11 +553,20 @@ function StudentsEvaluations() {
           {completedInternships.map(internship => (
             <Paper key={internship.id} elevation={2} className={styles.internshipCard} sx={{ mb: 2, p: 2 }}>
               <Grid container spacing={2}>
-                <Grid item xs={8}>
-                  <Typography variant="h6">{internship.companyName}</Typography>
-                  <Typography><strong>Position:</strong> {internship.position}</Typography>
-                  <Typography><strong>Duration:</strong> {internship.duration}</Typography>
-                  <Typography><strong>Completed on:</strong> {internship.completedOn}</Typography>
+                <Grid item xs={8} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  {internship.logo && (
+                    <img
+                      src={internship.logo}
+                      alt={internship.companyName + " logo"}
+                      style={{ height: 32, width: 'auto', marginRight: 12 }}
+                    />
+                  )}
+                  <Box>
+                    <Typography variant="h6">{internship.companyName}</Typography>
+                    <Typography><strong>Position:</strong> {internship.position}</Typography>
+                    <Typography><strong>Duration:</strong> {internship.duration}</Typography>
+                    <Typography><strong>Completed on:</strong> {internship.completedOn}</Typography>
+                  </Box>
                 </Grid>
                 <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
                   {isCompanyEvaluated(internship.id) ? (
@@ -1056,16 +1106,28 @@ function StudentsEvaluations() {
           userEvaluations.map(evaluation => (
             <Paper key={evaluation.id} elevation={2} sx={{ p: 2, mb: 2 }}>
               <Grid container spacing={2}>
-                <Grid item xs={8}>
-                  <Typography variant="subtitle1">{evaluation.companyName}</Typography>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
-                    <Typography variant="body2" sx={{ mr: 1 }}>Rating:</Typography>
-                    <Rating value={parseInt(evaluation.rating)} readOnly size="small" />
-                  </Box>
-                  <Typography variant="body2">
-                    Recommend: {evaluation.recommend === "yes" ? "Yes" : "No"}
-                  </Typography>
-                </Grid>
+              <Grid item xs={8} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+  {(() => {
+    const company = completedInternships.find(c => c.id === evaluation.companyId);
+    return company && company.logo ? (
+      <img
+        src={company.logo}
+        alt={company.companyName + " logo"}
+        style={{ height: 32, width: 'auto', marginRight: 12 }}
+      />
+    ) : null;
+  })()}
+  <Box>
+    <Typography variant="subtitle1">{evaluation.companyName}</Typography>
+    <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
+      <Typography variant="body2" sx={{ mr: 1 }}>Rating:</Typography>
+      <Rating value={parseInt(evaluation.rating)} readOnly size="small" />
+    </Box>
+    <Typography variant="body2">
+      Recommend: {evaluation.recommend === "yes" ? "Yes" : "No"}
+    </Typography>
+  </Box>
+</Grid>
                 <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
                   <Button 
                     variant="outlined" 
