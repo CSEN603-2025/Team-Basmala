@@ -1,5 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import SidebarCompany from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarSCAD';
+import ToolbarSCAD from '@/app/sharedComponents-Aswar/ToolbarComponents/ToolbarSCAD';
 import styles from './page.module.css';
 
 const DUMMY_WORKSHOPS = [
@@ -29,7 +32,7 @@ const DUMMY_WORKSHOPS = [
   }
 ];
 
-export default function ScadWorkshopsPage() {
+export default function SCADWorkshopsPage() {
   const [workshops, setWorkshops] = useState(DUMMY_WORKSHOPS);
   const [filter, setFilter] = useState('all');
 
@@ -73,65 +76,73 @@ export default function ScadWorkshopsPage() {
   };
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Career Workshops Management</h1>
-      
-      <div className={styles.adminControls}>
-        <button 
-          className={styles.addButton}
-          onClick={handleAddWorkshop}
-        >
-          + Add New Workshop
-        </button>
-        <div className={styles.filterControls}>
-          <select 
-            className={styles.filterSelect}
-            value={filter}
-            onChange={handleFilterChange}
-          >
-            <option value="all">All Workshops</option>
-            <option value="upcoming">Upcoming</option>
-            <option value="past">Past</option>
-          </select>
-        </div>
-      </div>
-
-      <div className={styles.workshopGrid}>
-        {workshops.map(workshop => (
-          <div key={workshop.id} className={styles.workshopCard}>
-            <div className={styles.workshopHeader}>
-              <h2>{workshop.title}</h2>
-              <span className={styles.status}>{workshop.status}</span>
-            </div>
+    <div className={styles.pageContainer}>
+      <ToolbarSCAD />
+      <div className={styles.contentWrapper}>
+        <SidebarCompany />
+        <div className={styles.mainContent}>
+          <div className={styles.container}>
+            <h1 className={styles.title}>Manage Career Workshops</h1>
             
-            <div className={styles.workshopDetails}>
-              <p className={styles.datetime}>
-                {formatDateTime(workshop.date, workshop.time)}
-              </p>
-              <p className={styles.duration}>Duration: {workshop.duration}</p>
-              <p className={styles.presenter}>Presenter: {workshop.presenter}</p>
-              <p className={styles.description}>{workshop.description}</p>
-              
-              <div className={styles.adminInfo}>
-                <p>Capacity: {workshop.enrolled}/{workshop.capacity}</p>
-                <div className={styles.adminActions}>
-                  <button 
-                    className={styles.editButton}
-                    onClick={() => handleEditWorkshop(workshop.id)}
-                  >
-                    Edit
-                  </button>
-                  <button 
-                    className={styles.deleteButton}
-                    onClick={() => handleCancelWorkshop(workshop.id)}
-                  >
-                    Cancel
-                  </button>
-                </div>
+            <div className={styles.adminControls}>
+              <button 
+                className={styles.addButton}
+                onClick={handleAddWorkshop}
+              >
+                + Add New Workshop
+              </button>
+              <div className={styles.filterControls}>
+                <select 
+                  className={styles.filterSelect}
+                  value={filter}
+                  onChange={handleFilterChange}
+                >
+                  <option value="all">All Workshops</option>
+                  <option value="upcoming">Upcoming</option>
+                  <option value="past">Past</option>
+                </select>
               </div>
             </div>
+
+            <div className={styles.workshopGrid}>
+              {workshops.map(workshop => (
+                <div key={workshop.id} className={styles.workshopCard}>
+                  <div className={styles.workshopHeader}>
+                    <h2>{workshop.title}</h2>
+                    <span className={styles.status}>{workshop.status}</span>
+                  </div>
+                  
+                  <div className={styles.workshopDetails}>
+                    <p className={styles.datetime}>
+                      {formatDateTime(workshop.date, workshop.time)}
+                    </p>
+                    <p className={styles.duration}>Duration: {workshop.duration}</p>
+                    <p className={styles.presenter}>Presenter: {workshop.presenter}</p>
+                    <p className={styles.description}>{workshop.description}</p>
+                    
+                    <div className={styles.adminInfo}>
+                      <p>Capacity: {workshop.enrolled}/{workshop.capacity}</p>
+                      <div className={styles.adminActions}>
+                        <button 
+                          className={styles.editButton}
+                          onClick={() => handleEditWorkshop(workshop.id)}
+                        >
+                          Edit
+                        </button>
+                        <button 
+                          className={styles.deleteButton}
+                          onClick={() => handleCancelWorkshop(workshop.id)}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );
