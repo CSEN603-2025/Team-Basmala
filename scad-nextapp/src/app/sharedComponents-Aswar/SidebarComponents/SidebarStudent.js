@@ -16,24 +16,24 @@ export default function SidebarStudent({ activeItem }) {
     
   ];
 
-  const handleClick = (name) => {
-    if (name === 'Dashboard') {
-      router.push('/Aswar/DashboardStudent');
-    }
-    else if (name === 'Available Internships') {
-      router.push('/John/internships');
-    } 
-    else if (name === 'My Internships') {
-      router.push('/John/studentInternships');
-    } 
-    else if (name === 'Applications') {
-      router.push('/John/myApplications')}
-    else if (name === 'Evaluate') {
-        router.push('/Mohamed/StudentsEvaluations');
-    } else {
-      alert(`Clicked on ${name}`);
-    }
-  };
+  // const handleClick = (name) => {
+  //   if (name === 'Dashboard') {
+  //     router.push('/Aswar/DashboardStudent');
+  //   }
+  //   else if (name === 'Available Internships') {
+  //     router.push('/John/internships');
+  //   } 
+  //   else if (name === 'My Internships') {
+  //     router.push('/John/studentInternships');
+  //   } 
+  //   else if (name === 'Applications') {
+  //     router.push('/John/myApplications')}
+  //   else if (name === 'Evaluate') {
+  //       router.push('/Mohamed/StudentsEvaluations');
+  //   } else {
+  //     alert(`Clicked on ${name}`);
+  //   }
+  // };
 
   return (
     <div className={styles.sidebar}>
