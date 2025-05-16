@@ -1,0 +1,144 @@
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 24px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Calibri', sans-serif;
+}
+
+.title {
+    margin: 0 0 16px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #0d455a;
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.search,
+.select {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.empty {
+    padding: 16px;
+    text-align: center;
+    color: #888;
+}
+
+.item {
+    border-bottom: 1px solid #eee;
+}
+
+/* Row header */
+.rowHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    cursor: pointer;
+}
+
+.rowHeader:hover {
+    background: #f9f9f9;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: contain;
+}
+
+.name {
+    font-size: 16px;
+    color: #000;
+}
+
+.industry {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Always-visible buttons */
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.acceptBtn,
+.rejectBtn {
+    padding: 6px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.acceptBtn {
+    background: #76a06d;
+    color: #fff;
+}
+
+.acceptBtn:hover {
+    background: #5d8a59;
+}
+
+.rejectBtn {
+    background: #c98a93;
+    color: #fff;
+}
+
+.rejectBtn:hover {
+    background: #aa7374;
+}
+
+/* Expanded details */
+.details {
+    padding: 12px 24px;
+    background: #f5f7fb;
+    font-size: 14px;
+    color: #333;
+}
+
+.detailItem {
+    margin-bottom: 8px;
+}
+
+.detailLabel {
+    font-weight: 700;
+}
+
+.detailLink,
+.documentLink {
+    color: #0070f3;
+    text-decoration: none;
+}
+
+.detailLink:hover,
+.documentLink:hover {
+    text-decoration: underline;
+}

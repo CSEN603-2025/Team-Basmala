@@ -1,41 +1,40 @@
 'use client';
 import React from 'react';
-import styles from './NewApplicantsCompany.module.css';
+import styles from './NewApplicantsSCAD.module.css';
 import { FaUser, FaEnvelope, FaPhone } from 'react-icons/fa';
 
 const applicants = [
   {
     name: 'Jermaine Kuhlman',
     position: 'Human Interactions Agent',
-    image: '/avatars/avatar1.jpg',
+    image: '/applicant1.jpeg',
   },
   {
     name: 'Sadie Yost',
     position: 'International Functionality Consultant',
-    image: '/avatars/avatar2.jpg',
+    image: '/applicant2.jpg',
   },
   {
     name: 'Ben Langworth',
     position: 'Future Web Representative',
-    image: '/avatars/avatar3.jpg',
+    image: '/applicant3.jpg',
   },
   {
     name: 'Raymond Raynor',
     position: 'Human Creative Designer',
-    image: '/avatars/avatar4.jpg',
+    image: '/applicant4.avif',
   },
   {
     name: 'Betty Buckridge',
     position: 'Direct Solutions Executive',
-    image: '/avatars/avatar5.jpg',
+    image: '/applicant5.jpeg',
   },
   {
     name: 'Raymond Raynor',
     position: 'Human Creative Designer',
-    image: '/avatars/avatar4.jpg',
+    image: '/applicant6.jpeg',
   },
 ];
-
 export default function NewApplicantsSCAD() {
   return (
     <div className={styles.container}>
