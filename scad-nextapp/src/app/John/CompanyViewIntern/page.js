@@ -6,6 +6,8 @@ import styles from './viewPostedIntern.module.css';
 
 import SidebarCompany from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarCompany';
 import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
+import BackButton from '@/app/sharedComponents-Aswar/backButton/backButton';
+
 
 export default function CompanyViewIntern() {
   const router = useRouter();
@@ -326,7 +328,11 @@ export default function CompanyViewIntern() {
             </div>
           </div>
         )}
+        
       </div>
+      <div className={styles.backButtonContainer}>
+          <BackButton />
+        </div>
     </>
   );
 }

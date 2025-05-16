@@ -1,7 +1,7 @@
 "use client";
 
 import SCAD from './SCAD';
-import SidebarCompany from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarCompany';
+import SidebarCompany from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarSCAD';
 import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
 
 export default function SCADPage() {

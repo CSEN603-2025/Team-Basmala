@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './CompanyPostInternship.module.css';
+import BackButton from '@/app/sharedComponents-Aswar/backButton/backButton';
+
 
 export default function CompanyPostInternship() {
   const router = useRouter();
@@ -155,6 +157,10 @@ export default function CompanyPostInternship() {
           </div>
         ))}
       </div>
+      <div className={styles.backButtonContainer}>
+          <BackButton />
+        </div>
     </div>
+    
   );
 }
