@@ -9,6 +9,7 @@ export default function SidebarStudent({ activeItem }) {
   const menuItems = [
     { name: 'Dashboard', icon: <FaHome />, label: 'Dashboard' },
     { name: 'My Internships', icon: <FaListAlt />, label: 'My Internships' },
+    { name: 'Available Internships', icon: <FaListAlt />, label: 'Available Internships' },
     { name: 'Applications', icon: <FaTasks />, label: 'Applications' },
     { name: 'Interns', icon: <FaUser />, label: 'Interns' },
     { name: 'Evaluate', icon: <FaChartBar />, label: 'Evaluate' }
@@ -18,8 +19,11 @@ export default function SidebarStudent({ activeItem }) {
     if (name === 'Dashboard') {
       router.push('/Aswar/DashboardStudent');
     }
-    else if (name === 'My Internships') {
+    else if (name === 'Available Internships') {
       router.push('/John/internships');
+    } 
+    else if (name === 'My Internships') {
+      router.push('/John/studentInternships');
     } 
     else if (name === 'Applications') {
       router.push('/John/myApplications')}

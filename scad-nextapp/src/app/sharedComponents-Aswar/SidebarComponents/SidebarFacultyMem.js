@@ -14,12 +14,6 @@ export default function SidebarFacultyMem({ activeItem }) {
     if (name === 'Dashboard') {
       router.push('/Aswar/DashboardStudent');
     }
-    else if (name === 'Internship Listings') {
-      router.push('/John/internships');
-    } 
-    else if (name === 'Applications') {
-      router.push('/John/myApplications');
-    } 
     else if (name === 'Internship Reports') {
       router.push('/Mohamed/FacMem');
     }else {
