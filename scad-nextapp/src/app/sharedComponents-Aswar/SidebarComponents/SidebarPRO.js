@@ -11,10 +11,10 @@ export default function SidebarPRO({ activeItem }) {
     { name: 'My Internships', icon: <FaListAlt />, label: 'My Internships' },
     { name: 'Available Internships', icon: <FaListAlt />, label: 'Available Internships' },
     { name: 'Applications', icon: <FaTasks />, label: 'Applications' },
-    { name: 'Interns', icon: <FaUser />, label: 'Interns' },
     { name: 'Evaluate', icon: <FaChartBar />, label: 'Evaluate' },
     { name: 'Workshops',  icon: <FaChartBar />, label: 'Workshops',  path: '/Basmala/workshops' },
-    { name: 'Appointments',  icon: <FaChartBar />, label: 'Appointments',  path: '/Mohamed/ProStudentAppointments' }
+    { name: 'Appointments',  icon: <FaChartBar />, label: 'Appointments',  path: '/Mohamed/ProStudentAppointments' },
+    { name: 'Assessments',  icon: <FaChartBar />, label: 'Assessments',  path: '/Basmala/Assessments' }
   ];
 
   const handleClick = (name) => {
@@ -32,6 +32,12 @@ export default function SidebarPRO({ activeItem }) {
       router.push('/Mohamed/ProStudentsEvaluations');
     }  else if (name === 'Workshops') {
         router.push('/Basmala/workshops' );
+      }  else if (name === 'Appointments') {
+        router.push('/Mohamed/ProStudentAppointments' );
+      }  else if (name === 'Assessments') {
+        router.push('/Basmala/Assessments' );
+      
+
   }else {
       alert('Clicked on ${name}');
     }
