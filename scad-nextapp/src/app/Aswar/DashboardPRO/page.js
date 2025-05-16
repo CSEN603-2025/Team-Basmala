@@ -11,6 +11,8 @@ import CallAlert from '../Components/CallAlert/page';
 import { useState, useEffect } from 'react';
 import { FaBell } from 'react-icons/fa';
 import NotificationCardPRO from '../Components/NotificationCardPRO/NotificationCardPRO';
+import SidebarPRO from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarPRO';
+import ToolbarPro from '@/app/sharedComponents-Aswar/ToolbarComponents/ToolbarPro';
 const internships = [
   { title: 'Frontend Development Internship', startDate: '2025-06-01', endDate: '2025-08-31', status: 'Accepted' },
   { title: 'Backend Development Internship',  startDate: '2025-07-01', endDate: '2025-09-30', status: 'Pending' },
@@ -30,8 +32,8 @@ export default function DashboardPRO() {
   
     return (
     <>
-      <SidebarCompany activeItem="Dashboard" />
-      <Toolbar title="Dashboard" />
+      <SidebarPRO activeItem="Dashboard" />
+      <ToolbarPro title="Dashboard" />
 
       <div className={styles.mainContent}>
         <div className={styles.topRow}>

@@ -24,3 +24,34 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 } */
+
+:root {
+  /* Core palette */
+  --color-primary: #005ad1;
+  /* interactive elements */
+  --color-primary-50: #e6efff;
+  /* hover / subtle backgrounds */
+  --color-secondary: #0d455a;
+  /* headings, titles */
+  --color-accent: #76a06d;
+  /* success states, badges */
+  --color-bg: #f5f7fb;
+  /* page background */
+  --color-surface: #ffffff;
+  /* cards, panels */
+  --color-text: #333333;
+  /* main copy */
+  --color-text-muted: #666666;
+  /* secondary text, timestamps */
+
+  /* Typography & spacing */
+  --font-family-base: 'Calibri', sans-serif;
+  --font-size-base: 14px;
+  --line-height-base: 1.5;
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+}
