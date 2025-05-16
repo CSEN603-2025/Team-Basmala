@@ -4,8 +4,9 @@
 
 import React, { useState } from 'react';
 import styles from './studentInternships.module.css';
-import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarSCAD';
+import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarStudent';
 import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
+import BackButton from '@/app/sharedComponents-Aswar/backButton/backButton';
 
 const dummyInternships = [
   {
@@ -98,6 +99,9 @@ export default function StudentInternships() {
           ))}
         </div>
       </div>
+      <div className={styles.backButtonContainer}>
+          <BackButton />
+        </div>
     </div>
   );
 }

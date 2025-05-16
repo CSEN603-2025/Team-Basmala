@@ -3,10 +3,10 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import styles from './internshipListing.module.css';
+import styles from './PROinternships.module.css';
 
-import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarStudent';
-import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/ToolbarStudent';
+import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarPRO';
+import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/ToolbarPro';
 import BackButton from '@/app/sharedComponents-Aswar/backButton/backButton';
 
 const dummyInternships = [
@@ -77,7 +77,7 @@ export default function InternshipListing() {
   };
 
   const navigateToApplyIntern = () => {
-    router.push('/John/applyIntern');
+    router.push('/John/applyInternPRO');
   };
 
   const handleImageError = (id) => {

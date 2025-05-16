@@ -1,0 +1,372 @@
+
+.pageLayout {
+  display: flex;
+  min-height: 100vh;
+  background-image: url('/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-left: 70px; /* space for sidebar */
+  box-sizing: border-box;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 80px; /* ✅ push content below toolbar */
+}
+
+.searchAndFiltersRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+  flex-wrap: wrap;
+}
+
+.searchInput {
+  flex: 2;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  min-width: 200px;
+}
+
+.filterSelect {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  min-width: 150px;
+  background-color: white;
+}
+
+@media (max-width: 768px) {
+  .searchAndFiltersRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.internshipList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.internshipCard {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  color: #000000;
+}
+
+.cardHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cardText {
+  flex: 1;
+}
+
+.companyHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.companyLogo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.duration,
+.paidStatus {
+  font-style: italic;
+}
+
+.viewDetailsBtn {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #FBC02D;
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.viewDetailsBtn:hover {
+  background-color: #D32F2F;
+  color: #fff;
+}
+
+.detailsPanel {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.detailsPanel p,
+.detailsPanel a {
+  color: #000;
+  margin: 6px 0;
+}
+
+.detailsPanel a:hover {
+  text-decoration: underline;
+}
+
+.applyLink {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background-color: #D32F2F;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.applyLink:hover {
+  background-color: #B71C1C;
+}
+
+.noResults {
+  color: #D32F2F;
+  font-weight: bold;
+  text-align: center;
+}
+
+.backButtonContainer {
+  margin-top: auto;
+  text-align: left;
+  padding: 1rem;
+}
+.pageLayout {
+  display: flex;
+  min-height: 100vh;
+  background-image: url('/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-left: 70px;
+  box-sizing: border-box;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 80px;
+}
+
+.viewToggle {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.toggleBtn {
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  border: 2px solid #007bff;
+  background-color: white;
+  color: #007bff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toggleBtn:hover {
+  background-color: #e6f0ff;
+}
+
+.toggleBtn.active {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.searchAndFiltersRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+  flex-wrap: wrap;
+}
+
+.searchInput {
+  flex: 2;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  min-width: 200px;
+}
+
+.filterSelect {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  min-width: 150px;
+  background-color: white;
+}
+
+@media (max-width: 768px) {
+  .searchAndFiltersRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.internshipList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.internshipCard {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  color: #000000;
+}
+
+.cardHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cardText {
+  flex: 1;
+}
+
+.companyHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.companyLogo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.duration,
+.paidStatus {
+  font-style: italic;
+}
+
+.viewDetailsBtn {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.viewDetailsBtn:hover {
+  background-color: #0056b3;
+}
+
+.detailsPanel {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.detailsPanel p,
+.detailsPanel a {
+  color: #000;
+  margin: 6px 0;
+}
+
+.detailsPanel a:hover {
+  text-decoration: underline;
+}
+
+.applyLink {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.applyLink:hover {
+  background-color: #0056b3;
+}
+
+.noResults {
+  color: #D32F2F;
+  font-weight: bold;
+  text-align: center;
+}
+
+.backButtonContainer {
+  margin-top: auto;
+  text-align: left;
+  padding: 1rem;
+}
+
+.suggestedTitle,
+.availableTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0056b3;
+  margin: 1rem 0 1rem 0;
+}

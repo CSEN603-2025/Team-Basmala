@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import styles from './myApplications.module.css';
+import styles from './myApplicationsPRO.module.css';
 
-import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarStudent';
-import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/ToolbarStudent';
+import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarPRO';
+import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/ToolbarPro';
 import BackButton from '@/app/sharedComponents-Aswar/backButton/backButton';
 
 const dummyApplications = [

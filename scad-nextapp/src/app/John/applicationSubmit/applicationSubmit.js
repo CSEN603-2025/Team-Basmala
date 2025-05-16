@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './applicationSubmit.module.css';
 
 import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarSCAD';
-import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
+import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/ToolbarStudent';
 
 export default function ApplicationSubmitPage() {
   return (

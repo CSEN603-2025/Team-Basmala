@@ -6,10 +6,10 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import styles from './allinternshipList.module.css';
+import styles from './InternshipsSCAD.module.css';
 
-import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarCompany';
-import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/ToolbarCompany';
+import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarSCAD';
+import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/ToolbarSCAD';
 import BackButton from '@/app/sharedComponents-Aswar/backButton/backButton';
 
 const dummyInternships = [

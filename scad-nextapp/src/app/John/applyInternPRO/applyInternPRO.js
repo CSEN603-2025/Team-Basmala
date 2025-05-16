@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import styles from './applyIntern.module.css';
+import styles from './applyInternPRO.module.css';
 import { useRouter } from 'next/navigation';
 
-import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarStudent';
-import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/ToolbarStudent';
+import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarPRO';
+import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/ToolbarPro';
 import BackButton from '@/app/sharedComponents-Aswar/backButton/backButton';
 
 export default function ApplyIntern() {

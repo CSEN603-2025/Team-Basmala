@@ -3,9 +3,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import styles from './studentInternships.module.css';
-import Sidebar from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarStudent';
-import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/ToolbarStudent';
+import styles from './StudentProInternships.module.css';
+import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarPRO';
+import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
+import BackButton from '@/app/sharedComponents-Aswar/backButton/backButton';
 
 
 const dummyInternships = [
@@ -54,7 +55,7 @@ export default function StudentInternships() {
 
   return (
     <div className={styles.pageLayout}>
-      <Sidebar activeItem="MyInternships" />
+      <SidebarSCAD activeItem="MyInternships" />
       <div className={styles.mainContent}>
         <Toolbar title="My Internships" />
 
@@ -99,6 +100,9 @@ export default function StudentInternships() {
           ))}
         </div>
       </div>
+      <div className={styles.backButtonContainer}>
+          <BackButton />
+        </div>
     </div>
   );
 }

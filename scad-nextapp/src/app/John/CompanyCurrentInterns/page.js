@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import styles from './CompanyCurrentInterns.module.css';
 import SidebarCompany from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarCompany';
-import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
+import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/ToolbarCompany';
 import BackButton from '@/app/sharedComponents-Aswar/backButton/backButton';
 
 
