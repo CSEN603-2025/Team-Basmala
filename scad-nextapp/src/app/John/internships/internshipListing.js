@@ -1,3 +1,5 @@
+// ✅ InternshipListing.js
+
 'use client';
 
 import React, { useState } from 'react';
@@ -47,14 +49,14 @@ export default function InternshipListing() {
   const [filters, setFilters] = useState({
     industry: '',
     duration: '',
-    paid: ''
+    paid: '',
   });
   const [openDetailsIds, setOpenDetailsIds] = useState([]);
   const [brokenImages, setBrokenImages] = useState({});
 
   const toggleDetails = (id) => {
-    setOpenDetailsIds(prev =>
-      prev.includes(id) ? prev.filter(openId => openId !== id) : [...prev, id]
+    setOpenDetailsIds((prev) =>
+      prev.includes(id) ? prev.filter((openId) => openId !== id) : [...prev, id]
     );
   };
 
@@ -63,22 +65,27 @@ export default function InternshipListing() {
   };
 
   const handleImageError = (id) => {
-    setBrokenImages(prev => ({ ...prev, [id]: true }));
+    setBrokenImages((prev) => ({ ...prev, [id]: true }));
   };
 
   const filteredInternships = dummyInternships.filter((internship) => {
     const matchesSearch =
+      searchTerm.trim() === '' ||
       internship.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       internship.company.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesFilters =
-      (filters.industry === '' || internship.industry === filters.industry) &&
-      (filters.duration === '' || internship.duration.includes(filters.duration)) &&
-      (filters.paid === '' ||
-        (filters.paid === 'paid' && internship.paid) ||
-        (filters.paid === 'unpaid' && !internship.paid));
+    const matchesIndustry =
+      filters.industry === '' || internship.industry === filters.industry;
 
-    return matchesSearch && matchesFilters;
+    const matchesDuration =
+      filters.duration === '' || internship.duration === filters.duration;
+
+    const matchesPaid =
+      filters.paid === '' ||
+      (filters.paid === 'paid' && internship.paid) ||
+      (filters.paid === 'unpaid' && !internship.paid);
+
+    return matchesSearch && matchesIndustry && matchesDuration && matchesPaid;
   });
 
   return (
@@ -88,11 +95,12 @@ export default function InternshipListing() {
       <div className={styles.mainContent}>
         <Toolbar title="Available Internships" />
 
-        <div className={styles.filtersContainer}>
+        {/* Search + Filters Row */}
+        <div className={styles.searchAndFiltersRow}>
           <input
             type="text"
             className={styles.searchInput}
-            placeholder="Search internships..."
+            placeholder="Search by title or company..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -104,7 +112,7 @@ export default function InternshipListing() {
           >
             <option value="">All Industries</option>
             <option value="Technology">Technology</option>
-            <option value="Healthcare">Healthcare</option>
+            <option value="Finance">Finance</option>
           </select>
 
           <select
@@ -128,6 +136,7 @@ export default function InternshipListing() {
           </select>
         </div>
 
+        {/* Internship List */}
         <div className={styles.internshipList}>
           {filteredInternships.length > 0 ? (
             filteredInternships.map((internship) => (

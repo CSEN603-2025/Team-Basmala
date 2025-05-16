@@ -6,6 +6,16 @@ import styles from './viewPostedIntern.module.css';
 
 export default function CompanyViewIntern() {
   const router = useRouter();
+  const COMPANY_NAME = 'TechNova Solutions';
+
+  const handleDurationChange = (e) => {
+  const value = e.target.value;
+  setDurationFilters((prev) =>
+    prev.includes(value)
+      ? prev.filter((d) => d !== value)
+      : [...prev, value]
+  );
+};
 
   const [internships, setInternships] = useState([]);
   const [formData, setFormData] = useState({
@@ -18,7 +28,12 @@ export default function CompanyViewIntern() {
   });
   const [editingId, setEditingId] = useState(null);
 
-  const COMPANY_NAME = 'TechNova Solutions';
+  // Filter states
+  const [showFilters, setShowFilters] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [paidOnly, setPaidOnly] = useState(false);
+  const [skillFilter, setSkillFilter] = useState('');
+  const [durationFilters, setDurationFilters] = useState([]);
 
   useEffect(() => {
     setInternships([
@@ -31,6 +46,7 @@ export default function CompanyViewIntern() {
         salary: '4000 EGP/month',
         skills: 'React, HTML, CSS, JavaScript, Git',
         description: 'Work on UI components and build user-friendly interfaces.',
+        applicants: 12
       },
       {
         id: 2,
@@ -41,6 +57,7 @@ export default function CompanyViewIntern() {
         salary: '',
         skills: 'Python, Pandas, Excel, SQL',
         description: 'Clean and analyze datasets, create data reports.',
+        applicants: 7
       },
       {
         id: 3,
@@ -51,6 +68,7 @@ export default function CompanyViewIntern() {
         salary: '5000 EGP/month',
         skills: 'Node.js, Express.js, MongoDB, REST APIs',
         description: 'Build scalable APIs with backend team.',
+        applicants: 5
       },
       {
         id: 4,
@@ -61,6 +79,7 @@ export default function CompanyViewIntern() {
         salary: '',
         skills: 'AutoCAD, Site Management, Safety Protocols',
         description: 'Support site engineers in layout and inspection.',
+        applicants: 20
       },
       {
         id: 5,
@@ -71,6 +90,7 @@ export default function CompanyViewIntern() {
         salary: '2000 EGP/month',
         skills: 'SEO, Social Media, Canva, Google Analytics',
         description: 'Manage content and performance reports.',
+        applicants: 30
       },
     ]);
   }, []);
@@ -86,7 +106,6 @@ export default function CompanyViewIntern() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (editingId !== null) {
-      // Update internship
       setInternships((prev) =>
         prev.map((internship) =>
           internship.id === editingId
@@ -96,7 +115,6 @@ export default function CompanyViewIntern() {
       );
       setEditingId(null);
     } else {
-      // Create internship
       const newInternship = {
         ...formData,
         id: Date.now(),
@@ -121,7 +139,7 @@ export default function CompanyViewIntern() {
 
   const handleEdit = (internship) => {
     if (editingId === internship.id) {
-      setEditingId(null); // toggle off
+      setEditingId(null);
     } else {
       setEditingId(internship.id);
       setFormData({
@@ -135,6 +153,37 @@ export default function CompanyViewIntern() {
     }
   };
 
+  const filteredInternships = internships
+    .filter((internship) => {
+      if (paidOnly && !internship.paid) return false;
+
+      if (
+        skillFilter &&
+        !internship.skills
+          .toLowerCase()
+          .split(',')
+          .map((s) => s.trim())
+          .includes(skillFilter.toLowerCase())
+      ) {
+        return false;
+      }
+
+      if (
+        durationFilters.length > 0 &&
+        durationFilters.includes(internship.duration)
+      ) {
+          return false;
+      }
+
+
+      const term = searchTerm.toLowerCase();
+      return (
+        internship.title.toLowerCase().includes(term) ||
+        internship.skills.toLowerCase().includes(term) ||
+        internship.description.toLowerCase().includes(term)
+      );
+    });
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -143,22 +192,82 @@ export default function CompanyViewIntern() {
           className={styles.postButton}
           onClick={() => router.push('/John/CompanyPostInternship')}
         >
-          Go to Post Page
+          Post Internship
         </button>
       </div>
 
-      {/* Internship Cards */}
+      {/* Top Search + Filter Toggle */}
+      <div className={styles.topControls}>
+        <input
+          type="text"
+          placeholder="Search title, description, or skills..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className={styles.searchInput}
+        />
+
+        <button
+          className={styles.postButton}
+          onClick={() => setShowFilters((prev) => !prev)}
+        >
+          {showFilters ? 'Hide Filters' : 'Filter'}
+        </button>
+      </div>
+
+      {showFilters && (
+        <div className={styles.filterBox}>
+          <input
+            type="text"
+            placeholder="Exact skill (e.g. React)"
+            value={skillFilter}
+            onChange={(e) => setSkillFilter(e.target.value)}
+          />
+          <div className={styles.durationCheckboxes}>
+            <label><strong>Duration:</strong></label>
+            <div className={styles.checkboxGrid}>
+              {Array.from({ length: 8 }, (_, i) => `${i + 1} month${i === 0 ? '' : 's'}`).map((label) => (
+                <label key={label}>
+                  <input
+                    type="checkbox"
+                    value={label}
+                    checked={durationFilters.includes(label)}
+                    onChange={handleDurationChange}
+                  />
+                  {label}
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <label>
+            <input
+              type="checkbox"
+              checked={paidOnly}
+              onChange={() => setPaidOnly(!paidOnly)}
+            />
+            Paid only
+          </label>
+        </div>
+      )}
+
+      {/* Internship List */}
       <div className={styles.internshipList}>
-        {internships.length > 0 ? (
-          internships.map((internship) => (
+        {filteredInternships.length > 0 ? (
+          filteredInternships.map((internship) => (
             <div key={internship.id} className={styles.internshipCard}>
-              <h3>{internship.title}</h3>
+              <div className={styles.titleRow}>
+                <h3>{internship.title}</h3>
+                {typeof internship.applicants !== 'undefined' && (
+                  <span className={styles.applicants}>
+                    {internship.applicants} applicant{internship.applicants !== 1 ? 's' : ''}
+                  </span>
+                )}
+              </div>
+
               <p><strong>Company:</strong> {COMPANY_NAME}</p>
               <p><strong>Duration:</strong> {internship.duration}</p>
               <p><strong>Paid:</strong> {internship.paid ? 'Yes' : 'No'}</p>
-              {internship.paid && (
-                <p><strong>Salary:</strong> {internship.salary}</p>
-              )}
+              {internship.paid && <p><strong>Salary:</strong> {internship.salary}</p>}
               <p><strong>Skills:</strong> {internship.skills}</p>
               <p><strong>Description:</strong> {internship.description}</p>
 
@@ -167,7 +276,6 @@ export default function CompanyViewIntern() {
                 <button onClick={() => handleDelete(internship.id)}>Delete</button>
               </div>
 
-              {/* Inline Edit Form */}
               {editingId === internship.id && (
                 <form onSubmit={handleSubmit} className={styles.editForm}>
                   <input
@@ -224,7 +332,7 @@ export default function CompanyViewIntern() {
             </div>
           ))
         ) : (
-          <p>No internships posted yet.</p>
+          <p>No internships match your filters.</p>
         )}
       </div>
     </div>

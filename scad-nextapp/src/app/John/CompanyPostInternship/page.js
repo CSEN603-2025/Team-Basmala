@@ -1,12 +1,20 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './CompanyPostInternship.module.css';
 
 export default function CompanyPostInternship() {
+  const router = useRouter();
+
+  // ✅ Named navigation function
+  const navigateToPostIntern = () => {
+    router.push('/John/PostInternCongrat');
+  };
+
   const [internships, setInternships] = useState([]);
   const [formData, setFormData] = useState({
-    company: '',
+    company: 'TechNova Solutions',
     title: '',
     duration: '',
     paid: false,
@@ -16,15 +24,6 @@ export default function CompanyPostInternship() {
   });
   const [editingId, setEditingId] = useState(null);
 
-  // Fetch internships from the backend
-  useEffect(() => {
-    fetch('/api/internships')
-      .then((res) => res.json())
-      .then((data) => setInternships(data))
-      .catch((err) => console.error(err));
-  }, []);
-
-  // Handle form input changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -33,68 +32,40 @@ export default function CompanyPostInternship() {
     }));
   };
 
-  // Handle form submission for Create/Update
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (editingId) {
-      // Update internship
-      fetch(`/api/internships/${editingId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      })
-        .then((res) => res.json())
-        .then((updatedInternship) => {
-          setInternships((prev) =>
-            prev.map((internship) =>
-              internship.id === editingId ? updatedInternship : internship
-            )
-          );
-          setEditingId(null);
-          setFormData({
-            company: '',
-            title: '',
-            duration: '',
-            paid: false,
-            salary: '',
-            skills: '',
-            description: '',
-          });
-        });
+    if (editingId !== null) {
+      // Update
+      setInternships((prev) =>
+        prev.map((internship) =>
+          internship.id === editingId
+            ? { ...formData, id: editingId }
+            : internship
+        )
+      );
+      setEditingId(null);
     } else {
-      // Create internship
-      fetch('/api/internships', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      })
-        .then((res) => res.json())
-        .then((newInternship) => {
-          setInternships((prev) => [...prev, newInternship]);
-          setFormData({
-            company: '',
-            title: '',
-            duration: '',
-            paid: false,
-            salary: '',
-            skills: '',
-            description: '',
-          });
-        });
+      // Create
+      const newInternship = {
+        ...formData,
+        id: Date.now(),
+      };
+      setInternships((prev) => [...prev, newInternship]);
+      navigateToPostIntern(); // ✅ navigation triggered here
     }
+
+    setFormData({
+      company: 'TechNova Solutions',
+      title: '',
+      duration: '',
+      paid: false,
+      salary: '',
+      skills: '',
+      description: '',
+    });
   };
 
-  // Handle delete
-  const handleDelete = (id) => {
-    fetch(`/api/internships/${id}`, { method: 'DELETE' })
-      .then(() => {
-        setInternships((prev) => prev.filter((internship) => internship.id !== id));
-      })
-      .catch((err) => console.error(err));
-  };
-
-  // Handle edit
   const handleEdit = (internship) => {
     setEditingId(internship.id);
     setFormData({
@@ -108,20 +79,15 @@ export default function CompanyPostInternship() {
     });
   };
 
+  const handleDelete = (id) => {
+    setInternships((prev) => prev.filter((internship) => internship.id !== id));
+  };
+
   return (
     <div className={styles.container}>
       <h1>Manage Internship Posts</h1>
 
-      {/* Form for Create/Update */}
       <form className={styles.form} onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="company"
-          placeholder="Company Name"
-          value={formData.company}
-          onChange={handleChange}
-          required
-        />
         <input
           type="text"
           name="title"
@@ -171,10 +137,9 @@ export default function CompanyPostInternship() {
           onChange={handleChange}
           required
         ></textarea>
-        <button type="submit">{editingId ? 'Update' : 'Create'} Internship</button>
+        <button type="submit">{editingId ? 'Update' : 'Post'} Internship</button>
       </form>
 
-      {/* List of Internships */}
       <div className={styles.internshipList}>
         {internships.map((internship) => (
           <div key={internship.id} className={styles.internshipCard}>
