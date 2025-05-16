@@ -1,4 +1,3 @@
-// src/app/auth/page.js
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -55,13 +54,21 @@ export default function AuthPage() {
       alert('Registration not implemented for this role.');
     }
   };
+
+  const formatRoleDisplay = (role) => {
+    if (!role) return 'No Role Selected';
+    return role.split('-').map(word => 
+      word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ');
+  };
   
   return (
-    <div>
-      <h1>Authentication Page</h1>
-      <p>Role Selected: {role}</p>
+    <div className={styles.pageWrapper}>
       <div className={styles.container}>
-        <h1>Login</h1>
+        <h1>Welcome Back</h1>
+        <p className={styles.roleDisplay}>
+          Signing in as {formatRoleDisplay(role)}
+        </p>
         <input
           type="email"
           placeholder="Email"
@@ -76,10 +83,14 @@ export default function AuthPage() {
           onChange={(e) => setPassword(e.target.value)}
           className={styles.input}
         />
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p className={styles.errorMessage}>{error}</p>}
         <div className={styles.buttonGroup}>
-          <button onClick={handleLogin} className={styles.loginBtn}>Login</button>
-          <button onClick={handleRegister} className={styles.registerBtn}>Register</button>
+          <button onClick={handleLogin} className={styles.loginBtn}>
+            Sign In
+          </button>
+          <button onClick={handleRegister} className={styles.registerBtn}>
+            Register
+          </button>
         </div>
       </div>
     </div>

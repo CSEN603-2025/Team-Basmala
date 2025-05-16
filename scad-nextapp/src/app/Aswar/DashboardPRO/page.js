@@ -1,6 +1,4 @@
 'use client';
-import SidebarCompany from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarCompany';
-import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
 import styles from './DashboardPRO.module.css';
 import InternshipPostsStudent from '../Components/InternshipPostsStudent/InternshipPostsStudent';
 import PROStudentInternshipProgress from '../Components/PROStudentInternshipProgress/PROStudentInternshipProgress';
