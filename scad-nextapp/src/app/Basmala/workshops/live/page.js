@@ -2,8 +2,10 @@
 import { useState } from 'react';
 import SidebarPRO from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarPRO';
 import ToolbarPro from '@/app/sharedComponents-Aswar/ToolbarComponents/ToolbarPro';
+import WorkshopChat from '../components/WorkshopChat';
+import WorkshopCompletion from '../components/WorkshopCompletion';
 import styles from './page.module.css';
-import { FaVideo, FaSave, FaDownload } from 'react-icons/fa';
+import { FaVideo, FaSave, FaDownload, FaCheck } from 'react-icons/fa';
 
 const DUMMY_LIVE_WORKSHOPS = [
   {
@@ -34,10 +36,12 @@ export default function LiveWorkshopsPage() {
   const [selectedWorkshop, setSelectedWorkshop] = useState(null);
   const [notes, setNotes] = useState('');
   const [savedNotes, setSavedNotes] = useState({});
+  const [showCompletion, setShowCompletion] = useState(false);
 
   const handleJoinWorkshop = (workshop) => {
     setSelectedWorkshop(workshop);
     setNotes(savedNotes[workshop.id] || '');
+    setShowCompletion(false);
   };
 
   const handleSaveNotes = () => {
@@ -46,7 +50,6 @@ export default function LiveWorkshopsPage() {
         ...prev,
         [selectedWorkshop.id]: notes
       }));
-      // Here you would typically save to a backend
       alert('Notes saved successfully!');
     }
   };
@@ -61,6 +64,10 @@ export default function LiveWorkshopsPage() {
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
+  };
+
+  const handleCompleteWorkshop = () => {
+    setShowCompletion(true);
   };
 
   const formatDateTime = (date, time) => {
@@ -114,32 +121,53 @@ export default function LiveWorkshopsPage() {
                 ))}
               </div>
 
-              {selectedWorkshop && (
-                <div className={styles.notesSection}>
-                  <div className={styles.notesHeader}>
-                    <h2>{selectedWorkshop.title} - Notes</h2>
-                    <div className={styles.notesActions}>
-                      <button
-                        className={styles.actionButton}
-                        onClick={handleSaveNotes}
-                        title="Save Notes"
-                      >
-                        <FaSave />
-                      </button>
-                      <button
-                        className={styles.actionButton}
-                        onClick={handleDownloadNotes}
-                        title="Download Notes"
-                      >
-                        <FaDownload />
-                      </button>
+              {selectedWorkshop && !showCompletion && (
+                <div className={styles.workshopActiveArea}>
+                  <div className={styles.notesSection}>
+                    <div className={styles.notesHeader}>
+                      <h2>{selectedWorkshop.title} - Notes</h2>
+                      <div className={styles.notesActions}>
+                        <button
+                          className={styles.actionButton}
+                          onClick={handleSaveNotes}
+                          title="Save Notes"
+                        >
+                          <FaSave />
+                        </button>
+                        <button
+                          className={styles.actionButton}
+                          onClick={handleDownloadNotes}
+                          title="Download Notes"
+                        >
+                          <FaDownload />
+                        </button>
+                      </div>
                     </div>
+                    <textarea
+                      className={styles.notesTextarea}
+                      value={notes}
+                      onChange={(e) => setNotes(e.target.value)}
+                      placeholder="Take your notes here..."
+                    />
+                    <button
+                      className={styles.completeButton}
+                      onClick={handleCompleteWorkshop}
+                    >
+                      <FaCheck />
+                      Complete Workshop
+                    </button>
                   </div>
-                  <textarea
-                    className={styles.notesTextarea}
-                    value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
-                    placeholder="Take your notes here..."
+                  <div className={styles.chatSection}>
+                    <WorkshopChat workshopId={selectedWorkshop.id} />
+                  </div>
+                </div>
+              )}
+
+              {selectedWorkshop && showCompletion && (
+                <div className={styles.workshopActiveArea}>
+                  <WorkshopCompletion
+                    workshop={selectedWorkshop}
+                    onClose={() => setShowCompletion(false)}
                   />
                 </div>
               )}

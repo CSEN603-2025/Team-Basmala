@@ -1,0 +1,207 @@
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  .contentWrapper {
+    display: flex;
+    flex: 1;
+    margin-top: 64px; /* Add margin to prevent overlap with toolbar */
+  }
+  
+  .mainContent {
+    flex: 1;
+    padding: 2rem;
+    background-color: #f5f5f5;
+    min-height: calc(100vh - 64px); /* Adjust for toolbar height */
+    overflow-y: auto;
+    margin-left: 250px; /* Add margin for sidebar */
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 2rem;
+  }
+  
+  .assessmentGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .assessmentCard {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .assessmentCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .cardHeader {
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .cardHeader h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #2c3e50;
+  }
+  
+  .category {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  /* Status-specific styles */
+  .available {
+    background-color: #e3f2fd;
+    color: #1976d2;
+  }
+  
+  .completed {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+  }
+  
+  .cardContent {
+    padding: 1.5rem;
+  }
+  
+  .description {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+  
+  .assessmentInfo {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .infoItem {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .label {
+    color: #666;
+    font-weight: 500;
+  }
+  
+  .completedSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+  }
+  
+  .score {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #2e7d32;
+  }
+  
+  .actionButtons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .viewResultsButton,
+  .startButton,
+  .postToProfileButton {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .viewResultsButton {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+  }
+  
+  .viewResultsButton:hover {
+    background-color: #c8e6c9;
+  }
+  
+  .postToProfileButton {
+    background-color: #fff3e0;
+    color: #f57c00;
+  }
+  
+  .postToProfileButton:hover {
+    background-color: #ffe0b2;
+  }
+  
+  .startButton {
+    display: block;
+    width: 100%;
+    background-color: #2196f3;
+    color: white;
+  }
+  
+  .startButton:hover {
+    background-color: #1976d2;
+  }
+  
+  @media (max-width: 768px) {
+    .mainContent {
+      padding: 1rem;
+      margin-left: 0;
+    }
+  
+    .contentWrapper {
+      margin-top: 56px;
+    }
+  
+    .assessmentGrid {
+      grid-template-columns: 1fr;
+    }
+  
+    .completedSection {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+  
+    .actionButtons {
+      flex-direction: column;
+      width: 100%;
+    }
+  
+    .viewResultsButton,
+    .startButton,
+    .postToProfileButton {
+      width: 100%;
+    }
+  }
