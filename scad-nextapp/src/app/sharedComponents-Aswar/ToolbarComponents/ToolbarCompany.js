@@ -51,7 +51,7 @@ export default function Toolbar({ title = "Dashboard" }) {
             width={40}
             height={40}
           />
-          <span className={styles.proBadge}>PRO</span>
+
         </div>
 
         <button className={styles.dropdownBtn}>

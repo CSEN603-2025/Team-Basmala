@@ -18,7 +18,7 @@ export default function SidebarCompany({ activeItem }) {
 
   const handleClick = (name) => {
     if (name === 'Dashboard') {
-      router.push('/Aswar/DashboardStudent');
+      router.push('/Aswar/DashboardCompany');
     } else if (name === 'Internship Listings') {
       router.push('/John/CompanyViewIntern');
     } 

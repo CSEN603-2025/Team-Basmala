@@ -12,7 +12,8 @@ export default function SidebarSCAD({ activeItem }) {
     { name: 'Applications',     icon: <FaTasks />,    label: 'Applications',     path: '/John/myApplications' },
     { name: 'Interns',          icon: <FaUser />,     label: 'Interns',          path: '/Mohamed/SCAD' },
     { name: 'Reports',          icon: <FaChartBar />, label: 'Reports',          path: '/Aswar/DashboardSCAD/reports' },
-    { name: 'Workshops',          icon: <FaChartBar />, label: 'Workshops',          path: '/Basmala/workshops/list/scad' }
+    { name: 'Workshops',          icon: <FaChartBar />, label: 'Workshops',          path: '/Basmala/workshops/list/scad' },
+    { name: 'Appointments',          icon: <FaChartBar />, label: 'Appointments',          path: '/Mohamed/ScadOfficeAppointments' }
   ];
 
   const handleClick = (path) => {
