@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react';
 import styles from './SCAD.module.css';
+import jsPDF from "jspdf";
 
 const SCAD = () => {
   // State variables
@@ -156,9 +157,33 @@ const mockReports = [
     setClarification('');
   };
 
+  const handleDownloadPDF = () => {
+    if (!selectedReport) {
+      alert("No report selected to download.");
+      return;
+    }
+    const doc = new jsPDF();
+    doc.setFontSize(16);
+    doc.text(selectedReport.title || "Internship Report", 10, 15);
+    doc.setFontSize(12);
+    doc.text(`Student: ${selectedReport.studentName || ""}`, 10, 30);
+    doc.text(`Major: ${selectedReport.major || ""}`, 10, 40);
+    doc.text(`Company: ${selectedReport.company || ""}`, 10, 50);
+    doc.text(`Supervisor: ${selectedReport.supervisor || ""}`, 10, 60);
+    doc.text(`Internship Start: ${selectedReport.internshipStartDate || ""}`, 10, 70);
+    doc.text(`Internship End: ${selectedReport.internshipEndDate || ""}`, 10, 80);
+    doc.text(`Evaluation: ${selectedReport.evaluation || ""}`, 10, 90);
+    doc.text(`Feedback: ${selectedReport.feedback || ""}`, 10, 100);
+    doc.text(`Status: ${selectedReport.status || ""}`, 10, 110);
+    doc.text(`Submission Date: ${selectedReport.submissionDate || ""}`, 10, 120);
+    doc.text("Report Content:", 10, 135);
+    doc.text(selectedReport.content || "", 10, 143, { maxWidth: 180 });
+    doc.save(`${selectedReport.title || "internship-report"}.pdf`);
+  };
+
   return (
     <div className={styles.scadContainer}>
-      <h1 className={styles.title}>SCAD Office Portal</h1>
+      
       
       <div className={styles.tabs}>
         <button 
@@ -391,17 +416,22 @@ const mockReports = [
     )}
   </form>
 )}
-              <div className={styles.actionButtons}>
-                <button className={`${styles.actionButton} ${styles.accept}`}>Accept</button>
-                <button className={`${styles.actionButton} ${styles.reject}`}>Reject</button>
-                <button className={`${styles.actionButton} ${styles.flag}`}>Flag</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
+                          // ...existing code...
+            <div className={styles.actionButtons}>
+              <button
+                className={`${styles.actionButton} ${styles.download}`}
+                onClick={handleDownloadPDF}
+                type="button"
+              >
+                          Download as PDF
+                        </button>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            };
 
 export default SCAD;
