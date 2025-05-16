@@ -20,19 +20,19 @@ export default function SidebarPRO({ activeItem }) {
     if (name === 'Dashboard') {
       router.push('/Aswar/DashboardPRO');
     }  else if (name === 'Available Internships') {
-      router.push('/John/internships');
+      router.push('/John/PROinternships');
     } 
     else if (name === 'My Internships') {
-      router.push('/John/studentInternships');
+      router.push('/John/StudentProInternships');
     } 
     else if (name === 'Applications') {
-      router.push('/John/myApplications')}
+      router.push('/John/myApplicationsPRO')}
     else if (name === 'Evaluate') {
       router.push('/Mohamed/ProStudentsEvaluations');
     }  else if (name === 'Workshops') {
         router.push('/Basmala/workshops' );
   }else {
-      alert(`Clicked on ${name}`);
+      alert('Clicked on ${name}');
     }
   };
   

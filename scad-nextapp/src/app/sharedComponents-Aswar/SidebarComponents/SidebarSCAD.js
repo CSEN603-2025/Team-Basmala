@@ -8,7 +8,7 @@ export default function SidebarSCAD({ activeItem }) {
 
   const menuItems = [
     { name: 'Dashboard',        icon: <FaHome />,     label: 'Dashboard',        path: '/Aswar/DashboardSCAD' },
-    { name: 'Internship Listings', icon: <FaListAlt />, label: 'Internships',     path: '/John/internships' },
+    { name: 'Internship Listings', icon: <FaListAlt />, label: 'Internships',     path: '/John/InternshipsSCAD' },
     { name: 'Applications',     icon: <FaTasks />,    label: 'Applications',     path: '/John/myApplications' },
     { name: 'Interns',          icon: <FaUser />,     label: 'Interns',          path: '/Mohamed/SCAD' },
     { name: 'Reports',          icon: <FaChartBar />, label: 'Reports',          path: '/Aswar/DashboardSCAD/reports' },
