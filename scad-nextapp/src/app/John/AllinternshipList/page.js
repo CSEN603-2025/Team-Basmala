@@ -185,9 +185,6 @@ export default function InternshipListing() {
                       ))}
                     </ul>
                     <p><strong>Additional Information:</strong> This internship offers a great opportunity to gain hands-on experience in the {internship.industry} industry. You'll work closely with experienced professionals and contribute to meaningful projects.</p>
-                    <button onClick={navigateToApplyIntern} className={styles.applyLink}>
-                      Apply Now
-                    </button>
                   </div>
                 )}
               </div>

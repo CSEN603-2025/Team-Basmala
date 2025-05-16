@@ -249,8 +249,8 @@ export default function CompanyViewIntern() {
                   <p><strong>Skills:</strong> {internship.skills}</p>
                   <p><strong>Description:</strong> {internship.description}</p>
                   <div style={{ marginTop: '0.5rem' }}>
-                    <button onClick={() => handleEdit(internship)}>Edit</button>
-                    <button onClick={() => handleDelete(internship.id)}>Delete</button>
+                    <button className={styles.editDeleteBtn} onClick={() => handleEdit(internship)}>Edit</button>
+                    <button className={styles.editDeleteBtn} onClick={() => handleDelete(internship.id)}>Delete</button>
                   </div>
                   {editingId === internship.id && (
                     <form onSubmit={handleSubmit} className={styles.editForm}>

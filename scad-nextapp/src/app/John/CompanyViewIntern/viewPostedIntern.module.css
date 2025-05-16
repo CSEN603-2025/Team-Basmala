@@ -303,3 +303,24 @@
   margin-top: 2rem;
   margin-right: 2rem;
 }
+.editDeleteBtn {
+  padding: 0.5rem 1.2rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 0.7rem;
+  min-width: 110px; /* Ensures consistent width for both buttons */
+  transition: background-color 0.2s;
+  box-sizing: border-box;
+}
+
+.editDeleteBtn:last-child {
+  margin-right: 0;
+}
+
+.editDeleteBtn:hover {
+  background-color: #0056b3;
+}
