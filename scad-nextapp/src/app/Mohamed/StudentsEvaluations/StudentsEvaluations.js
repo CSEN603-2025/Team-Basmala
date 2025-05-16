@@ -28,7 +28,10 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  MenuItem
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Select
 } from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
@@ -207,23 +210,51 @@ function StudentsEvaluations() {
 
   // Load saved data on component mount
   useEffect(() => {
-    // Simulate fetching data from localStorage or an API
-    const savedEvaluations = localStorage.getItem("userEvaluations")
-      ? JSON.parse(localStorage.getItem("userEvaluations"))
-      : [];
-      
-    const savedReports = localStorage.getItem("userReports")
-      ? JSON.parse(localStorage.getItem("userReports"))
-      : userReports;
+    try {
+      // Simulate fetching data from localStorage or an API
+      const savedEvaluations = localStorage.getItem("userEvaluations")
+        ? JSON.parse(localStorage.getItem("userEvaluations"))
+        : [];
 
-    setUserEvaluations(savedEvaluations);
-    setReports(savedReports);
-    
-    // Display alert for flagged reports on component mount
-    const hasFlaggedReports = savedReports.some(report => report.status === "Flagged" || report.status === "Rejected");
-    
-    // Mark loading as complete
-    setIsLoading(false);
+      const savedReports = localStorage.getItem("userReports")
+        ? JSON.parse(localStorage.getItem("userReports"))
+        : userReports;
+
+      // Validate the structure of savedEvaluations
+      if (!Array.isArray(savedEvaluations)) {
+        console.error("Invalid data format for userEvaluations. Resetting to default.");
+        localStorage.removeItem("userEvaluations");
+        setUserEvaluations([]);
+      } else {
+        setUserEvaluations(savedEvaluations);
+      }
+
+      // Validate the structure of savedReports
+      if (!Array.isArray(savedReports)) {
+        console.error("Invalid data format for userReports. Resetting to default.");
+        localStorage.removeItem("userReports");
+        setReports(userReports);
+      } else {
+        setReports(savedReports);
+      }
+
+      // Display alert for flagged reports on component mount
+      const hasFlaggedReports = savedReports.some(
+        (report) => report.status === "Flagged" || report.status === "Rejected"
+      );
+
+      if (hasFlaggedReports) {
+        console.warn("You have flagged or rejected reports that need attention.");
+      }
+
+      // Mark loading as complete
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error loading data: ", error);
+      setUserEvaluations([]);
+      setReports(userReports);
+      setIsLoading(false);
+    }
   }, []);
 
   // Tab change handler
@@ -313,8 +344,9 @@ function StudentsEvaluations() {
   const handleViewEvaluation = (company) => {
     // Set the selected company
     setSelectedCompany(company);
-    
-    // Do NOT set isEditing to true, so the view stays read-only
+
+    // Ensure the tab switches to the Company Evaluations tab for viewing
+    setTabValue(0);
   };
 
   const handleEditEvaluation = (company) => {
@@ -364,15 +396,6 @@ function StudentsEvaluations() {
   // ===== REPORT HANDLERS =====
   
   const handleCreateReport = () => {
-    setReportData({
-      title: "",
-      introduction: "",
-      body: "",
-      selectedCourses: [],
-      selectedMajor: "all" // Default to showing all courses
-    });
-    setIsEditingReport(true);
-    setSelectedReport(null);
     setReportDialogOpen(true); // Open the dialog to create a new report
   };
   
@@ -382,10 +405,11 @@ function StudentsEvaluations() {
       introduction: report.introduction,
       body: report.body,
       selectedCourses: report.selectedCourses || [],
-      selectedMajor: report.selectedMajor || "all" // Ensure selectedMajor is set
+      selectedMajor: report.selectedMajor || "all"
     });
     setSelectedReport(report);
     setIsEditingReport(true);
+    setReportDialogOpen(true);
   };
   
   const handleReportInputChange = (e) => {
@@ -540,6 +564,18 @@ function StudentsEvaluations() {
   
   // Render functions
   const renderCompanyEvaluationTab = () => {
+    if (isLoading) {
+      return <Typography>Loading...</Typography>;
+    }
+
+    if (!completedInternships || completedInternships.length === 0) {
+      return (
+        <Typography variant="body1" color="error">
+          No completed internships found.
+        </Typography>
+      );
+    }
+
     if (!selectedCompany && !isEditing) {
       return (
         <div className={styles.internshipList}>
@@ -550,14 +586,14 @@ function StudentsEvaluations() {
             Select a company to provide your evaluation. Remember, you can evaluate a company only once.
           </Typography>
           
-          {completedInternships.map(internship => (
+          {completedInternships.map((internship) => (
             <Paper key={internship.id} elevation={2} className={styles.internshipCard} sx={{ mb: 2, p: 2 }}>
               <Grid container spacing={2}>
                 <Grid item xs={8} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                   {internship.logo && (
                     <img
                       src={internship.logo}
-                      alt={internship.companyName + " logo"}
+                      alt={`${internship.companyName} logo`}
                       style={{ height: 32, width: 'auto', marginRight: 12 }}
                     />
                   )}
@@ -614,7 +650,15 @@ function StudentsEvaluations() {
       ); 
     } else if (selectedCompany && !isEditing) {
       const evaluation = getCompanyEvaluation(selectedCompany.id);
-      
+
+      if (!evaluation) {
+        return (
+          <Typography variant="body1" color="error">
+            Unable to load evaluation details. Please try again.
+          </Typography>
+        );
+      }
+
       return (
         <Paper elevation={3} sx={{ p: 3, mt: 2 }}>
           <Typography variant="h6" gutterBottom>
@@ -645,13 +689,12 @@ function StudentsEvaluations() {
         </Paper>
       );
     } else {
-      // Editing form remains mostly the same
-      const isEdittingExisting = userEvaluations.some(evaluation => evaluation.companyId === selectedCompany?.id);
-      
+      const isEditingExisting = userEvaluations.some(evaluation => evaluation.companyId === selectedCompany?.id);
+
       return (
         <Paper elevation={3} sx={{ p: 3, mt: 2 }}>
           <Typography variant="h6" gutterBottom>
-            {isEdittingExisting ? "Update Evaluation" : "New Company Evaluation"}
+            {isEditingExisting ? "Update Evaluation" : "New Company Evaluation"}
           </Typography>
           
           <form onSubmit={handleSubmit}>
@@ -740,7 +783,7 @@ function StudentsEvaluations() {
                     color="primary"
                     startIcon={<SaveIcon />}
                   >
-                    {isEdittingExisting ? "Update Evaluation" : "Submit Evaluation"}
+                    {isEditingExisting ? "Update Evaluation" : "Submit Evaluation"}
                   </Button>
                 </Box>
               </Grid>
@@ -752,6 +795,27 @@ function StudentsEvaluations() {
   };
   
   const renderReportsTab = () => {
+    if (isLoading) {
+      return <Typography>Loading...</Typography>;
+    }
+
+    if (!reports || reports.length === 0) {
+      return (
+        <Paper elevation={1} sx={{ p: 2, textAlign: 'center' }}>
+          <Typography variant="body1" gutterBottom>
+            You have not created any reports yet.
+          </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleCreateReport}
+          >
+            Create Your First Report
+          </Button>
+        </Paper>
+      );
+    }
+
     return (
       <div>
         <Typography variant="h6" gutterBottom>
@@ -760,326 +824,84 @@ function StudentsEvaluations() {
         <Typography variant="body2" gutterBottom className={styles.instructions}>
           Here you can view, create, and manage your internship reports. Reports are visible to faculty for evaluation.
         </Typography>
-        
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-          <Typography variant="h6">
-            Reports List
-          </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleCreateReport}
-          >
-            + NEW REPORT
-          </Button>
-        </Box>
-        
-        {reports.length === 0 ? (
-          <Paper elevation={1} sx={{ p: 2, textAlign: 'center' }}>
-            <Typography variant="body1" gutterBottom>
-              You have not created any reports yet.
-            </Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleCreateReport}
-            >
-              Create Your First Report
-            </Button>
-          </Paper>
-        ) : (
-          reports.map(report => (
-            <Paper key={report.id} elevation={2} sx={{ p: 2, mb: 2 }}>
-              <Grid container spacing={2}>
-                <Grid item xs={8}>
-                  <Typography variant="h6">{report.title}</Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    {report.introduction}
-                  </Typography>
-                  <Typography variant="body2" sx={{ mt: 1 }}>
-                    <strong>Courses:</strong> {report.selectedCourses.length > 0 ? 
-                      report.selectedCourses.map(courseId => {
-                        const course = availableCourses.find(c => c.id === courseId);
-                        return course ? course.code : courseId;
-                      }).join(', ') : "All courses"}
-                  </Typography>
-                  <Typography variant="body2" sx={{ mt: 1 }}>
-                    <strong>Major:</strong> {
-                      availableMajors.find(m => m.id === report.selectedMajor)?.name || "All Majors"
-                    }
-                  </Typography>
-                </Grid>
-                <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 1 }}>
-                  <Button
-                    variant="outlined"
-                    size="small"
-                    color="error"
-                    startIcon={<DeleteIcon />}
-                    onClick={() => handleDeleteReport(report.id)}
-                  >
-                    Delete
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    size="small"
-                    startIcon={<VisibilityIcon />}
-                    onClick={() => handleViewReport(report)}
-                  >
-                    View
-                  </Button>
-                </Grid>
+
+        {reports.map((report) => (
+          <Paper key={report.id} elevation={2} sx={{ p: 2, mb: 2, position: 'relative' }}>
+            <Grid container spacing={2}>
+              <Grid item xs={8}>
+                <Typography variant="h6">{report.title}</Typography>
+                <Typography variant="body2" color="textSecondary">
+                  {report.introduction}
+                </Typography>
+                <Typography variant="body2" sx={{ mt: 1 }}>
+                  <strong>Courses:</strong> {report.selectedCourses.length > 0 ? 
+                    report.selectedCourses.map((courseId) => {
+                      const course = availableCourses.find((c) => c.id === courseId);
+                      return course ? course.code : courseId;
+                    }).join(', ') : "All courses"}
+                </Typography>
+                <Typography variant="body2" sx={{ mt: 1 }}>
+                  <strong>Major:</strong> {
+                    availableMajors.find((m) => m.id === report.selectedMajor)?.name || "All Majors"
+                  }
+                </Typography>
               </Grid>
-            </Paper>
-          ))
-        )}
-        
-        <Dialog
-          open={reportDialogOpen}
-          onClose={() => setReportDialogOpen(false)}
-          maxWidth="md"
-          fullWidth
-        >
-          <DialogTitle>
-            {selectedReport ? "View Report" : "Create New Report"}
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              {selectedReport ? "Review the details of your report below." : "Fill out the form below to create a new report."}
-            </DialogContentText>
-            
-            {selectedReport ? (
-              <Box>
-                <Typography variant="h6" gutterBottom>
-                  {selectedReport.title}
-                </Typography>
-                <Typography variant="body2" paragraph>
-                  {selectedReport.body}
-                </Typography>
-                <Typography variant="subtitle1" gutterBottom>
-                  Courses Included:
-                </Typography>
-                <List>
-                  {selectedReport.selectedCourses.length > 0 ? (
-                    selectedReport.selectedCourses.map(courseId => {
-                      const course = availableCourses.find(c => c.id === courseId);
-                      return course ? (
-                        <ListItem key={courseId}>
-                          <ListItemText primary={course.name} />
-                        </ListItem>
-                      ) : null;
-                    })
-                  ) : (
-                    <ListItem>
-                      <ListItemText primary="All courses" />
-                    </ListItem>
-                  )}
-                </List>
-                <Divider sx={{ my: 2 }} />
-                <Typography variant="subtitle1" gutterBottom>
-                  Status: <Chip label={selectedReport.status} color={selectedReport.status === "Pending" ? "warning" : selectedReport.status === "Approved" ? "success" : "error"} size="small" />
-                </Typography>
-                {selectedReport.status === "Flagged" && (
-                  <Alert severity="warning" sx={{ mb: 2 }}>
-                    This report has been flagged for review. Please check the comments from your faculty.
-                  </Alert>
-                )}
-                
-                <Typography variant="subtitle1" gutterBottom>
-                  Comments:
-                </Typography>
-                {selectedReport.comments.length > 0 ? (
-                  <List>
-                    {selectedReport.comments.map(comment => (
-                      <ListItem key={comment.id}>
-                        <ListItemText 
-                          primary={comment.text} 
-                          secondary={`${comment.author} - ${new Date(comment.date).toLocaleString()}`} 
-                        />
-                      </ListItem>
-                    ))}
-                  </List>
-                ) : (
-                  <Typography variant="body2" color="textSecondary">
-                    No comments yet.
-                  </Typography>
-                )}
-              </Box>
-            ) : (
-              <Box>
-                <TextField
-                  label="Report Title"
-                  name="title"
-                  value={reportData.title}
-                  onChange={handleReportInputChange}
-                  fullWidth
-                  sx={{ mb: 2 }}
-                />
-                <TextField
-                  label="Introduction"
-                  name="introduction"
-                  value={reportData.introduction}
-                  onChange={handleReportInputChange}
-                  fullWidth
-                  multiline
-                  rows={2}
-                  sx={{ mb: 2 }}
-                />
-                <TextField
-                  label="Detailed Description"
-                  name="body"
-                  value={reportData.body}
-                  onChange={handleReportInputChange}
-                  fullWidth
-                  multiline
-                  rows={4}
-                  sx={{ mb: 2 }}
-                />
-                
-                <Typography variant="subtitle1" gutterBottom>
-                  Select Courses:
-                </Typography>
-                <FormGroup row sx={{ mb: 2 }}>
-                  {availableCourses.map(course => (
-                    <FormControlLabel
-                      key={course.id}
-                      control={
-                        <Checkbox
-                          checked={reportData.selectedCourses.includes(course.id)}
-                          onChange={() => handleCourseSelection(course.id)}
-                        />
-                      }
-                      label={course.name}
-                    />
-                  ))}
-                </FormGroup>
-                
-                <TextField
-                  select
-                  label="Major"
-                  name="selectedMajor"
-                  value={reportData.selectedMajor}
-                  onChange={handleMajorChange}
-                  fullWidth
-                  sx={{ mb: 2 }}
+              <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 1 }}>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  color="error"
+                  startIcon={<DeleteIcon />}
+                  onClick={() => handleDeleteReport(report.id)}
                 >
-                  {availableMajors.map(major => (
-                    <MenuItem key={major.id} value={major.id}>
-                      {major.name}
-                    </MenuItem>
-                  ))}
-                  <MenuItem value="all">All Majors</MenuItem>
-                </TextField>
-              </Box>
-            )}
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => setReportDialogOpen(false)} color="primary">
-              Close
-            </Button>
-            {selectedReport ? (
-              <>
-                <Button 
-                  onClick={() => handleDownloadPDF(selectedReport)} 
-                  color="primary"
-                  startIcon={<DownloadIcon />}
-                >
-                  Download PDF
+                  Delete
                 </Button>
-                <Button 
-                  onClick={openAppealDialog} 
-                  color="secondary"
-                  startIcon={<FlagIcon />}
+                <Button
+                  variant="outlined"
+                  size="small"
+                  startIcon={<VisibilityIcon />}
+                  onClick={() => handleViewReport(report)}
                 >
-                  Appeal Report
+                  View
                 </Button>
-              </>
-            ) : (
-              <Button 
-                onClick={() => handleSaveReport(false)} 
-                color="primary"
-                variant="contained"
-                startIcon={<SaveIcon />}
-              >
-                Save
-              </Button>
-            )}
-          </DialogActions>
-        </Dialog>
-        
-        <Dialog
-          open={appealDialogOpen}
-          onClose={() => setAppealDialogOpen(false)}
-        >
-          <DialogTitle>Submit Appeal</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Provide your comments or justifications for the appeal. Be as detailed as possible.
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              label="Appeal Message"
-              type="text"
-              fullWidth
-              variant="outlined"
-              value={appealMessage}
-              onChange={(e) => setAppealMessage(e.target.value)}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => setAppealDialogOpen(false)} color="primary">
-              Cancel
-            </Button>
-            <Button 
-              onClick={handleAppealReport} 
+              </Grid>
+            </Grid>
+            <IconButton
               color="primary"
-              variant="contained"
+              sx={{ position: 'absolute', bottom: 8, right: 8 }}
+              onClick={() => handleEditReport(report)}
             >
-              Submit Appeal
-            </Button>
-          </DialogActions>
-        </Dialog>
+              <EditIcon />
+            </IconButton>
+          </Paper>
+        ))}
       </div>
     );
   };
   
   // Create new function to render the evaluations summary tab
   const renderEvaluationsSummaryTab = () => {
-    // Check if a company evaluation is selected for viewing
-    if (selectedCompany && !isEditing) {
-      const evaluation = getCompanyEvaluation(selectedCompany.id);
-      
+    if (isLoading) {
+      return <Typography>Loading...</Typography>;
+    }
+
+    if (!userEvaluations || userEvaluations.length === 0) {
       return (
-        <Paper elevation={3} sx={{ p: 3, mt: 2 }}>
-          <Typography variant="h6" gutterBottom>
-            Your Evaluation for {evaluation.companyName}
+        <Paper elevation={1} sx={{ p: 2, textAlign: 'center' }}>
+          <Typography variant="body1" gutterBottom>
+            You have not submitted any evaluations yet.
           </Typography>
-          <Box sx={{ mb: 2 }}>
-            <Typography variant="subtitle1">Rating:</Typography>
-            <Rating value={parseInt(evaluation.rating)} readOnly />
-          </Box>
-          <Box sx={{ mb: 2 }}>
-            <Typography variant="subtitle1">Feedback:</Typography>
-            <Typography variant="body1" paragraph>{evaluation.feedback}</Typography>
-          </Box>
-          <Box sx={{ mb: 3 }}>
-            <Typography variant="subtitle1">
-              Recommend to other students: {evaluation.recommend === "yes" ? "Yes" : "No"}
-            </Typography>
-          </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'flex-start', gap: 2 }}>
-            <Button 
-              variant="outlined" 
-              startIcon={<ReplyIcon />}
-              onClick={() => setSelectedCompany(null)}
-            >
-              Back
-            </Button>
-          </Box>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setTabValue(0)}
+          >
+            Go to Evaluations
+          </Button>
         </Paper>
       );
     }
-    
+
     return (
       <div>
         <Typography variant="h6" gutterBottom>
@@ -1089,69 +911,69 @@ function StudentsEvaluations() {
           Here is a summary of all your internship evaluations.
         </Typography>
         
-        {userEvaluations.length === 0 ? (
-          <Paper elevation={1} sx={{ p: 2, textAlign: 'center' }}>
-            <Typography variant="body1" gutterBottom>
-              You have not submitted any evaluations yet.
-            </Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => setTabValue(0)}
-            >
-              Go to Evaluations
-            </Button>
-          </Paper>
-        ) : (
-          userEvaluations.map(evaluation => (
+        {userEvaluations.map((evaluation) => {
+          const company = completedInternships.find((c) => c.id === evaluation.companyId);
+          if (!company) {
+            return null; // Skip if company data is missing
+          }
+
+          return (
             <Paper key={evaluation.id} elevation={2} sx={{ p: 2, mb: 2 }}>
               <Grid container spacing={2}>
-              <Grid item xs={8} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-  {(() => {
-    const company = completedInternships.find(c => c.id === evaluation.companyId);
-    return company && company.logo ? (
-      <img
-        src={company.logo}
-        alt={company.companyName + " logo"}
-        style={{ height: 32, width: 'auto', marginRight: 12 }}
-      />
-    ) : null;
-  })()}
-  <Box>
-    <Typography variant="subtitle1">{evaluation.companyName}</Typography>
-    <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
-      <Typography variant="body2" sx={{ mr: 1 }}>Rating:</Typography>
-      <Rating value={parseInt(evaluation.rating)} readOnly size="small" />
-    </Box>
-    <Typography variant="body2">
-      Recommend: {evaluation.recommend === "yes" ? "Yes" : "No"}
-    </Typography>
-  </Box>
-</Grid>
-                <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-                  <Button 
-                    variant="outlined" 
+                <Grid item xs={8} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  {company.logo && (
+                    <img
+                      src={company.logo}
+                      alt={`${company.companyName} logo`}
+                      style={{ height: 32, width: 'auto', marginRight: 12 }}
+                    />
+                  )}
+                  <Box>
+                    <Typography variant="subtitle1">{evaluation.companyName}</Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
+                      <Typography variant="body2" sx={{ mr: 1 }}>Rating:</Typography>
+                      <Rating value={parseInt(evaluation.rating)} readOnly size="small" />
+                    </Box>
+                    <Typography variant="body2">
+                      Recommend: {evaluation.recommend === "yes" ? "Yes" : "No"}
+                    </Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 1 }}>
+                  <Button
+                    variant="outlined"
                     size="small"
+                    color="error"
+                    startIcon={<DeleteIcon />}
                     onClick={() => {
-                      const company = completedInternships.find(c => c.id === evaluation.companyId);
-                      if (company) {
-                        if (tabValue === 2) {
-                          // When in Summary tab, just set the company for viewing
-                          setSelectedCompany(company);
-                        } else {
-                          // For other tabs, use the regular view function
-                          handleViewEvaluation(company);
-                        }
+                      if (evaluation && evaluation.companyId) {
+                        handleDeleteEvaluation(evaluation.companyId);
+                      } else {
+                        alert("Unable to delete. Evaluation details are missing.");
                       }
                     }}
                   >
-                    View Details
+                    Delete
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    startIcon={<EditIcon />}
+                    onClick={() => {
+                      if (evaluation && evaluation.companyId) {
+                        handleEditEvaluation(evaluation);
+                      } else {
+                        alert("Unable to edit. Evaluation details are missing.");
+                      }
+                    }}
+                  >
+                    Edit
                   </Button>
                 </Grid>
               </Grid>
             </Paper>
-          ))
-        )}
+          );
+        })}
       </div>
     );
   };
@@ -1166,13 +988,101 @@ function StudentsEvaluations() {
         <Tabs value={tabValue} onChange={handleTabChange} sx={{ mb: 3 }}>
           <Tab label="Company Evaluations" />
           <Tab label="Internship Reports" />
-          <Tab label="Evaluations Summary" /> {/* New tab for evaluations summary */}
+          <Tab label="Evaluations Summary" />
         </Tabs>
-        
         {tabValue === 0 && renderCompanyEvaluationTab()}
         {tabValue === 1 && renderReportsTab()}
-        {tabValue === 2 && renderEvaluationsSummaryTab()} {/* Render the new tab content */}
+        {tabValue === 2 && renderEvaluationsSummaryTab()}
       </Paper>
+      {/* Dialog for creating/editing reports - always present, not duplicated */}
+      <Dialog
+        open={reportDialogOpen}
+        onClose={() => setReportDialogOpen(false)}
+        maxWidth="md"
+        fullWidth
+      >
+        <DialogTitle>{selectedReport ? "Edit Report" : "Create New Report"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {selectedReport ? "Update the details of your report." : "Fill out the form below to create a new report."}
+          </DialogContentText>
+          <TextField
+            label="Report Title"
+            name="title"
+            value={reportData.title}
+            onChange={handleReportInputChange}
+            fullWidth
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="Introduction"
+            name="introduction"
+            value={reportData.introduction}
+            onChange={handleReportInputChange}
+            fullWidth
+            multiline
+            rows={2}
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="Detailed Description"
+            name="body"
+            value={reportData.body}
+            onChange={handleReportInputChange}
+            fullWidth
+            multiline
+            rows={4}
+            sx={{ mb: 2 }}
+          />
+          <Typography variant="subtitle1" gutterBottom>
+            Select Courses
+          </Typography>
+          <Grid container spacing={2} sx={{ mb: 2 }}>
+            {availableCourses.map((course) => (
+              <Grid item xs={6} sm={4} md={3} key={course.id}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={reportData.selectedCourses.includes(course.id)}
+                      onChange={() => handleCourseSelection(course.id)}
+                    />
+                  }
+                  label={course.name}
+                />
+              </Grid>
+            ))}
+          </Grid>
+          <FormControl fullWidth sx={{ mb: 2 }}>
+            <InputLabel id="major-select-label">Select Major</InputLabel>
+            <Select
+              labelId="major-select-label"
+              id="major-select"
+              value={reportData.selectedMajor}
+              onChange={handleMajorChange}
+              label="Select Major"
+            >
+              <MenuItem value="all">All Majors</MenuItem>
+              {availableMajors.map((major) => (
+                <MenuItem key={major.id} value={major.id}>
+                  {major.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setReportDialogOpen(false)} color="primary">
+            Cancel
+          </Button>
+          <Button
+            onClick={() => handleSaveReport(false)}
+            color="primary"
+            variant="contained"
+          >
+            {selectedReport ? "Update Report" : "Save Report"}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }

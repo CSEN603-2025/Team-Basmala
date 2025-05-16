@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./CompanyEvaluations.module.css";
+import jsPDF from "jspdf";
+
 import { 
   Container, 
   Typography, 
@@ -366,6 +368,12 @@ function CompanyEvaluations() {
   };
   
   const handleSaveReport = () => {
+    // Prevent saving if no student is selected
+    if (!selectedStudent) {
+      alert("Please select a student before creating a report.");
+      return;
+    }
+
     // Form validation - check if required fields are filled
     if (!reportData.title.trim()) {
       alert("Please enter a report title");
@@ -446,9 +454,30 @@ function CompanyEvaluations() {
   };
   
   const handleDownloadPDF = () => {
-    // In a real app, this would generate and download a PDF
-    alert("Downloading report as PDF...");
-    // You would use a library like jsPDF or make an API call to generate the PDF
+    if (!selectedReport) {
+      alert("No report selected to download.");
+      return;
+    }
+    const doc = new jsPDF();
+    doc.setFontSize(16);
+    doc.text(selectedReport.title || "Student Performance Report", 10, 15);
+    doc.setFontSize(12);
+    doc.text(`Student: ${selectedReport.studentName || ""}`, 10, 30);
+    doc.text(`Introduction:`, 10, 40);
+    doc.text(selectedReport.introduction || "", 10, 48, { maxWidth: 180 });
+    doc.text(`Details:`, 10, 65);
+    doc.text(selectedReport.body || "", 10, 73, { maxWidth: 180 });
+    doc.text(`Skills Demonstrated:`, 10, 90);
+    if (selectedReport.selectedSkills && selectedReport.selectedSkills.length > 0) {
+      const skills = selectedReport.selectedSkills.map(id => {
+        const skill = availableSkills.find(s => s.id === id);
+        return skill ? skill.name : "";
+      }).join(", ");
+      doc.text(skills, 10, 98, { maxWidth: 180 });
+    }
+    doc.text(`Project Difficulty: ${selectedReport.projectDifficulty || ""}`, 10, 115);
+    doc.text(`Submission Date: ${selectedReport.submissionDate || ""}`, 10, 125);
+    doc.save(`${selectedReport.title || "student-report"}.pdf`);
   };
   
   // ===== RENDER FUNCTIONS =====
@@ -773,6 +802,18 @@ function CompanyEvaluations() {
           <Typography variant="h6">
             Reports List
           </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              setSelectedStudent(null);
+              setSelectedReport(null);
+              setIsEditingReport(true);
+              setReportDialogOpen(true);
+            }}
+          >
+            + NEW REPORT
+          </Button>
         </Box>
         
         {reports.length === 0 ? (
@@ -851,182 +892,204 @@ function CompanyEvaluations() {
           })
         )}
         
-        <Dialog
-          open={reportDialogOpen}
-          onClose={() => setReportDialogOpen(false)}
-          maxWidth="md"
-          fullWidth
-        >
-          <DialogTitle>
-            {selectedReport ? "View Report" : "Create New Student Report"}
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              {selectedReport 
-                ? "Review the details of your student performance report below."
-                : "Fill out the form below to create a detailed report for this student's internship performance."}
-            </DialogContentText>
-            
-            {/* Student details at the top */}
-            {selectedStudent && (
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 3, mt: 2 }}>
-                <Avatar src={selectedStudent.photo} alt={selectedStudent.studentName} sx={{ mr: 2 }} />
-                <Box>
-                  <Typography variant="subtitle1">{selectedStudent.studentName}</Typography>
-                  <Typography variant="body2" color="textSecondary">{selectedStudent.university} | {selectedStudent.major}</Typography>
-                </Box>
-              </Box>
-            )}
-            
-            {/* Report form or details view */}
-            {selectedReport && !isEditingReport ? (
-              <Box>
-                <Typography variant="h6" gutterBottom>
-                  {selectedReport.title}
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 2 }}>
-                  {selectedReport.introduction}
-                </Typography>
-                <Typography variant="body1" paragraph>
-                  {selectedReport.body}
-                </Typography>
-                
-                <Box sx={{ mt: 3, mb: 2 }}>
-                  <Typography variant="subtitle1" gutterBottom>
-                    Skills Demonstrated:
-                  </Typography>
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                    {selectedReport.selectedSkills?.map(skillId => {
-                      const skill = availableSkills.find(s => s.id === skillId);
-                      return skill ? (
-                        <Chip key={skillId} label={skill.name} />
-                      ) : null;
-                    })}
-                  </Box>
-                </Box>
-                
-                <Box sx={{ mt: 3 }}>
-                  <Typography variant="subtitle1" gutterBottom>
-                    Project Difficulty:
-                  </Typography>
-                  <Typography variant="body1">
-                    {projectDifficulties.find(d => d.value === selectedReport.projectDifficulty)?.label || 'Not specified'}
-                  </Typography>
-                </Box>
-              </Box>
-            ) : (
-              <Box>
-                <TextField
-                  label="Report Title"
-                  name="title"
-                  value={reportData.title}
-                  onChange={handleReportInputChange}
-                  fullWidth
-                  required
-                  sx={{ mb: 3, mt: 2 }}
-                />
-                <TextField
-                  label="Introduction"
-                  name="introduction"
-                  value={reportData.introduction}
-                  onChange={handleReportInputChange}
-                  fullWidth
-                  multiline
-                  rows={2}
-                  required
-                  helperText="Briefly introduce the student's internship project and role"
-                  sx={{ mb: 3 }}
-                />
-                <TextField
-                  label="Detailed Report"
-                  name="body"
-                  value={reportData.body}
-                  onChange={handleReportInputChange}
-                  fullWidth
-                  multiline
-                  rows={6}
-                  required
-                  helperText="Provide a comprehensive assessment of the student's performance, achievements, and growth during the internship"
-                  sx={{ mb: 3 }}
-                />
-                
-                <Typography variant="subtitle1" gutterBottom>
-                  Skills Demonstrated:
-                </Typography>
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 3 }}>
-                  {availableSkills.map(skill => (
-                    <Chip
-                      key={skill.id}
-                      label={skill.name}
-                      onClick={() => handleSkillSelection(skill.id)}
-                      color={reportData.selectedSkills.includes(skill.id) ? "primary" : "default"}
-                      variant={reportData.selectedSkills.includes(skill.id) ? "filled" : "outlined"}
-                    />
-                  ))}
-                </Box>
-                
+        {reportDialogOpen && (
+          <Dialog
+            open={reportDialogOpen}
+            onClose={() => setReportDialogOpen(false)}
+            maxWidth="md"
+            fullWidth
+          >
+            <DialogTitle>
+              {selectedReport ? "View Report" : "Create New Student Report"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                {selectedReport 
+                  ? "Review the details of your student performance report below."
+                  : "Fill out the form below to create a detailed report for this student's internship performance."}
+              </DialogContentText>
+              {/* Student selection dropdown for new report */}
+              {!selectedReport && isEditingReport && (
                 <TextField
                   select
-                  label="Project Difficulty"
-                  name="projectDifficulty"
-                  value={reportData.projectDifficulty}
-                  onChange={handleReportInputChange}
+                  label="Select Student"
+                  value={selectedStudent ? selectedStudent.id : ''}
+                  onChange={e => {
+                    const student = completedInternshipStudents.find(s => s.id === Number(e.target.value));
+                    setSelectedStudent(student);
+                  }}
                   fullWidth
-                  helperText="Rate the difficulty level of the projects assigned to the student"
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 3, mt: 2 }}
                 >
-                  {projectDifficulties.map(option => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
+                  <MenuItem value="">-- Select Student --</MenuItem>
+                  {completedInternshipStudents.map(student => (
+                    <MenuItem key={student.id} value={student.id}>
+                      {student.studentName}
                     </MenuItem>
                   ))}
                 </TextField>
-              </Box>
-            )}
-          </DialogContent>
-          <DialogActions>
-            <Button 
-              onClick={() => {
-                setReportDialogOpen(false);
-                setSelectedReport(null);
-                setIsEditingReport(false);
-                setSelectedStudent(null);
-              }} 
-              color="primary"
-            >
-              Close
-            </Button>
-            {selectedReport && !isEditingReport ? (
-              <>
-                <Button 
-                  onClick={handleDownloadPDF} 
-                  color="primary"
-                  startIcon={<DownloadIcon />}
-                >
-                  Download PDF
-                </Button>
-                <Button 
-                  onClick={() => {
-                    setIsEditingReport(true);
-                  }} 
-                  color="secondary"
-                  startIcon={<EditIcon />}
-                >
-                  Edit Report
-                </Button>
-              </>
-            ) : isEditingReport ? (
+              )}
+              {/* Student details at the top */}
+              {selectedStudent && (
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 3, mt: 2 }}>
+                  <Avatar src={selectedStudent.photo} alt={selectedStudent.studentName} sx={{ mr: 2 }} />
+                  <Box>
+                    <Typography variant="subtitle1">{selectedStudent.studentName}</Typography>
+                    <Typography variant="body2" color="textSecondary">{selectedStudent.university} | {selectedStudent.major}</Typography>
+                  </Box>
+                </Box>
+              )}
+              
+              {/* Report form or details view */}
+              {selectedReport && !isEditingReport ? (
+                <Box>
+                  <Typography variant="h6" gutterBottom>
+                    {selectedReport.title}
+                  </Typography>
+                  <Typography variant="body2" sx={{ mb: 2 }}>
+                    {selectedReport.introduction}
+                  </Typography>
+                  <Typography variant="body1" paragraph>
+                    {selectedReport.body}
+                  </Typography>
+                  
+                  <Box sx={{ mt: 3, mb: 2 }}>
+                    <Typography variant="subtitle1" gutterBottom>
+                      Skills Demonstrated:
+                    </Typography>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                      {selectedReport.selectedSkills?.map(skillId => {
+                        const skill = availableSkills.find(s => s.id === skillId);
+                        return skill ? (
+                          <Chip key={skillId} label={skill.name} />
+                        ) : null;
+                      })}
+                    </Box>
+                  </Box>
+                  
+                  <Box sx={{ mt: 3 }}>
+                    <Typography variant="subtitle1" gutterBottom>
+                      Project Difficulty:
+                    </Typography>
+                    <Typography variant="body1">
+                      {projectDifficulties.find(d => d.value === selectedReport.projectDifficulty)?.label || 'Not specified'}
+                    </Typography>
+                  </Box>
+                </Box>
+              ) : (
+                <Box>
+                  <TextField
+                    label="Report Title"
+                    name="title"
+                    value={reportData.title}
+                    onChange={handleReportInputChange}
+                    fullWidth
+                    required
+                    sx={{ mb: 3, mt: 2 }}
+                  />
+                  <TextField
+                    label="Introduction"
+                    name="introduction"
+                    value={reportData.introduction}
+                    onChange={handleReportInputChange}
+                    fullWidth
+                    multiline
+                    rows={2}
+                    required
+                    helperText="Briefly introduce the student's internship project and role"
+                    sx={{ mb: 3 }}
+                  />
+                  <TextField
+                    label="Detailed Report"
+                    name="body"
+                    value={reportData.body}
+                    onChange={handleReportInputChange}
+                    fullWidth
+                    multiline
+                    rows={6}
+                    required
+                    helperText="Provide a comprehensive assessment of the student's performance, achievements, and growth during the internship"
+                    sx={{ mb: 3 }}
+                  />
+                  
+                  <Typography variant="subtitle1" gutterBottom>
+                    Skills Demonstrated:
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 3 }}>
+                    {availableSkills.map(skill => (
+                      <Chip
+                        key={skill.id}
+                        label={skill.name}
+                        onClick={() => handleSkillSelection(skill.id)}
+                        color={reportData.selectedSkills.includes(skill.id) ? "primary" : "default"}
+                        variant={reportData.selectedSkills.includes(skill.id) ? "filled" : "outlined"}
+                      />
+                    ))}
+                  </Box>
+                  
+                  <TextField
+                    select
+                    label="Project Difficulty"
+                    name="projectDifficulty"
+                    value={reportData.projectDifficulty}
+                    onChange={handleReportInputChange}
+                    fullWidth
+                    helperText="Rate the difficulty level of the projects assigned to the student"
+                    sx={{ mb: 2 }}
+                  >
+                    {projectDifficulties.map(option => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Box>
+              )}
+            </DialogContent>
+            <DialogActions>
               <Button 
-                onClick={handleSaveReport} 
+                onClick={() => {
+                  setReportDialogOpen(false);
+                  setSelectedReport(null);
+                  setIsEditingReport(false);
+                  setSelectedStudent(null);
+                }} 
                 color="primary"
-                variant="contained"
-                startIcon={<SaveIcon />}
               >
-                {selectedReport ? "Update Report" : "Save Report"}
+                Close
               </Button>
-            ) : null}
-          </DialogActions>
-        </Dialog>
+              {selectedReport && !isEditingReport ? (
+                <>
+                  <Button 
+                    onClick={handleDownloadPDF} 
+                    color="primary"
+                    startIcon={<DownloadIcon />}
+                  >
+                    Download PDF
+                  </Button>
+                  <Button 
+                    onClick={() => {
+                      setIsEditingReport(true);
+                    }} 
+                    color="secondary"
+                    startIcon={<EditIcon />}
+                  >
+                    Edit Report
+                  </Button>
+                </>
+              ) : isEditingReport ? (
+                <Button 
+                  onClick={handleSaveReport} 
+                  color="primary"
+                  variant="contained"
+                  startIcon={<SaveIcon />}
+                >
+                  {selectedReport ? "Update Report" : "Save Report"}
+                </Button>
+              ) : null}
+            </DialogActions>
+          </Dialog>
+        )}
       </div>
     );
   };
