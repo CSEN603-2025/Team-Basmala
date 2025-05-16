@@ -12,7 +12,8 @@ export default function SidebarPRO({ activeItem }) {
     { name: 'Available Internships', icon: <FaListAlt />, label: 'Available Internships' },
     { name: 'Applications', icon: <FaTasks />, label: 'Applications' },
     { name: 'Interns', icon: <FaUser />, label: 'Interns' },
-    { name: 'Evaluate', icon: <FaChartBar />, label: 'Evaluate' }
+    { name: 'Evaluate', icon: <FaChartBar />, label: 'Evaluate' },
+    { name: 'Workshops',  icon: <FaChartBar />, label: 'Workshops',  path: '/Basmala/workshops/list/scad' }
   ];
 
   const handleClick = (name) => {
