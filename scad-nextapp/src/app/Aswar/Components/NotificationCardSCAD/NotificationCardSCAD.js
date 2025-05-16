@@ -13,13 +13,13 @@ const defaultNotifications = [
   }
 ];
 
-export default function NotificationListSmall({
+export default function NotificationCardSCAD({
   notifications = defaultNotifications,
 }) {
   const router = useRouter();
 
   const goToNotifications = () => {
-    router.push('/Aswar/NotificationsPage');
+    router.push('/Aswar/NotificationsPageSCAD');
   };
 
   return (

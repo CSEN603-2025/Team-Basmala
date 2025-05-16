@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
-import styles from './StudentInternshipProgress.module.css';
+import styles from './PROStudentInternshipProgress.module.css';
 
-export default function StudentInternshipProgress({
+export default function PROStudentInternshipProgress({
   daysCompleted = 0,
   maxDays = 90,
   completedInternships = []
@@ -29,6 +29,13 @@ export default function StudentInternshipProgress({
           {daysCompleted} / {maxDays} days
         </div>
       </div>
+
+      {/* PRO message when complete */}
+      {percent === 100 && (
+        <div className={styles.proMessage}>
+          🎉 Congratulations! You are now a PRO student.
+        </div>
+      )}
 
       {/* Completed Internships */}
       <h4 className={styles.listTitle}>Completed Internships</h4>

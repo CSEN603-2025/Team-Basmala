@@ -10,8 +10,8 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
     /* 4 → 3, 8 → 6 */
     border: 1px solid #eeeeee;
-    
-        }
+
+}
 
 .header {
     display: flex;
@@ -95,6 +95,7 @@
     /* 14 → 10 */
     color: green;
 }
+
 .container {
     width: 295px;
     border-radius: 14px;

@@ -1,6 +1,4 @@
 .mainContent {
-    position: flex;
-    /* context for absolute children */
     margin-left: 100px;
     margin-top: 90px;
     padding: 10px;
@@ -14,18 +12,25 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 16px;
-    flex-wrap: wrap;
 }
 
 .dashboardSpacing {
     margin-top: 0;
 }
 
+/* Updated container for the three components */
 .dashboardContent {
     display: flex;
     flex-direction: row;
     gap: 24px;
     align-items: flex-start;
+    flex-wrap: nowrap;
+    /* prevent wrapping */
+}
+
+/* Make each direct child take equal space */
+.dashboardContent>* {
+    flex: 1 1 0;
 }
 
 /* call alert floats above everything */

@@ -4,7 +4,6 @@ import styles from './toolbar.module.css';
 import { FaChevronDown, FaSearch, FaEnvelope, FaBell } from 'react-icons/fa';
 import Image from 'next/image';
 import NotificationListMedium from '@/app/Aswar/Components/NotificationListMedium/NotificationListMedium';
-import NotificationListMediumPRO from '@/app/Aswar/Components/NotificationListMediumSCAD/NotificationListMediumSCAD';
 
 export default function Toolbar({ title = "Dashboard" }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -39,7 +38,7 @@ export default function Toolbar({ title = "Dashboard" }) {
 
           {dropdownOpen && (
             <div ref={dropdownRef} className={styles.notificationDropdown}>
-              <NotificationListMediumPRO />
+              <NotificationListMedium/>
             </div>
           )}
         </div>

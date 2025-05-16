@@ -1,7 +1,8 @@
 'use client';
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import styles from './NotificationListSmall.module.css';
+import styles from './NotificationCardPRO.module.css';
+
 
 const defaultNotifications = [
   {
@@ -13,13 +14,13 @@ const defaultNotifications = [
   }
 ];
 
-export default function NotificationListSmall({
+export default function NotificationCardPRO({
   notifications = defaultNotifications,
 }) {
   const router = useRouter();
 
   const goToNotifications = () => {
-    router.push('/Aswar/NotificationsPage');
+    router.push('/Aswar/NotificationsPagePRO');
   };
 
   return (
