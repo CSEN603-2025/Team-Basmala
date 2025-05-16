@@ -36,7 +36,7 @@ export default function CallAlert({
     if (toneRef.current) {
       toneRef.current.play().catch(() => {});
     }
-    setTimeout(() => router.push('/Aswar/CallPage'), 300);
+    setTimeout(() => router.push('/Basmala/calls/[callId]'), 300);
   };
 
   const handleDecline = () => {

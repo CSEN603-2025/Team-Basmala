@@ -13,7 +13,7 @@ export default function SidebarPRO({ activeItem }) {
     { name: 'Applications', icon: <FaTasks />, label: 'Applications' },
     { name: 'Interns', icon: <FaUser />, label: 'Interns' },
     { name: 'Evaluate', icon: <FaChartBar />, label: 'Evaluate' },
-    { name: 'Workshops',  icon: <FaChartBar />, label: 'Workshops',  path: '/Basmala/workshops/list/scad' }
+    { name: 'Workshops',  icon: <FaChartBar />, label: 'Workshops',  path: '/Basmala/workshops' }
   ];
 
   const handleClick = (name) => {

@@ -26,8 +26,8 @@ export default function DashboardStudent() {
 
       <div className={styles.mainContent}>
         <div className={styles.topRow}>
-          <DashboardQuickButtons />
-          <NotificationCardStudent />
+       
+        
         </div>
 
         <div className={styles.dashboardSpacing}>
@@ -48,7 +48,9 @@ export default function DashboardStudent() {
             {/* Guide Video for Internships */}
             <InternshipGuideVideo major={studentMajor} />
           </div>
+          
         </div>
+        
       </div>
     </>
   );
