@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import SidebarCompany from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarCompany';
-import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
+import ToolbarSCAD from '@/app/sharedComponents-Aswar/ToolbarComponents/ToolbarSCAD';
 import styles from './DashboardSCAD.module.css';
 import InternshipPosts from '@/app/Aswar/Components/InternshipPosts/InternshipPosts';
 import ApplicationStatusChart from '../Components/ApplicationStatusChart/ApplicationStatusChart';
@@ -10,6 +10,7 @@ import DashboardQuickButtons from '../Components/DashboardQuickButtons/Dashboard
 import NewApplicantsCompany from '../Components/NewApplicantsCompany/NewApplicantsCompany';
 import NewApplicantsSCAD from '../Components/NewApplicantsSCAD/NewApplicantsSCAD';
 import CallAlert from '../Components/CallAlert/page';
+import SidebarSCAD from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarSCAD';
 
 const internships = [
   { title: 'Frontend Development Internship', startDate: '2025-06-01', endDate: '2025-08-31', status: 'Accepted' },
@@ -30,8 +31,8 @@ export default function DashboardSCAD() {
 
   return (
     <>
-      <SidebarCompany activeItem="Dashboard" />
-      <Toolbar title="Dashboard" />
+      <SidebarSCAD activeItem="Dashboard" />
+      <ToolbarSCAD title="Dashboard" />
 
       <div className={styles.mainContent}>
         <div className={styles.topRow}>

@@ -7,7 +7,7 @@ import NotificationListMedium from '@/app/Aswar/Components/NotificationListMediu
 import NotificationsPageSCAD from '@/app/Aswar/NotificationsPageSCAD/page';
 import NotificationListMediumSCAD from '@/app/Aswar/Components/NotificationListMediumStudent/NotificationListMediumStudent';
 
-export default function Toolbar({ title = "Dashboard" }) {
+export default function ToolbarSCAD({ title = "Dashboard" }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 

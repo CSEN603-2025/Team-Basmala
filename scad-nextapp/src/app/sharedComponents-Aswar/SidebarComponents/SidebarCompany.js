@@ -13,7 +13,7 @@ export default function SidebarCompany({ activeItem }) {
     { name: 'All Internship Listings', icon: <FaListAlt />, label: 'All Internships' },
     { name: 'Applications', icon: <FaTasks />, label: 'Applications' },
     { name: 'Interns', icon: <FaUser />, label: 'Interns' },
-    { name: 'Reports', icon: <FaChartBar />, label: 'Reports' }
+    { name: 'Evaluate', icon: <FaChartBar />, label: 'Evaluate' }
   ];
 
   const handleClick = (name) => {
@@ -23,7 +23,10 @@ export default function SidebarCompany({ activeItem }) {
       router.push('/John/CompanyViewIntern');
     } else if (name === 'Applications') {
       router.push('/John/myApplications');
-    } else {
+    } 
+    else if (name === 'Evaluate') {
+      router.push('/Mohamed/CompanyEvaluations');
+  }else {
       alert(`Clicked on ${name}`);
     }
     

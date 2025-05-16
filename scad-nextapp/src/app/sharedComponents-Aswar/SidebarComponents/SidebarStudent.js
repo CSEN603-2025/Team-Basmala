@@ -11,7 +11,7 @@ export default function SidebarStudent({ activeItem }) {
     { name: 'Internship Listings', icon: <FaListAlt />, label: 'Internships' },
     { name: 'Applications', icon: <FaTasks />, label: 'Applications' },
     { name: 'Interns', icon: <FaUser />, label: 'Interns' },
-    { name: 'Reports', icon: <FaChartBar />, label: 'Reports' }
+    { name: 'Evaluate', icon: <FaChartBar />, label: 'Evaluate' }
   ];
 
   const handleClick = (name) => {
@@ -23,7 +23,7 @@ export default function SidebarStudent({ activeItem }) {
     } 
     else if (name === 'Applications') {
       router.push('/John/myApplications')}
-    else if (name === 'Reports') {
+    else if (name === 'Evaluate') {
         router.push('/Mohamed/StudentsEvaluations');
     } else {
       alert(`Clicked on ${name}`);

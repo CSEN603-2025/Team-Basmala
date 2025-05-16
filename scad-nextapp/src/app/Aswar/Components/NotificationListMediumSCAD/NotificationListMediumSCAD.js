@@ -6,24 +6,24 @@ import styles from './NotificationListMedium.module.css';
 const defaultNotifications = [
   {
     id: 1,
-    app: 'SCAD',
-    title: 'New Notification',
-    message: 'Your application has been accepted successfully.',
-    datetime: '2025-05-14 10:32 AM',
+    app: 'Student',
+    title: 'Appointment Accepted',
+    message: 'John Doe has accepted the appointment.',
+    datetime: '2025-05-16 09:15 AM',
   },
   {
     id: 2,
-    app: 'SCAD',
-    title: 'Post Updated',
-    message: 'Your internship posting ‘Data Science Intern’ has been updated successfully.',
-    datetime: '2025-05-13 04:12 PM',
+    app: 'Student',
+    title: 'Appointment Accepted',
+    message: 'Jane Smith has accepted the appointment.',
+    datetime: '2025-05-15 02:45 PM',
   },
   {
     id: 3,
-    app: 'SCAD',
-    title: 'Application Received',
-    message: 'You have a new application for your Microsoft Internship opportunity.',
-    datetime: '2025-05-15 02:15 PM',
+    app: 'Student',
+    title: 'Appointment Accepted',
+    message: 'Michael Lee has accepted the appointment.',
+    datetime: '2025-05-14 11:30 AM',
   },
 ];
 

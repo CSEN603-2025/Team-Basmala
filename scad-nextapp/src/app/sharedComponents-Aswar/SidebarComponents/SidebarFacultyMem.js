@@ -7,8 +7,7 @@ export default function SidebarFacultyMem({ activeItem }) {
     { name: 'Dashboard', icon: <FaHome />, label: 'Dashboard' },
     { name: 'Internship Listings', icon: <FaListAlt />, label: 'Internships' },
     { name: 'Applications', icon: <FaTasks />, label: 'Applications' },
-    { name: 'Interns', icon: <FaUser />, label: 'Interns' },
-    { name: 'Reports', icon: <FaChartBar />, label: 'Reports' }
+    { name: 'Internship Reports', icon: <FaChartBar />, label: 'Internship Reports' }
   ];
 
   const handleClick = (name) => {
@@ -20,7 +19,10 @@ export default function SidebarFacultyMem({ activeItem }) {
     } 
     else if (name === 'Applications') {
       router.push('/John/myApplications');
-    } else {
+    } 
+    else if (name === 'Internship Reports') {
+      router.push('/Mohamed/FacMem');
+    }else {
       alert(`Clicked on ${name}`);
     }
   };
