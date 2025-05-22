@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import styles from './NotificationListMedium.module.css';
+import styles from './NotificationListMediumSCAD.module.css';
 
 const defaultNotifications = [
   {

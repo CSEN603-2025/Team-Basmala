@@ -11,7 +11,7 @@ export default function DashboardFacultyMem() {
       <div style={{ marginLeft: '150px', marginTop: '90px', padding: '20px' }}>
         
 
-        YOUR CONTENT GOES HERE -faculty member-
+        Welcome to the Faculty Member Dashboard!
 
 
       </div>

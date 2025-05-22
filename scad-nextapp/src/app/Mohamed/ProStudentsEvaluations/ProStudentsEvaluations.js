@@ -1,8 +1,6 @@
 "use client";
 
 
-import SidebarCompany from '@/app/sharedComponents-Aswar/SidebarComponents/SidebarPRO';
-import Toolbar from '@/app/sharedComponents-Aswar/ToolbarComponents/Toolbar';
 import React, { useState, useEffect } from "react";
 import styles from "./ProStudentsEvaluations.module.css";
 import jsPDF from "jspdf";
@@ -83,7 +81,8 @@ function ProStudentsEvaluations() {
   const completedInternships = [
     {
       id: 1,
-      companyName: "Tech Innovations Inc.",
+      companyName: "Google",
+      logo: "/images/default-logo.png", // Use your workspace's public/images folder
       position: "Software Engineering Intern",
       duration: "3 months",
       completedOn: "March 15, 2025",
@@ -91,10 +90,20 @@ function ProStudentsEvaluations() {
     },
     {
       id: 2,
-      companyName: "DataSoft Solutions",
+      companyName: "Microsoft",
+      logo: "/images/pwc.png", // Example: use pwc.png as a placeholder
       position: "Frontend Developer Intern",
       duration: "6 months",
       completedOn: "April 30, 2025",
+      evaluated: false
+    },
+    {
+      id: 3,
+      companyName: "IBM",
+      logo: "/images/techcorp.png", // Example: use techcorp.png as a placeholder
+      position: "Data Analyst Intern",
+      duration: "4 months",
+      completedOn: "May 10, 2025",
       evaluated: false
     }
   ];
@@ -342,10 +351,11 @@ function ProStudentsEvaluations() {
       introduction: report.introduction,
       body: report.body,
       selectedCourses: report.selectedCourses || [],
-      selectedMajor: report.selectedMajor || "all" // Ensure selectedMajor is set
+      selectedMajor: report.selectedMajor || "all"
     });
     setSelectedReport(report);
     setIsEditingReport(true);
+    setReportDialogOpen(true);
   };
   
   const handleReportInputChange = (e) => {
@@ -534,11 +544,20 @@ function ProStudentsEvaluations() {
           {completedInternships.map(internship => (
             <Paper key={internship.id} elevation={2} className={styles.internshipCard} sx={{ mb: 2, p: 2 }}>
               <Grid container spacing={2}>
-                <Grid item xs={8}>
-                  <Typography variant="h6">{internship.companyName}</Typography>
-                  <Typography><strong>Position:</strong> {internship.position}</Typography>
-                  <Typography><strong>Duration:</strong> {internship.duration}</Typography>
-                  <Typography><strong>Completed on:</strong> {internship.completedOn}</Typography>
+                <Grid item xs={8} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  {internship.logo && (
+                    <img
+                      src={internship.logo}
+                      alt={`${internship.companyName} logo`}
+                      style={{ height: 32, width: 'auto', marginRight: 12 }}
+                    />
+                  )}
+                  <Box>
+                    <Typography variant="h6">{internship.companyName}</Typography>
+                    <Typography><strong>Position:</strong> {internship.position}</Typography>
+                    <Typography><strong>Duration:</strong> {internship.duration}</Typography>
+                    <Typography><strong>Completed on:</strong> {internship.completedOn}</Typography>
+                  </Box>
                 </Grid>
                 <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
                   {isCompanyEvaluated(internship.id) ? (
@@ -792,6 +811,15 @@ function ProStudentsEvaluations() {
                     onClick={() => handleViewReport(report)}
                   >
                     View
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    startIcon={<EditIcon />}
+                    onClick={() => handleEditReport(report)}
+                    sx={{ ml: 1 }}
+                  >
+                    Edit
                   </Button>
                 </Grid>
               </Grid>
